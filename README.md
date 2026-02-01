@@ -41,6 +41,7 @@ Basado en `calendario/pdf-calendario.md`.
 
 ## Estructura sugerida (simple)
 - `calendario/` — prompts y ejemplo (`pdf-calendario.md` ya contiene el prompt).
+- `prompts/` — colección de plantillas y prompts generales (ver `prompts/generales.md`).
 - `templates/` — prompts comunes y plantillas de salida (CSV, ICS, email).
 - `examples/` — ejemplos de entrada y salida (pueden ser solo textos y archivos de ejemplo).
 

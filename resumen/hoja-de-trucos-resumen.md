@@ -13,15 +13,15 @@ Guía mínima para usar IA generativa y transformar un informe o PDF en un resum
   "Actúa como un editor ejecutivo. Lee el archivo PDF adjunto y resume el documento en **3–5 puntos** claros y accionables. Cada punto debe tener máximo 20 palabras. Al final, añade una línea `Clave:` con la idea principal (6–8 palabras). Devuélvelo únicamente como lista numerada y la línea `Clave:`. No añadas texto adicional."
 ```
 - **Prompt (pegando texto):**
-```prompt
+```code
 
-  "Actúa como un editor ejecutivo. Del siguiente texto extrae **3–5 puntos** accionables y una línea `Clave:` que resuma la idea principal. Limita cada punto a 1 frase. Texto: <PEGA_AQUI_EL_TEXTO>"
+  Actúa como un editor ejecutivo. Del siguiente texto extrae **3–5 puntos** accionables y una línea `Clave:` que resuma la idea principal. Limita cada punto a 1 frase. Texto: <PEGA_AQUI_EL_TEXTO>
   ```
 
 - **Variación (nivel técnico):**
-```prompt
+```
 
-  "Resume en 3–5 puntos; por cada punto, añade una sub-línea `Riesgos/Acción` (máx. 10 palabras) si aplica. Devuelve JSON con `summary` (array) y `key` (string)."
+  Resume en 3–5 puntos; por cada punto, añade una sub-línea `Riesgos/Acción` (máx. 10 palabras) si aplica. Devuelve JSON con `summary` (array) y `key` (string).
 ```
 ---
 

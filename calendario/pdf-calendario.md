@@ -6,7 +6,9 @@ Esta guía contiene los "comandos" (prompts) y pasos exactos para convertir un P
 
 Copia y pega este texto en tu chat de IA (Gemini, ChatGPT, etc.) junto con el archivo PDF del calendario:
 
-> *"Actúa como un experto en gestión de datos. Lee este calendario en PDF y extrae exclusivamente las sesiones de los Módulos [X e Y]. Genera una tabla con estas columnas exactas: **Subject, Start Date, Start Time, End Date, End Time, Description**. Asegúrate de que las fechas tengan el formato DD/MM/AAAA y que las horas incluyan AM/PM. Una vez hecha la tabla, genera el código en formato CSV para que pueda copiarlo."*
+```
+Actúa como un experto en gestión de datos. Lee este calendario en PDF y extrae exclusivamente las sesiones de los Módulos [X e Y]. Genera una tabla con estas columnas exactas: **Subject, Start Date, Start Time, End Date, End Time, Description**. Asegúrate de que las fechas tengan el formato DD/MM/AAAA y que las horas incluyan AM/PM. Una vez hecha la tabla, genera el código en formato CSV para que pueda copiarlo.
+```
 
 ---
 
