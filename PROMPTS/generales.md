@@ -69,7 +69,8 @@ Optimiza este prompt para mayor claridad y brevedad: [prompt]. Devuelve versión
 
 - **Escritura & Contenido**
   - Ejemplos: títulos SEO, estructura de artículos, CTA.
-  - Plantilla: `Escribe un título SEO <70 caracteres para: [tema]`
+  - Plantilla: 
+  ```Escribe un título SEO <70 caracteres para: [tema]``` 
 
 - **Programación & DevOps**
   - Ejemplos: snippets, explicación de algoritmos, revisión de PR.
