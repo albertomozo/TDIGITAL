@@ -10,19 +10,19 @@ Guía mínima para usar IA generativa y transformar una transcripción o apuntes
 
 - **Prompt básico (subiendo la transcripción):**
 
-  "Actúa como un secretario ejecutivo. Lee la transcripción adjunta y genera una minuta clara con las secciones: `Fecha`, `Asistentes`, `Resumen ejecutivo` (3–5 puntos), `Decisiones` (lista), `Acciones` (lista con responsable y fecha límite), `Próxima reunión`. Devuélvelo en texto plano sin explicaciones adicionales."
+```Actúa como un secretario ejecutivo. Lee la transcripción adjunta y genera una minuta clara con las secciones: `Fecha`, `Asistentes`, `Resumen ejecutivo` (3–5 puntos), `Decisiones` (lista), `Acciones` (lista con responsable y fecha límite), `Próxima reunión`. Devuélvelo en texto plano sin explicaciones adicionales.```
 
 - **Prompt pegando texto (rápido):**
 
-  "Actúa como un secretario y resume el siguiente texto en una minuta con: 1) Resumen ejecutivo (máx. 5 puntos), 2) Decisiones, 3) Acciones con responsable y fecha límite. Devuélvelo como texto con encabezados claros. Texto: <PEGA_AQUI>"
+  ```Actúa como un secretario y resume el siguiente texto en una minuta con: 1) Resumen ejecutivo (máx. 5 puntos), 2) Decisiones, 3) Acciones con responsable y fecha límite. Devuélvelo como texto con encabezados claros. Texto: <PEGA_AQUI>```
 
 - **Prompt para salida estructurada (JSON):**
 
-  "Convierte la transcripción en un objeto JSON con campos: `date`, `attendees` (array), `summary` (array de strings), `decisions` (array), `actions` (array de {task,responsible,due_date}), `next_meeting` (string/null). Devuélvelo SOLO como JSON." 
+  ```Convierte la transcripción en un objeto JSON con campos: `date`, `attendees` (array), `summary` (array de strings), `decisions` (array), `actions` (array de {task,responsible,due_date}), `next_meeting` (string/null). Devuélvelo SOLO como JSON.``` 
 
 - **Prompt para extraer solo acciones:**
 
-  "Extrae únicamente las acciones de la transcripción en formato CSV con columnas: task,responsible,due_date. Si falta responsable o fecha, deja el campo vacío." 
+  ```Extrae únicamente las acciones de la transcripción en formato CSV con columnas: task,responsible,due_date. Si falta responsable o fecha, deja el campo vacío.```
 
 ---
 
@@ -95,6 +95,3 @@ Próxima reunión: 2026-02-10, 10:00
 
 Guarda esta hoja en `actas/` y añade el prompt preferido a `templates/prompts.md` para reutilizarlo.
 
----
-
-¿Quieres que añada un ejemplo real (transcripción + minuta esperada) en `examples/actas/` y un pequeño script que convierta la salida JSON a un correo listo para enviar? ✉️
