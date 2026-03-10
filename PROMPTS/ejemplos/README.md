@@ -9,7 +9,8 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Asistencia / Soporte** – [`asistencia-soporte.md`](asistencia-soporte.md) – ejemplos de prompts para atención al cliente o help desk.
 - **Generación de documentación** – [`generacion-documentacion.md`](generacion-documentacion.md) – instruir al modelo para crear manuales, guías, fichas técnicas.
 - **Transformación digital** – [`transformacion-digital.md`](transformacion-digital.md)
-- **Generación de código informático** – peticiones para que la IA escriba fragmentos de código, refactorizaciones, etc.
+- **Educacion** – [`educacion.md`](educacion.md)
+- **Acción pedagógica* – [`educacion2.md`](educacion2.md)
 - **Marketing** – prompts orientados a campañas, planes de contenido, anuncios.
 - **Gestión de errores** – ejemplos de cómo pedir al modelo que diagnostique o explique fallos (logs, bugs).
 - **Otras temáticas** – puedes añadir más carpetas/archivos según necesites (educación, salud, finanzas, etc.).

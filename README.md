@@ -1,57 +1,55 @@
 # TDIGITAL — Automatizaciones básicas con IA generativa 🤖
 
-**Propósito (muy sencillo)**
+**Propósito**
 
-Este repositorio ofrece soluciones prácticas y mínimas, basadas únicamente en IA generativa, para automatizar tareas cotidianas de oficina. Cada receta incluye: un prompt listo para usar, pasos claros y una comprobación mínima que haga falta.
+Este repositorio reúne recetas prácticas y minimalistas para automatizar tareas de oficina usando **IA generativa**. Cada receta incluye:
 
----
+- Un **prompt listo para usar**
+- Pasos claros para ejecutar la receta
+- Una **comprobación mínima** para validar resultados
 
-## Cómo usar este repositorio ✅
-- Abre la carpeta de la temática que necesites.
-- Copia el *prompt* y el texto (o archivo) que quieras procesar en tu chat de IA preferido (ChatGPT, Gemini, etc.).
-- Revisa y valida manualmente los resultados antes de importarlos o compartirlos.
-
----
-
-## Automatizaciones sencillas (hoja de trucos) 🔧
-- **Calendarios / Agendas** 📅 — Extraer eventos de un PDF y generar CSV/ICS.
-- **Resúmenes** 📄 — Resumir un informe o PDF en 3–5 puntos.
-- **Emails** ✉️ — Redactar respuestas o plantillas personalizadas a partir de párrafos y datos.
-- **Actas / Minutas** 📝 — Generar minuta de reunión a partir de una transcripción o apuntes.
-- **Tablas a CSV** 📊 — Extraer tablas copypasteadas y convertir a CSV.
-- **Textos comerciales** 💬 — Crear 3 variantes de un post o anuncio a partir de una sola idea.
+> ⚠️ Siempre revisa manualmente los resultados de la IA antes de usarlos en producción.
 
 ---
 
-## Ejemplo práctico (extraer eventos de un calendario PDF) 🛠️
+## 🚀 Cómo usar este repositorio
+
+1. Navega a la carpeta de la temática que quieras automatizar.
+2. Copia el prompt y el texto/archivo de entrada en tu IA preferida (ChatGPT, Gemini, etc.).
+3. Ejecuta el prompt y valida los resultados.
+
+---
+
+## 🔎 Contenido principal
+
+- `calendario/` — Prompts y ejemplos para extraer eventos de PDFs y generar CSV/ICS.
+- `actas/` — Plantillas y prompts para generar actas/minutas a partir de transcripciones o notas.
+- `prompts/` — Colección de prompts generales y plantillas reutilizables.
+- `examples/` — Ejemplos de entrada/salida que ayudan a entender cómo usar cada receta.
+
+---
+
+## 🧩 Ejemplo rápido: extraer eventos de un calendario PDF
 
 Basado en `calendario/pdf-calendario.md`.
 
-1. Extrae el texto del PDF (si tu IA acepta archivos, súbelo; si no, copia el texto extraído con OCR).
-2. Usa este prompt (pega el texto o sube el PDF junto con el prompt):
+1. Extrae el texto del PDF (si tu IA admite carga de archivos, súbelo; si no, usa OCR).
+2. Usa este prompt:
 
-   "Actúa como un experto en gestión de datos. Lee este calendario y extrae todos los eventos. Devuélvelos como **CSV** con columnas exactas: Subject, Start Date (DD/MM/AAAA), Start Time (HH:MM AM/PM), End Date, End Time, Description. No añadas texto extra fuera del CSV."
+   > "Actúa como un experto en gestión de datos. Lee este calendario y extrae todos los eventos. Devuélvelos como **CSV** con columnas exactas: Subject, Start Date (DD/MM/AAAA), Start Time (HH:MM AM/PM), End Date, End Time, Description. No añadas texto extra fuera del CSV."
 
-3. Copia el CSV generado, guárdalo como `micurso.csv` y **valida las fechas/horas**.
-4. Importa en Google Calendar/Outlook o conviértelo a ICS si prefieres.
-
-> Nota: siempre revisa los resultados de la IA para fechas y horas; la revisión humana es obligatoria en esta etapa.
+3. Copia el CSV generado y guárdalo como `micurso.csv`.
+4. Verifica las fechas y horas antes de importarlo en Google Calendar/Outlook.
 
 ---
 
-## Estructura sugerida (simple)
-- `calendario/` — prompts y ejemplo (`pdf-calendario.md` ya contiene el prompt).
-- `prompts/` — colección de plantillas y prompts generales (ver `prompts/generales.md`).
-- `templates/` — prompts comunes y plantillas de salida (CSV, ICS, email).
-- `examples/` — ejemplos de entrada y salida (pueden ser solo textos y archivos de ejemplo).
+## 🛠️ Cómo colaborar
+
+- Abre un *issue* con ideas o mejoras de prompts.
+- Envía un *pull request* con nuevas recetas, ejemplos o mejoras de documentación.
 
 ---
 
-## Contribuir
-- Abre un *issue* con tu idea o con un prompt mejorado.
-- Envía un *pull request* con un `README` y un ejemplo (texto + prompt).
+## 📄 Licencia
 
----
-
-
-Licencia: MIT
+MIT

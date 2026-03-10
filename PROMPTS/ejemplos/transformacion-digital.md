@@ -45,3 +45,25 @@ Para que el ejercicio sea realmente transformador, diles que sigan estos tres pa
 2. **Iteración (El "Double Check"):** Una vez que la IA responda, deben pedirle: *"Profundiza en el punto 6 citando fuentes o noticias recientes sobre sus inversiones tecnológicas"*.
 3. **Crítica Humana:** Recuérdales que la IA puede alucinar datos financieros. Su trabajo como alumnos es validar que los "Impactos Inferidos" tengan sentido lógico con la realidad del sector.
 
+## informe notebooklm / transcripcion
+
+
+```prompt
+Actúa como un analista de gestión de proyectos experto. Basándote exclusivamente en la transcripción de Zoom proporcionada, genera un informe detallado que incluya los siguientes apartados:
+
+Índice de Temas: Una lista organizada de los puntos clave tratados en la reunión, siguiendo el orden cronológico de la conversación.
+
+Resumen Ejecutivo: Un resumen de alto nivel que explique el propósito de la reunión, quiénes intervinieron principalmente y los hitos o decisiones más importantes alcanzadas.
+
+Conclusiones Estratégicas: Un análisis de los resultados finales y el sentimiento general de la reunión (acuerdos, desacuerdos o bloqueos).
+
+Checklist de Tareas y Seguimiento:
+
+Crea una lista de tareas pendientes (Action Items).
+
+Asigna cada tarea a una persona (si se menciona en el audio).
+
+Incluye fechas límite o "deadlines" si fueron discutidos.
+
+Instrucciones de formato: Utiliza negritas para resaltar nombres y fechas, y emplea un tono profesional, conciso y estructurado. Si algún dato no se menciona en la fuente (como un responsable de tarea), indícalo como "No especificado".
+```
