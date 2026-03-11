@@ -1,4 +1,5 @@
-    ```timeline
+    ```mermaid
+    timeline
     title Evolución de la IA desde 2022
     section 2022
         Noviembre : OpenAI lanza ChatGPT
