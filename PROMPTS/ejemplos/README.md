@@ -14,6 +14,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Marketing** – prompts orientados a campañas, planes de contenido, anuncios.
 - **Gestión de errores** – ejemplos de cómo pedir al modelo que diagnostique o explique fallos (logs, bugs).
 - **Otras temáticas** – puedes añadir más carpetas/archivos según necesites (educación, salud, finanzas, etc.).
+ **Preguntas Trampa** – Intentando enganar a las IA [`preguntas-trampa.md`](preguntas-trampa.md)
 
 
 
