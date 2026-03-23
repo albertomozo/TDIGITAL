@@ -26,19 +26,12 @@ Este repositorio reúne recetas prácticas y minimalistas para automatizar tarea
 - `actas/` — Plantillas y prompts para generar actas/minutas a partir de transcripciones o notas.
 - `prompts/` — Colección de prompts generales y plantillas reutilizables.
 - `examples/` — Ejemplos de entrada/salida que ayudan a entender cómo usar cada receta.
+- `markdown/` — Manual educativo de Markdown con teoría, sintaxis, ejercicios y tendencias.
 
 ---
 
-## 🧩 Ejemplo rápido: extraer eventos de un calendario PDF
 
-Basado en `calendario/pdf-calendario.md`.
-
-1. Extrae el texto del PDF (si tu IA admite carga de archivos, súbelo; si no, usa OCR).
-2. Usa este prompt:
-
-   > "Actúa como un experto en gestión de datos. Lee este calendario y extrae todos los eventos. Devuélvelos como **CSV** con columnas exactas: Subject, Start Date (DD/MM/AAAA), Start Time (HH:MM AM/PM), End Date, End Time, Description. No añadas texto extra fuera del CSV."
-
-3. Copia el CSV generado y guárdalo como `micurso.csv`.
+generado y guárdalo como `micurso.csv`.
 4. Verifica las fechas y horas antes de importarlo en Google Calendar/Outlook.
 
 ---
