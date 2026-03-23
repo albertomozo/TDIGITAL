@@ -4,7 +4,7 @@ timeline
   section 2022
     Noviembre : OpenAI lanza ChatGPT
     : Basado en GPT-3, populariza la IA generativa
-    : 200 millones de usuarios en 3 meses
+    : 100 millones de usuarios en 2 meses
 
   section 2023
     Mayo : Reunión en EE.UU. con Alphabet, Anthropic, Microsoft y OpenAI
@@ -29,6 +29,10 @@ timeline
     : Singapur crea consejo nacional para estrategia de IA
 
   section Futuro
+    Mayor autonomía y colaboración humano-máquina
+    : Integración más profunda en vida cotidiana y negocios
+
+  section Futuro 2
     Mayor autonomía y colaboración humano-máquina
     : Integración más profunda en vida cotidiana y negocios
 ```
