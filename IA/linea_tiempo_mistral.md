@@ -4,7 +4,7 @@ timeline
   section 2022
     Noviembre : OpenAI lanza ChatGPT
     : Basado en GPT-3, populariza la IA generativa
-    : 100 millones de usuarios en 2 meses
+    : 200 millones de usuarios en 3 meses
 
   section 2023
     Mayo : Reunión en EE.UU. con Alphabet, Anthropic, Microsoft y OpenAI
