@@ -1,7 +1,3 @@
-    Sí, se puede y tiene mucho sentido para tu manual. Te dejo una sección lista para pegar en tu `.md`, integrando todo lo que hemos comentado.
-
-***
-
 ## El futuro de Markdown
 
 Markdown nació como un lenguaje de marcado ligero para escribir texto legible y convertirlo a HTML, pero en la era de la IA está evolucionando hacia algo mucho más potente. Cada vez más profesionales lo utilizan como formato estándar para colaborar con modelos de lenguaje, agentes y herramientas de desarrollo asistidas por IA. [chris.towles](https://chris.towles.dev/blog/markdown-plus-ai-the-communication-protocol-that-changes-everything)

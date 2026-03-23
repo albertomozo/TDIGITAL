@@ -101,5 +101,5 @@ A veces la IA se desvía del perfil después de una charla larga. Para devolverl
 
 ### transformación digital 
 
-[skill transformación]("skills/skill-digital-trans-texto.md")
-[skill-digital-trans.md]("skills/skill-digital-trans.md")
+[skill transformación](skills/skill-digital-trans-texto.md)
+[skill-digital-trans.md](skills/skill-digital-trans.md)
