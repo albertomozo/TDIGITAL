@@ -31,4 +31,6 @@ timeline
   section Futuro
     Mayor autonomía y colaboración humano-máquina
     : Integración más profunda en vida cotidiana y negocios
+
+
 ```
