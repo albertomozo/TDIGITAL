@@ -1,0 +1,460 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .planner {
+    font-family: 'Sora', sans-serif;
+    color: var(--color-text-primary);
+    padding: 1.5rem 1rem 2rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .header {
+    border-left: 4px solid #1D9E75;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+  .header .tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: #0F6E56;
+    background: #E1F5EE;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.3;
+  }
+  .header p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+  .meta-chip .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .section { margin-bottom: 1.75rem; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .obj-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .obj-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .obj-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    background: #E1F5EE;
+    color: #0F6E56;
+    border-radius: 4px;
+    padding: 2px 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .act-card {
+    display: flex;
+    gap: 12px;
+    position: relative;
+  }
+
+  .act-timeline-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .act-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    border: 0.5px solid var(--color-border-secondary);
+    background: var(--color-background-primary);
+  }
+  .act-line {
+    width: 1px;
+    flex: 1;
+    min-height: 12px;
+    background: var(--color-border-tertiary);
+    margin: 4px 0;
+  }
+
+  .act-body {
+    flex: 1;
+    padding-bottom: 1.25rem;
+  }
+  .act-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .act-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .act-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .act-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .act-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .act-step {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    display: flex;
+    gap: 7px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .act-step::before {
+    content: '›';
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+    margin-top: 0px;
+  }
+
+  .code-preview {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--color-background-tertiary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    margin-top: 8px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    overflow-x: auto;
+  }
+  .code-preview .kw { color: #1D9E75; font-weight: 500; }
+  .code-preview .b { font-weight: 500; color: var(--color-text-primary); }
+  .code-preview .it { font-style: italic; color: #185FA5; }
+  .code-preview .h { color: #BA7517; font-weight: 500; }
+
+  .mat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .mat-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .mat-icon { font-size: 16px; margin-bottom: 5px; display: block; }
+  .mat-name { font-weight: 500; font-size: 13px; color: var(--color-text-primary); }
+  .mat-desc { color: var(--color-text-secondary); margin-top: 2px; }
+
+  .eval-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .eval-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px;
+    font-size: 13px;
+  }
+  .eval-card .eval-title {
+    font-weight: 500;
+    margin-bottom: 6px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .eval-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .eval-card ul li {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    padding-left: 10px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .eval-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-tertiary);
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 0 0 1.75rem;
+  }
+
+  .badge-intro { background: #E6F1FB; color: #185FA5; }
+  .badge-dev { background: #FAEEDA; color: #854F0B; }
+  .badge-cierre { background: #E1F5EE; color: #0F6E56; }
+
+  .dot-intro { background: #378ADD; }
+  .dot-dev { background: #EF9F27; }
+  .dot-cierre { background: #1D9E75; }
+</style>
+
+<div class="planner">
+
+  <div class="header">
+    <span class="tag">Transformación Digital · Nivel Principiante</span>
+    <h1>Introducción a Markdown</h1>
+    <p>Plan de lección · 20 minutos · Modalidad presencial o virtual</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-chip"><span class="dot" style="background:#1D9E75"></span> 20 minutos totales</div>
+    <div class="meta-chip"><span class="dot" style="background:#378ADD"></span> Principiantes</div>
+    <div class="meta-chip"><span class="dot" style="background:#BA7517"></span> Máx. 20 estudiantes</div>
+    <div class="meta-chip"><span class="dot" style="background:#D4537E"></span> Sin conocimientos previos</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Objetivos de aprendizaje</div>
+    <div class="obj-list">
+      <div class="obj-item"><span class="obj-num">OA1</span> Explicar qué es Markdown y para qué se usa en entornos digitales y laborales.</div>
+      <div class="obj-item"><span class="obj-num">OA2</span> Aplicar la sintaxis básica: encabezados, listas y énfasis de texto.</div>
+      <div class="obj-item"><span class="obj-num">OA3</span> Reconocer la utilidad de Markdown en herramientas cotidianas como GitHub, Notion o chats.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Desarrollo de la clase</div>
+    <div class="timeline">
+
+      <div class="act-card">
+        <div class="act-timeline-col">
+          <div class="act-circle">🚀</div>
+          <div class="act-line"></div>
+        </div>
+        <div class="act-body">
+          <div class="act-header">
+            <span class="act-time badge-intro">0 – 5 min</span>
+            <span class="act-title">Introducción · ¿Por qué dar formato al texto?</span>
+          </div>
+          <div class="act-desc">Conectar con lo que los estudiantes ya conocen antes de mostrar código.</div>
+          <div class="act-steps">
+            <div class="act-step">Pregunta de enganche: "¿Han usado negritas en WhatsApp o Slack? ¿Cómo lo hicieron?"</div>
+            <div class="act-step">Mostrar el mismo párrafo: sin formato vs. con Markdown renderizado → impacto visual inmediato.</div>
+            <div class="act-step">Definición sencilla: "Markdown es un lenguaje liviano de marcado que convierte texto plano en formato visual."</div>
+            <div class="act-step">Mencionar dónde lo verán: GitHub, Notion, README, Discord, Jupyter, documentación técnica.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act-card">
+        <div class="act-timeline-col">
+          <div class="act-circle">⚒️</div>
+          <div class="act-line"></div>
+        </div>
+        <div class="act-body">
+          <div class="act-header">
+            <span class="act-time badge-dev">5 – 15 min</span>
+            <span class="act-title">Desarrollo · Sintaxis en vivo</span>
+          </div>
+          <div class="act-desc">El/la docente escribe en tiempo real en un editor (StackEdit, Dillinger o VS Code) mientras los estudiantes replican en sus dispositivos.</div>
+          <div class="act-steps">
+            <div class="act-step">Bloque 1 (3 min) — Encabezados: H1 con #, H2 con ##, H3 con ###. Mostrar jerarquía visual.</div>
+            <div class="act-step">Bloque 2 (3 min) — Énfasis: **negrita**, *cursiva*, ~~tachado~~. Escribir una oración y aplicarlos.</div>
+            <div class="act-step">Bloque 3 (4 min) — Listas: desordenadas con -, ordenadas con 1. 2. 3. Crear una lista de "mis apps favoritas".</div>
+          </div>
+          <div class="code-preview">
+<span class="h"># Mi primera nota en Markdown</span>
+
+Esto es un párrafo con texto <span class="b">**en negrita**</span> y texto <span class="it">*en cursiva*</span>.
+
+<span class="h">## Mis herramientas favoritas</span>
+
+<span class="kw">- </span>Notion
+<span class="kw">- </span>GitHub
+<span class="kw">- </span>Slack
+
+<span class="h">## Pasos para empezar</span>
+
+<span class="kw">1.</span> Abre un editor
+<span class="kw">2.</span> Escribe en texto plano
+<span class="kw">3.</span> Observa el resultado
+          </div>
+        </div>
+      </div>
+
+      <div class="act-card">
+        <div class="act-timeline-col">
+          <div class="act-circle">🎯</div>
+        </div>
+        <div class="act-body">
+          <div class="act-header">
+            <span class="act-time badge-cierre">15 – 20 min</span>
+            <span class="act-title">Cierre · Reto de 3 minutos + reflexión</span>
+          </div>
+          <div class="act-desc">Actividad de producción individual rápida para consolidar lo aprendido.</div>
+          <div class="act-steps">
+            <div class="act-step">Reto: "Crea en Markdown tu presentación personal: nombre (H1), rol o carrera (H2), 3 habilidades en lista, una frase importante en negrita."</div>
+            <div class="act-step">2–3 voluntarios comparten su resultado en pantalla o en el chat del aula virtual.</div>
+            <div class="act-step">Cierre reflexivo: "¿En qué momento de tu semana usarías Markdown?" (1 respuesta por estudiante).</div>
+            <div class="act-step">Compartir recurso de referencia rápida para que continúen practicando.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Materiales necesarios</div>
+    <div class="mat-grid">
+      <div class="mat-card">
+        <span class="mat-icon">💻</span>
+        <div class="mat-name">Dispositivo con navegador</div>
+        <div class="mat-desc">PC, tablet o celular — sin instalación requerida</div>
+      </div>
+      <div class="mat-card">
+        <span class="mat-icon">📝</span>
+        <div class="mat-name">Editor online</div>
+        <div class="mat-desc">StackEdit.io, Dillinger.io o Markdown Live Preview</div>
+      </div>
+      <div class="mat-card">
+        <span class="mat-icon">🖥️</span>
+        <div class="mat-name">Proyector o pantalla</div>
+        <div class="mat-desc">Para mostrar el código y el resultado en tiempo real</div>
+      </div>
+      <div class="mat-card">
+        <span class="mat-icon">📋</span>
+        <div class="mat-name">Cheatsheet Markdown</div>
+        <div class="mat-desc">Tarjeta de referencia rápida (impresa o PDF compartible)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-label">Evaluación formativa</div>
+    <div class="eval-grid">
+      <div class="eval-card">
+        <div class="eval-title">📌 Durante la clase</div>
+        <ul>
+          <li>Observación directa mientras replican la sintaxis</li>
+          <li>Detección de errores comunes: espacios faltantes, # mal ubicado</li>
+          <li>Preguntas rápidas de comprensión al grupo</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <div class="eval-title">✅ Reto de cierre</div>
+        <ul>
+          <li>¿Usó al menos 2 niveles de encabezado?</li>
+          <li>¿Aplicó negrita o cursiva correctamente?</li>
+          <li>¿La lista tiene formato válido (guion o número)?</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <div class="eval-title">💬 Reflexión final</div>
+        <ul>
+          <li>"¿Qué fue lo más sorprendente de Markdown?"</li>
+          <li>"¿Dónde crees que lo usarás esta semana?"</li>
+          <li>Registrar respuestas para retroalimentación</li>
+        </ul>
+      </div>
+      <div class="eval-card">
+        <div class="eval-title">📈 Extensión opcional</div>
+        <ul>
+          <li>Crear un README básico para un proyecto personal</li>
+          <li>Explorar links e imágenes en Markdown</li>
+          <li>Subir ejercicio a GitHub como primer commit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>

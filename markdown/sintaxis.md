@@ -1,6 +1,3 @@
-    Perfecto, Alberto. Aquí tienes un documento en **formato Markdown (.md)** con la **sintaxis básica**, explicado paso a paso y listo para copiar directamente a tu manual o archivo de ejemplo. He añadido ejemplos reales y comentarios breves para hacerlo útil en clase.
-
-***
 
 # Guía básica de sintaxis Markdown
 
