@@ -32,7 +32,5 @@ timeline
     Mayor autonomía y colaboración humano-máquina
     : Integración más profunda en vida cotidiana y negocios
 
-  section Futuro 2
-    Mayor autonomía y colaboración humano-máquina
-    : Integración más profunda en vida cotidiana y negocios
+
 ```
