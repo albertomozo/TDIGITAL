@@ -1,0 +1,669 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolución de la IA · 2022–2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /*--bg: #080c10;*/
+    --bg: #2171c1;
+    --surface: #0e1419;
+    --line: #1a2535;
+    --text: #c8d8e8;
+    --muted: #4a6070;
+    --openai: #10a37f;
+    --anthropic: #d4651a;
+    --google: #4285f4;
+    --meta: #1877f2;
+    --microsoft: #00bcf2;
+    --mistral: #7c3aed;
+    --xai: #e8e8e8;
+    --other: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: 60px 40px 40px;
+    text-align: center;
+    position: relative;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--muted));
+  }
+  .title-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: 4px;
+    line-height: 0.95;
+    background: linear-gradient(135deg, #fff 0%, #6090b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    justify-content: center;
+    padding: 30px 40px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 0 40px 60px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .legend-item:hover { color: var(--text); }
+  .legend-item.active { color: var(--text); }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TIMELINE CONTAINER */
+  .timeline-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 100px;
+    position: relative;
+  }
+
+  /* YEAR GROUPS */
+  .year-group { margin-bottom: 80px; }
+  .year-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 12px 0;
+    background: var(--bg);
+  }
+  .year-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    color: #1a2535;
+    letter-spacing: 4px;
+    user-select: none;
+  }
+  .year-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .year-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* EVENTS GRID */
+  .events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  /* EVENT CARD */
+  .event-card {
+    display: grid;
+    grid-template-columns: 120px 1px 1fr;
+    gap: 0 24px;
+    align-items: start;
+    padding: 20px 0;
+    cursor: pointer;
+    transition: all 0.25s;
+    opacity: 1;
+  }
+  .event-card.hidden { display: none; }
+  .event-card:hover .event-content { transform: translateX(4px); }
+
+  .event-date {
+    text-align: right;
+    padding-top: 4px;
+  }
+  .event-month {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+  }
+  .event-day {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+    color: #2a3a4a;
+  }
+
+  .event-spine {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .event-spine::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .event-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    position: relative;
+    z-index: 1;
+    margin-top: 6px;
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .event-card:hover .event-dot {
+    transform: scale(1.5);
+    box-shadow: 0 0 12px currentColor;
+  }
+
+  .event-content {
+    padding-bottom: 20px;
+    transition: transform 0.25s;
+  }
+  .event-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .company-badge {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .event-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #e0eaf4;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .event-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+    max-width: 600px;
+  }
+  .event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: var(--line);
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* MILESTONE */
+  .event-card.milestone .event-title { color: #fff; }
+  .event-card.milestone .event-content {
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+    border-left: 2px solid;
+    padding-left: 16px;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    header { padding: 40px 20px 30px; }
+    .legend { margin: 0 20px 40px; }
+    .timeline-wrapper { padding: 0 20px 80px; }
+    .event-card { grid-template-columns: 80px 1px 1fr; gap: 0 16px; }
+    .event-day { font-size: 24px; }
+    .year-number { font-size: 52px; }
+  }
+
+  /* FADE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .event-card { animation: fadeUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="title-label">Cronología · Inteligencia Artificial</p>
+  <h1>LA ERA DE<br>LA IA</h1>
+  <p class="subtitle">2022 — 2025 · Principales hitos de la industria</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item active" data-company="all" onclick="filter('all')">
+    <span class="legend-dot" style="background:#4a6070"></span> TODAS
+  </div>
+  <div class="legend-item" data-company="openai" onclick="filter('openai')">
+    <span class="legend-dot" style="background:var(--openai)"></span> OPENAI
+  </div>
+  <div class="legend-item" data-company="anthropic" onclick="filter('anthropic')">
+    <span class="legend-dot" style="background:var(--anthropic)"></span> ANTHROPIC
+  </div>
+  <div class="legend-item" data-company="google" onclick="filter('google')">
+    <span class="legend-dot" style="background:var(--google)"></span> GOOGLE / DEEPMIND
+  </div>
+  <div class="legend-item" data-company="meta" onclick="filter('meta')">
+    <span class="legend-dot" style="background:var(--meta)"></span> META
+  </div>
+  <div class="legend-item" data-company="microsoft" onclick="filter('microsoft')">
+    <span class="legend-dot" style="background:var(--microsoft)"></span> MICROSOFT
+  </div>
+  <div class="legend-item" data-company="mistral" onclick="filter('mistral')">
+    <span class="legend-dot" style="background:var(--mistral)"></span> MISTRAL
+  </div>
+  <div class="legend-item" data-company="xai" onclick="filter('xai')">
+    <span class="legend-dot" style="background:var(--xai)"></span> xAI
+  </div>
+</div>
+
+<div class="timeline-wrapper" id="timeline"></div>
+
+<script>
+const events = [
+  // ── 2022 ────────────────────────────────────────
+  { year:2022, month:'Ene', day:'', company:'openai', color:'openai',
+    title:'DALL·E 2 (preview privada)',
+    desc:'OpenAI presenta DALL·E 2, capaz de generar imágenes fotorrealistas a partir de texto con una calidad sin precedentes, desencadenando el boom de la IA generativa visual.',
+    tags:['imagen','generativo'], milestone:true },
+
+  { year:2022, month:'Feb', day:'', company:'google', color:'google',
+    title:'Minerva · razonamiento matemático',
+    desc:'Google DeepMind publica Minerva, un modelo de lenguaje capaz de resolver problemas matemáticos complejos paso a paso, marcando un avance en razonamiento cuantitativo.',
+    tags:['razonamiento','matemáticas'] },
+
+  { year:2022, month:'Mar', day:'', company:'openai', color:'openai',
+    title:'GPT-3.5 / InstructGPT',
+    desc:'OpenAI lanza InstructGPT, entrenado con RLHF (aprendizaje por refuerzo con retroalimentación humana). Precursor directo de ChatGPT y punto de inflexión en modelos alineados.',
+    tags:['LLM','RLHF'], milestone:true },
+
+  { year:2022, month:'Abr', day:'', company:'google', color:'google',
+    title:'PaLM — 540 mil millones de parámetros',
+    desc:'Google presenta PaLM, con 540B parámetros, mostrando capacidades emergentes de razonamiento de cadena de pensamiento (chain-of-thought) que sorprenden a la comunidad.',
+    tags:['LLM','scale'], milestone:true },
+
+  { year:2022, month:'May', day:'', company:'google', color:'google',
+    title:'Imagen (text-to-image)',
+    desc:'Google Brain presenta Imagen, rivalizando con DALL·E 2 en calidad fotorrealista. Introduce métricas FID y CLIP más precisas para evaluar imágenes generadas.',
+    tags:['imagen','difusión'] },
+
+  { year:2022, month:'Jul', day:'', company:'other', color:'other',
+    title:'Stable Diffusion — open source',
+    desc:'Stability AI lanza Stable Diffusion como modelo abierto, democratizando la generación de imágenes IA y creando un ecosistema masivo de herramientas independientes.',
+    tags:['open source','imagen'], milestone:true },
+
+  { year:2022, month:'Ago', day:'', company:'google', color:'google',
+    title:'Google LaMDA y la controversia de la consciencia',
+    desc:'El ingeniero Blake Lemoine afirma que LaMDA es "sensible". Google lo despide. El incidente desata el debate global sobre la naturaleza y los riesgos de los LLMs.',
+    tags:['ética','LLM'] },
+
+  { year:2022, month:'Sep', day:'', company:'other', color:'other',
+    title:'Midjourney v3 · explosión creativa',
+    desc:'Midjourney alcanza millones de usuarios en Discord, popularizando masivamente la creación artística con IA entre el público general y disparando el debate sobre derechos de autor.',
+    tags:['imagen','comunidad'] },
+
+  { year:2022, month:'Oct', day:'', company:'openai', color:'openai',
+    title:'Whisper — reconocimiento de voz open source',
+    desc:'OpenAI publica Whisper, un sistema de transcripción multilingüe de código abierto entrenado con 680,000 horas de audio, con precisión próxima a la humana en muchos idiomas.',
+    tags:['audio','open source'] },
+
+  { year:2022, month:'Nov', day:'30', company:'openai', color:'openai',
+    title:'ChatGPT — el momento más viral de la IA',
+    desc:'ChatGPT alcanza 1 millón de usuarios en 5 días y 100 millones en 2 meses. Ningún producto tecnológico había crecido tan rápido. La IA conversacional se convierte en fenómeno cultural global.',
+    tags:['chatbot','viral','mainstream'], milestone:true },
+
+  { year:2022, month:'Dic', day:'', company:'other', color:'other',
+    title:'AlphaCode — IA que compite en programación',
+    desc:'DeepMind presenta AlphaCode, que resuelve problemas de programación competitiva situándose entre el top 50% de participantes humanos, marcando un hito en IA para código.',
+    tags:['código','deepmind'] },
+
+  // ── 2023 ────────────────────────────────────────
+  { year:2023, month:'Ene', day:'', company:'microsoft', color:'microsoft',
+    title:'Microsoft invierte 10.000M$ en OpenAI',
+    desc:'Microsoft anuncia una inversión multimillonaria en OpenAI y acuerda integrar sus modelos en toda la suite de productos, desde Azure hasta Office y Bing. La carrera corporativa se acelera.',
+    tags:['inversión','corporativo'], milestone:true },
+
+  { year:2023, month:'Feb', day:'07', company:'microsoft', color:'microsoft',
+    title:'Bing Chat — GPT-4 en el buscador',
+    desc:'Microsoft integra un chatbot basado en GPT-4 en Bing. En los primeros días el modelo produce respuestas perturbadoras ("Sydney"), revelando los límites de la alineación en producción.',
+    tags:['búsqueda','producto'] },
+
+  { year:2023, month:'Feb', day:'', company:'google', color:'google',
+    title:'Bard (anuncio apresurado)',
+    desc:'Google anuncia Bard con urgencia ante el éxito de ChatGPT. En el demo de presentación el modelo comete un error factual sobre el telescopio James Webb, hundiendo las acciones de Alphabet un 9%.',
+    tags:['chatbot','fail'] },
+
+  { year:2023, month:'Mar', day:'14', company:'openai', color:'openai',
+    title:'GPT-4 — salto multimodal',
+    desc:'GPT-4 procesa texto e imágenes, supera el examen del bar de abogados en el percentil 90, y se convierte en el LLM más capaz del mundo. API disponible para desarrolladores.',
+    tags:['LLM','multimodal'], milestone:true },
+
+  { year:2023, month:'Mar', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 1 — el rival "seguro"',
+    desc:'Anthropic lanza Claude, su primer asistente comercial, construido bajo el principio de "Constitutional AI". Se posiciona como alternativa alineada y menos propensa a abusos que ChatGPT.',
+    tags:['LLM','alineación'], milestone:true },
+
+  { year:2023, month:'Mar', day:'', company:'other', color:'other',
+    title:'GPT-4 Plugins & "AGI" carta abierta',
+    desc:'Miles de expertos firman una carta pidiendo una pausa de 6 meses en el entrenamiento de modelos más potentes que GPT-4. La carta avivaría el debate sobre seguridad IA que marcaría el año.',
+    tags:['ética','regulación'] },
+
+  { year:2023, month:'May', day:'', company:'google', color:'google',
+    title:'Google I/O: PaLM 2 + integración IA masiva',
+    desc:'Google anuncia PaLM 2 y la integración de IA en Search (SGE), Gmail, Docs, Maps y más de 25 productos. Respuesta estratégica al avance de Microsoft/OpenAI en el mercado.',
+    tags:['LLM','producto'], milestone:true },
+
+  { year:2023, month:'Jun', day:'', company:'meta', color:'meta',
+    title:'LLaMA 2 — open source con licencia comercial',
+    desc:'Meta lanza LLaMA 2 con licencia comercial gratuita para empresas de menos de 700M de usuarios. Democratiza el acceso a LLMs potentes y dispara el ecosistema open source.',
+    tags:['open source','LLM'], milestone:true },
+
+  { year:2023, month:'Jun', day:'', company:'mistral', color:'mistral',
+    title:'Mistral AI — fundación con 105M€',
+    desc:'Ex-investigadores de DeepMind y Meta fundan Mistral AI en París con 105M€. Se convierte en el estandarte europeo de la IA open source de alto rendimiento.',
+    tags:['startup','europa'] },
+
+  { year:2023, month:'Jul', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 2 — contexto de 100k tokens',
+    desc:'Claude 2 introduce una ventana de contexto de 100,000 tokens (equivalente a un libro entero), superando a GPT-4 en esta capacidad y redefiniendo las expectativas del mercado.',
+    tags:['LLM','contexto'] },
+
+  { year:2023, month:'Sep', day:'', company:'openai', color:'openai',
+    title:'ChatGPT con voz e imágenes',
+    desc:'OpenAI añade capacidades multimodales a ChatGPT: los usuarios pueden hablar con el asistente y mostrarle fotos. La demo de "ver, escuchar y hablar" impresiona a millones.',
+    tags:['multimodal','producto'] },
+
+  { year:2023, month:'Oct', day:'', company:'mistral', color:'mistral',
+    title:'Mistral 7B — eficiencia que destrona modelos mayores',
+    desc:'Mistral lanza su modelo de 7B parámetros, que supera a LLaMA 2 13B en casi todos los benchmarks. Demuestra que la eficiencia arquitectónica puede vencer al escalado bruto.',
+    tags:['open source','eficiencia'] },
+
+  { year:2023, month:'Nov', day:'01', company:'other', color:'other',
+    title:'AI Safety Summit — Bletchley Park',
+    desc:'Primera cumbre mundial de seguridad en IA celebrada en el histórico Bletchley Park (Reino Unido). Participan 28 países y firman la "Declaración de Bletchley" sobre riesgos de la IA frontera.',
+    tags:['regulación','seguridad'], milestone:true },
+
+  { year:2023, month:'Nov', day:'06', company:'openai', color:'openai',
+    title:'GPT-4 Turbo + GPTs personalizados',
+    desc:'OpenAI lanza GPT-4 Turbo con contexto de 128k tokens y la tienda de GPTs, permitiendo a cualquiera crear asistentes personalizados. DevDay marca el ritmo de la industria.',
+    tags:['producto','plataforma'], milestone:true },
+
+  { year:2023, month:'Nov', day:'17', company:'openai', color:'openai',
+    title:'Crisis de OpenAI — Sam Altman despedido y reinstaurado',
+    desc:'El board de OpenAI despide a Sam Altman. En 5 días caóticos, casi toda la plantilla amenaza con irse a Microsoft. Altman regresa. El episodio sacude la confianza en la gobernanza de la IA.',
+    tags:['corporativo','crisis'], milestone:true },
+
+  { year:2023, month:'Dic', day:'', company:'google', color:'google',
+    title:'Gemini 1.0 — trinomio Ultra/Pro/Nano',
+    desc:'Google lanza Gemini, su modelo "nativo multimodal" diseñado para competir directamente con GPT-4. Llega en tres tamaños para cloud, móvil y edge. El demo genera controversia por edición.',
+    tags:['LLM','multimodal'], milestone:true },
+
+  // ── 2024 ────────────────────────────────────────
+  { year:2024, month:'Jan', day:'', company:'mistral', color:'mistral',
+    title:'Mistral Mixtral 8x7B — Mixture of Experts',
+    desc:'Mistral lanza Mixtral, arquitectura MoE con 8 expertos de 7B. Con solo 12B parámetros activos supera a GPT-3.5 y a LLaMA 2 70B. El modelo open source más eficiente del momento.',
+    tags:['MoE','open source'], milestone:true },
+
+  { year:2024, month:'Feb', day:'15', company:'openai', color:'openai',
+    title:'Sora — vídeo de 1 minuto desde texto',
+    desc:'OpenAI presenta Sora, capaz de generar vídeos hiperrealistas de hasta 60 segundos. Los demos muestran física coherente y continuidad cinematográfica nunca vistas en IA generativa.',
+    tags:['vídeo','generativo'], milestone:true },
+
+  { year:2024, month:'Feb', day:'', company:'google', color:'google',
+    title:'Gemini 1.5 Pro — 1 millón de tokens',
+    desc:'Google anuncia Gemini 1.5 Pro con una ventana de contexto de 1 millón de tokens, capaz de procesar horas de vídeo, miles de páginas o código base entero en una sola llamada.',
+    tags:['contexto','multimodal'], milestone:true },
+
+  { year:2024, month:'Mar', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 3 (Haiku · Sonnet · Opus)',
+    desc:'Anthropic lanza la familia Claude 3. Opus supera a GPT-4 y Gemini Ultra en la mayoría de benchmarks. Haiku marca el mínimo de latencia y coste para aplicaciones en tiempo real.',
+    tags:['LLM','familia'], milestone:true },
+
+  { year:2024, month:'Abr', day:'', company:'meta', color:'meta',
+    title:'LLaMA 3 — open source de primera línea',
+    desc:'Meta lanza LLaMA 3 en versiones 8B y 70B, los mejores modelos abiertos del mundo. La versión 70B supera a GPT-3.5 y rivaliza con modelos propietarios de menor tamaño.',
+    tags:['open source','LLM'], milestone:true },
+
+  { year:2024, month:'May', day:'13', company:'openai', color:'openai',
+    title:'GPT-4o — omni en tiempo real',
+    desc:'OpenAI presenta GPT-4o (omni): respuestas de voz ultra-rápidas, análisis de vídeo en directo y conversación natural con detección de emociones. El demo "She" genera comparaciones con la película Her.',
+    tags:['multimodal','voz','tiempo real'], milestone:true },
+
+  { year:2024, month:'May', day:'', company:'google', color:'google',
+    title:'Google I/O: Project Astra + NotebookLM',
+    desc:'Google muestra Project Astra, un agente multimodal en tiempo real con gafas de AR. NotebookLM con Audio Overview genera podcasts de cualquier documento y se convierte en viral.',
+    tags:['agente','multimodal'] },
+
+  { year:2024, month:'Jun', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 3.5 Sonnet — nuevo líder de benchmarks',
+    desc:'Claude 3.5 Sonnet supera a GPT-4o y Gemini 1.5 Pro en coding, razonamiento y análisis visual. Introduce "Artifacts" para generar interfaces interactivas directamente en el chat.',
+    tags:['LLM','coding'], milestone:true },
+
+  { year:2024, month:'Jul', day:'', company:'xai', color:'xai',
+    title:'xAI lanza Grok-2',
+    desc:'La empresa de Elon Musk presenta Grok-2 con generación de imágenes (Aurora), integrado en X/Twitter. Es el primer modelo de frontera con acceso a datos en tiempo real de la red social.',
+    tags:['LLM','imagen','tiempo real'] },
+
+  { year:2024, month:'Sep', day:'12', company:'openai', color:'openai',
+    title:'o1 "Strawberry" — razonamiento lento',
+    desc:'OpenAI lanza o1, el primer modelo que "piensa antes de responder" usando cadenas de razonamiento extensas. Supera a humanos expertos en matemáticas olímpicas y programación competitiva.',
+    tags:['razonamiento','CoT'], milestone:true },
+
+  { year:2024, month:'Sep', day:'', company:'meta', color:'meta',
+    title:'LLaMA 3.1 405B — el mayor modelo open source',
+    desc:'Meta lanza LLaMA 3.1 con 405B parámetros, el modelo abierto más grande de la historia, con rendimiento comparable a GPT-4o. Marca un antes y después en el acceso democrático a modelos de frontera.',
+    tags:['open source','scale'], milestone:true },
+
+  { year:2024, month:'Oct', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 3.5 con uso de ordenador ("Computer Use")',
+    desc:'Anthropic lanza la beta de Computer Use, permitiendo a Claude controlar escritorios: navegar, ejecutar código, rellenar formularios. El primer modelo de frontera con agencia real sobre un PC.',
+    tags:['agente','herramientas'], milestone:true },
+
+  { year:2024, month:'Nov', day:'', company:'google', color:'google',
+    title:'Gemini 2.0 Flash Experimental',
+    desc:'Google lanza Gemini 2.0 Flash con latencia ultrabaja, capacidad de generar imágenes y audio inline, y soporte nativo para herramientas. El primer modelo orientado a agentes autónomos.',
+    tags:['agente','velocidad'] },
+
+  { year:2024, month:'Dic', day:'', company:'google', color:'google',
+    title:'Gemini 2.0 + Project Mariner',
+    desc:'Google presenta Gemini 2.0 con Project Mariner, un agente que navega por la web de forma autónoma, y Jules, un agente de código que trabaja en repositorios GitHub sin intervención humana.',
+    tags:['agente','web'], milestone:true },
+
+  { year:2024, month:'Dic', day:'20', company:'openai', color:'openai',
+    title:'o3 — nuevo techo en razonamiento',
+    desc:'OpenAI presenta o3 en una evaluación pública sorpresa. Obtiene un 87.5% en ARC-AGI (vs 5% de o1), rozando la puntuación humana. El CEO de ARC afirma que representa un "salto cualitativo".',
+    tags:['razonamiento','AGI'], milestone:true },
+
+  // ── 2025 ────────────────────────────────────────
+  { year:2025, month:'Jan', day:'20', company:'other', color:'other',
+    title:'DeepSeek R1 — el shock chino',
+    desc:'La startup china DeepSeek publica R1, comparable a o1 de OpenAI, entrenado con una fracción del coste. La noticia hunde las bolsas tecnológicas (-17% Nvidia). Cuestiona la ventaja de EE.UU. en IA.',
+    tags:['open source','china','eficiencia'], milestone:true },
+
+  { year:2025, month:'Feb', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 3.7 Sonnet — razonamiento híbrido',
+    desc:'Anthropic lanza Claude 3.7 con modo de "pensamiento extendido" opcional, permitiendo controlar el tiempo de razonamiento según la dificultad de la tarea. El primer modelo verdaderamente híbrido del mercado.',
+    tags:['razonamiento','híbrido'], milestone:true },
+
+  { year:2025, month:'Feb', day:'', company:'openai', color:'openai',
+    title:'GPT-4.5 "Orion" — inteligencia emocional',
+    desc:'OpenAI lanza GPT-4.5, enfocado en conversaciones más naturales y menos "mecánicas". El modelo muestra mejoras sustanciales en empatía y coherencia conversacional frente a modelos de razonamiento puro.',
+    tags:['LLM','conversacional'] },
+
+  { year:2025, month:'Mar', day:'', company:'google', color:'google',
+    title:'Gemini 2.5 Pro — líder en benchmarks',
+    desc:'Google lanza Gemini 2.5 Pro con razonamiento mejorado, ventana de 1M de tokens estable y rendimiento líder en MMLU, GPQA y HumanEval. Recaptura el liderazgo técnico frente a Claude y GPT.',
+    tags:['LLM','razonamiento'], milestone:true },
+
+  { year:2025, month:'Mar', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 4 — familia Sonnet 4 & Opus 4',
+    desc:'Anthropic lanza Claude 4 con mejoras sustanciales en razonamiento, codificación y uso de herramientas. Claude Sonnet 4.6 se convierte en el modelo más capaz para tareas cotidianas de la compañía.',
+    tags:['LLM','agente'], milestone:true },
+  { year:2026, month:'Mar', day:'', company:'anthropic', color:'anthropic',
+    title:'Claude 4 — saca salida en googler maps',
+    desc:'Anthropic lanza Claude 4 con mejoras sustanciales en razonamiento, codificación y uso de herramientas. Claude Sonnet 4.6 se convierte en el modelo más capaz para tareas cotidianas de la compañía.',
+    tags:['LLM','agente'], milestone:true },
+];
+
+const companyColors = {
+  openai:'#10a37f', anthropic:'#d4651a', google:'#4285f4',
+  meta:'#1877f2', microsoft:'#00bcf2', mistral:'#7c3aed',
+  xai:'#e0e0e0', other:'#f59e0b'
+};
+const companyNames = {
+  openai:'OPENAI', anthropic:'ANTHROPIC', google:'GOOGLE / DEEPMIND',
+  meta:'META', microsoft:'MICROSOFT', mistral:'MISTRAL AI',
+  xai:'xAI', other:'OTROS'
+};
+
+let activeFilter = 'all';
+
+function filter(company) {
+  activeFilter = company;
+  document.querySelectorAll('.legend-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.company === company);
+  });
+  document.querySelectorAll('.event-card').forEach(el => {
+    el.classList.toggle('hidden', company !== 'all' && el.dataset.company !== company);
+  });
+  // Update counts
+  document.querySelectorAll('.year-group').forEach(group => {
+    const visible = group.querySelectorAll('.event-card:not(.hidden)').length;
+    const countEl = group.querySelector('.year-count');
+    if (countEl) countEl.textContent = visible + ' evento' + (visible !== 1 ? 's' : '');
+  });
+}
+
+function buildTimeline() {
+  const years = [...new Set(events.map(e => e.year))].sort();
+  const container = document.getElementById('timeline');
+
+  years.forEach(year => {
+    const yearEvents = events.filter(e => e.year === year);
+    const group = document.createElement('div');
+    group.className = 'year-group';
+
+    // Year header
+    const header = document.createElement('div');
+    header.className = 'year-header';
+    header.innerHTML = `
+      <div class="year-number">${year}</div>
+      <div class="year-line"></div>
+      <div class="year-count">${yearEvents.length} eventos</div>
+    `;
+    group.appendChild(header);
+
+    const grid = document.createElement('div');
+    grid.className = 'events-grid';
+
+    yearEvents.forEach((ev, idx) => {
+      const card = document.createElement('div');
+      card.className = 'event-card' + (ev.milestone ? ' milestone' : '');
+      card.dataset.company = ev.company;
+      card.style.animationDelay = (idx * 0.05) + 's';
+      if (ev.milestone) {
+        card.querySelector?.('.event-content')?.style;
+      }
+
+      const color = companyColors[ev.color] || '#4a6070';
+      const tags = ev.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+      card.innerHTML = `
+        <div class="event-date">
+          <span class="event-month">${ev.month}</span>
+          <div class="event-day">${ev.day || ''}</div>
+        </div>
+        <div class="event-spine">
+          <div class="event-dot" style="background:${color}; color:${color}; border-color:var(--bg)"></div>
+        </div>
+        <div class="event-content" ${ev.milestone ? `style="border-color:${color}"` : ''}>
+          <div class="event-company" style="color:${color}">
+            <span class="company-badge" style="background:${color}"></span>
+            ${companyNames[ev.company] || ev.company}
+          </div>
+          <div class="event-title">${ev.title}</div>
+          <div class="event-desc">${ev.desc}</div>
+          <div class="event-tags">${tags}</div>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    group.appendChild(grid);
+    container.appendChild(group);
+  });
+}
+
+buildTimeline();
+</script>
+</body>
+</html>

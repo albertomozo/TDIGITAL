@@ -63,4 +63,7 @@ Si quieres mejorar el contenido, abre un PR con:
 - **Ficheros de texto plano**
 [XML/JSON/CSV](https://docs.google.com/presentation/d/1ikE4ntCLaaioY1_c8p74foxRLYJIbwQ0-EMNidHSFfw/edit?usp=sharing)
 
+** Articulo sobre Markdown**
+[Markdown](https://xtrategia.substack.com/p/markdown?triedRedirect=true)
+
 
