@@ -1,0 +1,400 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+
+  .hero {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+  }
+  .hero-title {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-top: 6px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 1.5rem 1rem;
+  }
+
+  .step-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.25rem 1rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .step-card:hover {
+    border-color: var(--color-border-primary);
+    background: var(--color-background-secondary);
+  }
+  .step-card.active {
+    border-color: var(--color-border-info);
+    background: var(--color-background-info);
+  }
+
+  .step-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+  .step-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 2px;
+    width: fit-content;
+  }
+  .badge-evap  { background: #FAEEDA; color: #854F0B; }
+  .badge-cond  { background: #E6F1FB; color: #185FA5; }
+  .badge-prec  { background: #EAF3DE; color: #3B6D11; }
+  .badge-esc   { background: #EEEDFE; color: #3C3489; }
+
+  .step-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .step-short {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .detail-panel {
+    margin: 0 1rem 1.5rem;
+    border-radius: var(--border-radius-lg);
+    border: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-primary);
+    overflow: hidden;
+    transition: opacity 0.2s;
+  }
+
+  .detail-header {
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .detail-big-icon { font-size: 32px; }
+  .detail-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .detail-subtitle {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+
+  .detail-body {
+    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .detail-block {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 0.875rem 1rem;
+  }
+  .detail-block-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .detail-block-text {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.55;
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 0 1rem;
+  }
+
+  .experiment-section {
+    padding: 1.5rem 1rem;
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .exp-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+  }
+  .exp-header {
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .exp-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); }
+
+  .materials-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 1rem 1.25rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .material-pill {
+    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 99px;
+    border: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-secondary);
+    background: var(--color-background-secondary);
+  }
+
+  .steps-list {
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .exp-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .exp-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .exp-step-text {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.5;
+  }
+
+  .magic-q {
+    margin: 0 1rem 1.5rem;
+    background: var(--color-background-secondary);
+    border-left: 2px solid var(--color-border-info);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    padding: 0.875rem 1rem;
+  }
+  .magic-q-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-info);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .magic-q-text {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    line-height: 1.55;
+  }
+
+  .tip-box {
+    margin: 0 1rem 2rem;
+    background: var(--color-background-warning);
+    border: 0.5px solid var(--color-border-warning);
+    border-radius: var(--border-radius-md);
+    padding: 0.875rem 1rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .tip-text { font-size: 14px; color: var(--color-text-warning); line-height: 1.5; }
+</style>
+
+<h2 class="sr-only">Guía interactiva del ciclo del agua para niños: analogía de Gotita y experimento en casa</h2>
+
+<div class="hero">
+  <div class="hero-title">💧 La Gran Aventura de Gotita</div>
+  <div class="hero-sub">Pulsa cada fase para descubrir su secreto</div>
+</div>
+
+<div class="steps" id="steps-grid">
+
+  <div class="step-card" onclick="showDetail(0)" id="card-0">
+    <div class="step-icon">☀️</div>
+    <span class="step-badge badge-evap">Fase 1</span>
+    <div class="step-name">Evaporación</div>
+    <div class="step-short">Gotita sube en un ascensor invisible</div>
+  </div>
+
+  <div class="step-card" onclick="showDetail(1)" id="card-1">
+    <div class="step-icon">☁️</div>
+    <span class="step-badge badge-cond">Fase 2</span>
+    <div class="step-name">Condensación</div>
+    <div class="step-short">Gotita forma un sofá gigante en el cielo</div>
+  </div>
+
+  <div class="step-card" onclick="showDetail(2)" id="card-2">
+    <div class="step-icon">🌧️</div>
+    <span class="step-badge badge-prec">Fase 3</span>
+    <div class="step-name">Precipitación</div>
+    <div class="step-short">Gotita cae en el tobogán más largo del mundo</div>
+  </div>
+
+  <div class="step-card" onclick="showDetail(3)" id="card-3">
+    <div class="step-icon">🏔️</div>
+    <span class="step-badge badge-esc">Fase 4</span>
+    <div class="step-name">Escorrentía</div>
+    <div class="step-short">Gotita explora y vuelve a casa</div>
+  </div>
+
+</div>
+
+<div class="detail-panel" id="detail-panel">
+  <div class="detail-header">
+    <div class="detail-big-icon" id="d-icon">☀️</div>
+    <div>
+      <div class="detail-title" id="d-title">Evaporación</div>
+      <div class="detail-subtitle" id="d-sub">El ascensor invisible de Gotita</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="detail-block">
+      <div class="detail-block-label">🔬 Qué pasa de verdad</div>
+      <div class="detail-block-text" id="d-science">El sol calienta el agua del mar, ríos y lagos. Las moléculas se mueven tan rápido que escapan al aire en forma de vapor invisible.</div>
+    </div>
+    <div class="detail-block">
+      <div class="detail-block-label">🎭 La aventura de Gotita</div>
+      <div class="detail-block-text" id="d-story">Gotita baila tan rápido con sus amigas que se vuelven tan ligeras como burbujas y flotan hacia arriba. ¡El calor del sol es su ascensor secreto!</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="experiment-section">
+  <div class="section-label">🧪 Experimento en casa</div>
+  <div class="exp-card">
+    <div class="exp-header">
+      <span style="font-size:20px">🛍️</span>
+      <div class="exp-title">La Nube en una Bolsa</div>
+    </div>
+    <div class="materials-grid">
+      <span class="material-pill">Bolsa zip 1 ud.</span>
+      <span class="material-pill">Agua</span>
+      <span class="material-pill">Rotulador azul</span>
+      <span class="material-pill">Cinta adhesiva</span>
+      <span class="material-pill">Ventana soleada</span>
+    </div>
+    <div class="steps-list">
+      <div class="exp-step">
+        <div class="exp-step-num">1</div>
+        <div class="exp-step-text">Dibuja un sol arriba y olas abajo en la bolsa con el rotulador azul.</div>
+      </div>
+      <div class="exp-step">
+        <div class="exp-step-num">2</div>
+        <div class="exp-step-text">Echa 3 dedos de agua en la bolsa y ciérrala bien.</div>
+      </div>
+      <div class="exp-step">
+        <div class="exp-step-num">3</div>
+        <div class="exp-step-text">Pégala con cinta en la ventana más soleada de casa.</div>
+      </div>
+      <div class="exp-step">
+        <div class="exp-step-num">4</div>
+        <div class="exp-step-text">¡Espera y observa! Verás gotitas subir, juntarse y caer, igual que la lluvia de verdad.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="magic-q">
+  <div class="magic-q-label">💬 La pregunta mágica</div>
+  <div class="magic-q-text">«¿Dónde crees que irá Gotita después de caer... si la bolsa nunca se abre?» — Así descubren solos que el ciclo no tiene fin. 🔄</div>
+</div>
+
+<div class="tip-box">
+  <div class="tip-icon"><i class="ti ti-bulb" aria-hidden="true"></i></div>
+  <div class="tip-text"><strong>Truco de profe:</strong> Pídeles que le pongan nombre a su Gotita y que cuenten su aventura como si fueran narradores de un documental. ¡Se lo aprenden sin darse cuenta!</div>
+</div>
+
+<script>
+const details = [
+  {
+    icon: "☀️",
+    title: "Evaporación",
+    sub: "El ascensor invisible de Gotita",
+    science: "El sol calienta el agua del mar, ríos y lagos. Las moléculas se mueven tan rápido que escapan al aire en forma de vapor invisible.",
+    story: "Gotita baila tan rápido con sus amigas que se vuelven tan ligeras como burbujas y flotan hacia arriba. ¡El calor del sol es su ascensor secreto!"
+  },
+  {
+    icon: "☁️",
+    title: "Condensación",
+    sub: "El sofá-nube gigante",
+    science: "Al subir, el vapor se enfría. Las moléculas se juntan de nuevo formando gotitas muy pequeñas que flotan y crean las nubes.",
+    story: "Arriba hace mucho frío y Gotita se apretuja con millones de amiguitas. Todas juntas forman una nube esponjosa, ¡como un sofá gigante en el cielo!"
+  },
+  {
+    icon: "🌧️",
+    title: "Precipitación",
+    sub: "El tobogán más largo del mundo",
+    science: "Cuando las nubes se cargan demasiado de agua, las gotitas caen en forma de lluvia, nieve o granizo, según la temperatura.",
+    story: "El sofá-nube está tan lleno que ya no aguanta más. ¡Gotita sale disparada y cae por el tobogán más largo del mundo hasta llegar al suelo!"
+  },
+  {
+    icon: "🏔️",
+    title: "Escorrentía",
+    sub: "El gran viaje de vuelta a casa",
+    science: "El agua rueda por montañas, se filtra por la tierra, viaja por ríos y arroyos hasta llegar de nuevo al mar o a los lagos.",
+    story: "Gotita rueda, se escurre, se mete por la tierra, viaja por ríos... ¡hasta llegar de vuelta al mar! Y entonces comienza la aventura otra vez. 🔄"
+  }
+];
+
+function showDetail(idx) {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('card-' + i).classList.remove('active');
+  }
+  document.getElementById('card-' + idx).classList.add('active');
+  const d = details[idx];
+  document.getElementById('d-icon').textContent = d.icon;
+  document.getElementById('d-title').textContent = d.title;
+  document.getElementById('d-sub').textContent = d.sub;
+  document.getElementById('d-science').textContent = d.science;
+  document.getElementById('d-story').textContent = d.story;
+  document.getElementById('detail-panel').style.opacity = '0';
+  setTimeout(() => { document.getElementById('detail-panel').style.opacity = '1'; }, 60);
+}
+
+showDetail(0);
+</script>

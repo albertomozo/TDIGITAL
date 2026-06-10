@@ -1,0 +1,172 @@
+
+<h2 class="sr-only">Formulario de valoración con respuesta personalizada por IA</h2>
+
+<div style="padding: 1.5rem 0; max-width: 640px; margin: 0 auto;">
+
+  <div style="margin-bottom: 1.5rem;">
+    <p style="font-size: 15px; color: var(--color-text-secondary); margin: 0 0 4px;">Ejemplo: Evaluación de bienestar personal</p>
+    <p style="font-size: 13px; color: var(--color-text-tertiary); margin: 0;">Responde cada pregunta del 1 (nada) al 5 (mucho). La IA generará un mensaje según tu perfil.</p>
+  </div>
+
+  <div id="preguntas-container"></div>
+
+  <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+    <button id="btn-enviar" onclick="enviarFormulario()" style="padding: 10px 24px; font-size: 14px; font-weight: 500; cursor: pointer; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); color: var(--color-text-primary);">
+      Analizar respuestas ↗
+    </button>
+    <button onclick="resetFormulario()" style="padding: 10px 16px; font-size: 13px; cursor: pointer; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); color: var(--color-text-secondary);">
+      Reiniciar
+    </button>
+    <span id="puntuacion-badge" style="display:none; font-size: 13px; color: var(--color-text-secondary); padding: 6px 12px; background: var(--color-background-secondary); border-radius: var(--border-radius-md);"></span>
+  </div>
+
+  <div id="resultado" style="margin-top: 1.5rem; display: none;">
+    <div style="border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; background: var(--color-background-primary);">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+        <div id="nivel-badge" style="font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: var(--border-radius-md);"></div>
+        <span style="font-size: 13px; color: var(--color-text-secondary);" id="puntos-texto"></span>
+      </div>
+      <div id="mensaje-ia" style="font-size: 15px; line-height: 1.7; color: var(--color-text-primary); white-space: pre-wrap;"></div>
+    </div>
+  </div>
+
+  <div style="margin-top: 2rem; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 1.25rem;">
+    <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 8px; font-weight: 500;">¿Quieres personalizar este formulario?</p>
+    <button onclick="sendPrompt('Quiero cambiar las preguntas del formulario. Ayúdame a definir mis propias preguntas valorables y los mensajes que debe enviar la IA según los niveles de puntuación.')" style="padding: 8px 16px; font-size: 13px; cursor: pointer; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); color: var(--color-text-secondary);">
+      Personalizar preguntas ↗
+    </button>
+    <button onclick="sendPrompt('Explícame cómo añadir el envío de email o WhatsApp automático cuando la IA genera el mensaje para el usuario.')" style="margin-left: 8px; padding: 8px 16px; font-size: 13px; cursor: pointer; background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); color: var(--color-text-secondary);">
+      Añadir envío por email/WhatsApp ↗
+    </button>
+  </div>
+</div>
+
+<script>
+const PREGUNTAS = [
+  { id: "p1", texto: "¿Con qué frecuencia te sientes con energía durante el día?" },
+  { id: "p2", texto: "¿Cómo valoras la calidad de tu sueño últimamente?" },
+  { id: "p3", texto: "¿Te resulta fácil concentrarte en tus tareas?" },
+  { id: "p4", texto: "¿Cómo de satisfecho/a estás con tu alimentación?" },
+  { id: "p5", texto: "¿Con qué frecuencia realizas actividad física?" }
+];
+
+const NIVELES = [
+  { min: 0,  max: 10, label: "Necesita atención",   color: "background: #FCEBEB; color: #A32D2D;" },
+  { min: 11, max: 15, label: "En proceso",           color: "background: #FAEEDA; color: #854F0B;" },
+  { min: 16, max: 20, label: "Buen nivel",           color: "background: #EAF3DE; color: #3B6D11;" },
+  { min: 21, max: 25, label: "Excelente",            color: "background: #E1F5EE; color: #0F6E56;" }
+];
+
+function renderPreguntas() {
+  const c = document.getElementById("preguntas-container");
+  c.innerHTML = PREGUNTAS.map((p, i) => `
+    <div style="margin-bottom: 1.25rem; background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem;">
+      <p style="font-size: 14px; font-weight: 500; margin: 0 0 12px; color: var(--color-text-primary);">${i+1}. ${p.texto}</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        ${[1,2,3,4,5].map(v => `
+          <label style="cursor: pointer;">
+            <input type="radio" name="${p.id}" value="${v}" style="display:none;" onchange="actualizarPuntuacion()">
+            <span class="opcion-${p.id}" data-val="${v}" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); font-size: 14px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-primary); transition: all 0.1s;">
+              ${v}
+            </span>
+          </label>
+        `).join("")}
+        <span style="font-size: 12px; color: var(--color-text-tertiary); margin-left: 4px;">1 = nada · 5 = mucho</span>
+      </div>
+    </div>
+  `).join("");
+
+  document.querySelectorAll("input[type=radio]").forEach(radio => {
+    radio.addEventListener("change", function() {
+      const name = this.name;
+      document.querySelectorAll(`.opcion-${name}`).forEach(span => {
+        span.style.background = "var(--color-background-primary)";
+        span.style.color = "var(--color-text-secondary)";
+        span.style.borderColor = "var(--color-border-secondary)";
+      });
+      const selected = document.querySelector(`.opcion-${name}[data-val="${this.value}"]`);
+      if (selected) {
+        selected.style.background = "#EEEDFE";
+        selected.style.color = "#3C3489";
+        selected.style.borderColor = "#AFA9EC";
+      }
+    });
+  });
+}
+
+function getPuntuacion() {
+  return PREGUNTAS.reduce((sum, p) => {
+    const r = document.querySelector(`input[name="${p.id}"]:checked`);
+    return sum + (r ? parseInt(r.value) : 0);
+  }, 0);
+}
+
+function actualizarPuntuacion() {
+  const pts = getPuntuacion();
+  const contestadas = PREGUNTAS.filter(p => document.querySelector(`input[name="${p.id}"]:checked`)).length;
+  const badge = document.getElementById("puntuacion-badge");
+  badge.style.display = "inline-block";
+  badge.textContent = `${contestadas}/${PREGUNTAS.length} respondidas · ${pts} pts`;
+}
+
+async function enviarFormulario() {
+  const contestadas = PREGUNTAS.filter(p => document.querySelector(`input[name="${p.id}"]:checked`)).length;
+  if (contestadas < PREGUNTAS.length) {
+    alert("Por favor responde todas las preguntas antes de continuar.");
+    return;
+  }
+
+  const pts = getPuntuacion();
+  const nivel = NIVELES.find(n => pts >= n.min && pts <= n.max) || NIVELES[0];
+
+  const resDiv = document.getElementById("resultado");
+  const mensajeEl = document.getElementById("mensaje-ia");
+  const nivelBadge = document.getElementById("nivel-badge");
+  const puntosTexto = document.getElementById("puntos-texto");
+
+  resDiv.style.display = "block";
+  nivelBadge.textContent = nivel.label;
+  nivelBadge.style.cssText = nivel.color + " border-radius: var(--border-radius-md); font-size: 12px; font-weight: 500; padding: 3px 10px;";
+  puntosTexto.textContent = `Puntuación: ${pts} / ${PREGUNTAS.length * 5}`;
+  mensajeEl.textContent = "Generando mensaje personalizado...";
+
+  const respuestas = PREGUNTAS.map((p, i) => {
+    const r = document.querySelector(`input[name="${p.id}"]:checked`);
+    return `${i+1}. ${p.texto} → ${r ? r.value : "?"}/5`;
+  }).join("\n");
+
+  const prompt = `Eres un asistente de bienestar personal. Un usuario ha completado un formulario de autoevaluación con estos resultados:\n\n${respuestas}\n\nPuntuación total: ${pts}/${PREGUNTAS.length * 5} — Nivel: ${nivel.label}\n\nRedacta un mensaje personalizado, cálido y motivador de 3-4 frases dirigido directamente al usuario. El mensaje debe reconocer su situación según la puntuación (${nivel.label}) y darle una recomendación concreta y accionable. Habla en segunda persona (tú). Responde solo con el mensaje, sin saludos previos ni firmas.`;
+
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await res.json();
+    const texto = data.content && data.content[0] ? data.content[0].text : "No se pudo generar el mensaje.";
+    mensajeEl.textContent = texto;
+  } catch(e) {
+    mensajeEl.textContent = "Error al conectar con la IA. Revisa tu conexión e inténtalo de nuevo.";
+  }
+
+  document.getElementById("btn-enviar").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function resetFormulario() {
+  document.querySelectorAll("input[type=radio]").forEach(r => r.checked = false);
+  document.querySelectorAll("[class^='opcion-']").forEach(s => {
+    s.style.background = "var(--color-background-primary)";
+    s.style.color = "var(--color-text-secondary)";
+    s.style.borderColor = "var(--color-border-secondary)";
+  });
+  document.getElementById("resultado").style.display = "none";
+  document.getElementById("puntuacion-badge").style.display = "none";
+}
+
+renderPreguntas();
+</script>

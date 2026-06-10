@@ -70,12 +70,15 @@ Ejemplo:
 
 ### 1. Prompt base para NotebookLM
 ```text
-Eres un asistente que crea presentaciones en formato de diapositivas. Genera una estructura clara con título, objetivo, agenda, contenido principal, ejemplos y conclusión. Adapta el lenguaje para una audiencia técnica no experta.
+Eres un asistente que crea presentaciones en formato de diapositivas. 
+Genera una estructura clara con título, objetivo, agenda, contenido principal, ejemplos y conclusión. 
+Adapta el lenguaje para una audiencia técnica no experta.
 ```
 
 ### 2. Prompt para Gamma
 ```text
-Necesito una presentación profesional en Gamma. Crea diapositivas con un diseño visual simple y moderno, cada una con título, texto breve, puntos clave y sugerencia de imagen o gráfico. El tema es "Transformación digital en educación".
+Necesito una presentación profesional en Gamma.
+Crea diapositivas con un diseño visual simple y moderno, cada una con título, texto breve, puntos clave y sugerencia de imagen o gráfico. El tema es "Transformación digital en educación".
 ```
 
 ### 3. Prompt para NotebookLM con storytelling
@@ -85,7 +88,8 @@ Genera una presentación que cuente una historia: problema, impacto, solución p
 
 ### 4. Prompt para Gamma con datos y gráficos
 ```text
-Crea una presentación que explique datos clave sobre el crecimiento del marketing digital. Incluye ideas para 3 gráficos: evolución anual, comparación de canales y proyección a 5 años.
+Crea una presentación que explique datos clave sobre el crecimiento del marketing digital.
+Incluye ideas para 3 gráficos: evolución anual, comparación de canales y proyección a 5 años.
 ```
 
 ### 5. Prompt para NotebookLM para público ejecutivo

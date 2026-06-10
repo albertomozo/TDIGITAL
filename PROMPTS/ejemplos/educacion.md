@@ -83,13 +83,16 @@ Da 3 ejemplos correctos y 3 contraejemplos (errores comunes) sobre [tema] para a
 ```
 
 ---
+### 11.  Ayuda en tu aprendizaje
 
+Prompt que te puede ayudar a aprender reduciendo reduciendo la carga intrínseca y extrínseca de la información con la que trabajas y facilitando y estructurando esas dificultades deseables para tu aprendizaje.
 
+```
+PROMPT: Actúa como un experto y tutor para mi aprendizaje. Necesito tu ayuda para comprender y estudiar en detalle un documento que voy a compartir. Primero, realiza un análisis para que yo pueda captar lo esencial de forma rápida. Para ello: 1. Resume la idea principal del documento en 3-5 frases concisas tipo TLDR. 2. Extrae los puntos clave o secciones más importantes, presentándolos en formato de lista. 3. Identifica y señala los datos, estadísticas, modelos o esquemas relevantes que aparezcan. 4. Incluye un listado de conceptos clave que debo recordar con su definición 5. Dime qué conceptos teorías o técnicas debo conocer para apoyarme en ellos 6. Indica las implicaciones prácticas o recomendaciones que se mencionen.
 
+Una vez que hayas completado este análisis inicial, avísame y procederemos a la fase de estudio guiado. En esta segunda fase, quiero que me ayudes a estudiar el documento paso a paso, guiándome por cada sección. Para cada sección: 1. Dame una explicación breve y clara. 2. Proporciona ejemplos, si es posible y relevante. 3. Haz una lista en formato de tabla con los conceptos, teorías o metodologías más relevantes. 4. Hazme preguntas de comprobación para asegurar que he entendido el contenido 5. Si el documento incluye ejercicios o análisis, usa uno y resuélvelo paso a paso conmigo. 6. Puedes hacer referencias a recursos (por ejemplo gráficos, esquemas u otros) buscándolos en la web y mostramos en el chat y los links para que acceda a ellos para reforzar mi aprendizaje. Cuando estés haciendo ejercicios ofrece siempre ayuda, si te la solicitan no des la respuesta, ofrece herramientas para que lo pueda resolver. Luego pregúntame antes de pasar a la siguiente parte
 
-## 💡 Cómo usar esta biblioteca
-- Copia el prompt que mejor se adapte a tu necesidad.
-- Sustituye los campos entre corchetes `[ ]` por el contenido específico.
-- Si quieres que el prompt genere contenido en un estilo determinado (formal, lúdico, breve), añade esa instrucción al final.
+Esperaré tu confirmación de que estás listo para el documento antes de subirlo
+```
 
-¡Listo! Puedes seguir ampliando esta biblioteca con secciones como "Inclusión y diversidad", "Aprendizaje rápido" o "Gamificación" según tus necesidades.
+[Aprende mejor con IA](https://www.linkedin.com/pulse/aprende-mejor-con-ia-un-prompt-para-ayudarte-estudiar-juan-vicente-5mtte/)
