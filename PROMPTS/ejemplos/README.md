@@ -19,7 +19,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Otras temáticas** – puedes añadir más carpetas/archivos según necesites (educación, salud, finanzas, etc.).
 - **Preguntas Trampa** – Intentando enganar a las IA [`preguntas-trampa.md`](preguntas-trampa.md)
 - **Pensamiento Critico** – Intentando enganar a las IA [`pensamiento-critico.md`](pensamiento-critico.md)
- 
+- **Plan de transformación digital** - Prompts para generar el PTD [`Plan Transformación Digital (PTD)`] (guia_PTD_con_propts_IA.md)
 ![imagen propmts](Prompts.png)
 
 
