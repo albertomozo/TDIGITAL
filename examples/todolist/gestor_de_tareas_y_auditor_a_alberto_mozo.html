@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-zinc-950 text-zinc-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuadro de Mando de Tareas - Agentes del Cambio</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React & ReactDOM CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="h-full">
+
+  <div id="root" class="h-full"></div>
+
+  <!-- React Logic and View Implementation -->
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    // Base de datos inicial de tareas extraída estrictamente de los archivos de clase
+    const initialTasks = [
+      {
+        id: 1,
+        title: "Rellenar Cuestionario de Valoración",
+        module: "Inicio y Entorno",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Completar el formulario oficial enviado por el docente Alberto para mapear los conocimientos iniciales en IA, programación y herramientas ágiles.",
+        instructions: [
+          "Acceder al enlace del formulario compartido en clase.",
+          "Responder con total sinceridad sobre tus experiencias anteriores.",
+          "Enviar el formulario para nutrir la base de datos que el docente utilizará para personalizar los retos del curso."
+        ],
+        quote: "Si me vais rellenando este formulario... Consigo dos objetivos: Os conozco vuestros conocimientos y os explico cómo vamos a trabajar.",
+        source: "Sesión 2026/05/20 (16:52:28)",
+        prompts: null,
+        duration: "5 min"
+      },
+      {
+        id: 2,
+        title: "Ejercicio 01: Libreta de Direcciones (CSV)",
+        module: "Gestión de Datos",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Exportar contactos en CSV desde el correo personal o corporativo e importarlos ordenadamente en Google Contacts aplicando etiquetas automáticas.",
+        instructions: [
+          "Descargar el archivo CSV de correos compartido en Slack.",
+          "Abrir Google Contacts (o tu gestor de correo corporativo).",
+          "Importar el archivo CSV creando una etiqueta específica (ej. 'TD2026-Curso') para separar de forma limpia el ámbito profesional del particular.",
+          "Verificar que las etiquetas se apliquen correctamente a la lista."
+        ],
+        quote: "El ejercicio de importar una libreta de direcciones... Estas pequeñas cosas son en realidad lo que es importante de estas herramientas.",
+        source: "Sesión 2026/05/20 (18:51:25 - 19:09:40)",
+        prompts: "Actúa como un gestor de contactos. Tengo una lista de correos en formato desestructurado. Necesito que los limpies y me generes una tabla con columnas: Nombre, Apellido, Email, Empresa y Etiqueta 'Agente de Cambio 2026'.",
+        duration: "15 min"
+      },
+      {
+        id: 3,
+        title: "Ejercicio 02: Permisos en Google Drive (ej02-drive)",
+        module: "Inicio y Entorno",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Configurar una estructura de carpetas y documentos de Google con distintos tipos de permisos para asimilar el control de accesos de la información.",
+        instructions: [
+          "Crear una carpeta en tu Google Drive.",
+          "Crear un 'Documento 1' con permiso de SOLO LECTURA para cualquiera con el enlace.",
+          "Crear un 'Documento 2' con permiso de COMENTADOR (rellenar con texto lorem ipsum).",
+          "Crear un 'Documento 3' con acceso RESTRINGIDO (sin compartir).",
+          "Crear una 'Carpeta 4' con permisos de EDICIÓN para un grupo o email del docente.",
+          "Copiar la plantilla de Slack proporcionada por Alberto, sustituir los enlaces con tus documentos y publicarla en el hilo del canal de ejercicios."
+        ],
+        quote: "Y sobre todo cuando trabajemos con la IA, tenemos que tener muy claro qué permisos estamos utilizando y qué cosas estamos haciendo de acuerdo.",
+        source: "Sesión 2026/05/20 (19:31:12 - 19:48:26)",
+        prompts: null,
+        duration: "25 min"
+      },
+      {
+        id: 4,
+        title: "Configuración de Comunicación y Netiqueta en Slack",
+        module: "Comunicación",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Adecuar tu perfil de Slack y seguir estrictamente los estándares de cultura digital síncrona/asíncrona del equipo.",
+        instructions: [
+          "Configurar tu nombre real y foto de perfil clara.",
+          "Uso obligatorio de HILOS (threads) para responder a ejercicios o dudas para reducir el ruido en el canal principal.",
+          "Uso de emojis de forma estandarizada para votaciones o confirmación de lecturas.",
+          "Evitar la 'reunitis' priorizando respuestas estructuradas y asíncronas antes de proponer videollamadas de más de 30 minutos."
+        ],
+        quote: "No utilicéis el canal principal... intentemos acostumbrarnos a trabajar mediante canales y mediante mensajes organizados.",
+        source: "Sesión 2026/05/20 (17:29:18 - 17:47:21)",
+        prompts: null,
+        duration: "10 min"
+      },
+      {
+        id: 5,
+        title: "Auditoría de los 5 PDFs del Módulo 1 en NotebookLM",
+        module: "Inteligencia Artificial",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Descargar los PDFs de fundamentos de IA y asistentes del Moodle institucional y cargarlos como fuentes unificadas en NotebookLM para su estudio interactivo.",
+        instructions: [
+          "Descargar del Moodle los 5 PDFs teóricos del Módulo 1 (Fundamentos de IA y uso práctico de asistentes).",
+          "Acceder a NotebookLM de Google con tu cuenta de curso.",
+          "Crear un cuaderno llamado 'Inteligencia Artificial del Curso'.",
+          "Cargar los 5 PDFs descargados como fuentes oficiales.",
+          "Utilizar el chat para pedir un resumen unificado y contrastar conceptos en lugar de leerlos uno a uno en formato denso."
+        ],
+        quote: "En vez de estudiarlos mirando PDF a PDF, lo que vamos a hacer es, los descargáis todos los PDFs y los analizáis así todos de golpe.",
+        source: "Sesión 2026/05/26 (18:31:00 - 18:15:48)",
+        prompts: "Basándote exclusivamente en los documentos del Módulo 1 provistos, genera una tabla comparativa sobre los distintos tipos de IA generativa (Texto, Imagen, Audio, Vídeo), sus principales utilidades prácticas para una PYME y los riesgos de sesgo o alucinación descritos en los textos.",
+        duration: "30 min"
+      },
+      {
+        id: 6,
+        title: "Generar un Esquema y Mapa Mental en NotebookLM",
+        module: "Inteligencia Artificial",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Uso práctico de la herramienta 'Studio' de NotebookLM para conceptualizar los flujos de la IA de forma visual y ramificada.",
+        instructions: [
+          "Dentro de tu cuaderno de NotebookLM con las fuentes del Módulo 1, ve al panel derecho de 'Studio'.",
+          "Haz clic en la opción 'Mapa mental' (Mind Map) para generar un esquema de la arquitectura de la IA o gestión del cambio.",
+          "Haz clic en cada nodo interactivo del mapa para que se abra el chat interactivo y te aclare o debata dicho concepto utilizando citas de tus fuentes."
+        ],
+        quote: "Te haces un mapa mental y los manipulas para conseguir de ahí un resumen de los cinco en un solo documento más sencillo... controla las herramientas.",
+        source: "Sesión 2026/05/26 (18:42:14 - 18:42:32)",
+        prompts: null,
+        duration: "15 min"
+      },
+      {
+        id: 7,
+        title: "Análisis Práctico del Video Explicativo de NotebookLM",
+        module: "Inteligencia Artificial",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Añadir un video de YouTube sobre NotebookLM como fuente externa para entrenar al modelo en la propia herramienta y dominar sus trucos ocultos.",
+        instructions: [
+          "Crear un cuaderno nuevo en NotebookLM.",
+          "Copiar el enlace de YouTube compartido en la presentación de clase: 'https://youtu.be/b2fGNHPlUGA'.",
+          "Añadirlo como fuente de tipo enlace web.",
+          "Pedirle a la IA que extraiga los 5 mejores trucos para investigadores y redactores que se mencionan en el video."
+        ],
+        quote: "Crear un cuaderno de NotebookLM usando como fuente este enlace... Es un video en inglés que explica cómo funciona... generar los artefactos que más nos interesen.",
+        source: "PDF NotebookLM (Slide 15)",
+        prompts: "Actúa como un especialista en productividad. Del video de YouTube adjunto, genera un manual de usuario de 3 pasos en español para que un profesional sin conocimientos técnicos aprenda a exprimir la función de audio-podcast de NotebookLM para repasar apuntes de manera asíncrona.",
+        duration: "20 min"
+      },
+      {
+        id: 8,
+        title: "Autodiagnóstico del Test de Madurez Digital",
+        module: "Transformación Digital",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Evaluar la madurez tecnológica de la PYME elegida para el proyecto final utilizando el modelo Excel de PKF o la plataforma Industria Conectada 4.0.",
+        instructions: [
+          "Acceder a la plataforma del Gobierno de España de Industria Conectada o descargar la plantilla Excel provista por Alberto (Modelo PKF).",
+          "Completar los ejes clave: Cultura digital, Presencia en internet, Adopción de tecnologías emergentes, Digitalización de procesos y Competencia de trabajadores.",
+          "Obtener el informe resultante con el porcentaje de madurez para integrarlo en tu proyecto final."
+        ],
+        quote: "Además os paso un modelo de documento que utiliza la empresa PKF, para analizar el estado 'digital' de una empresa... un test de madurez digital.",
+        source: "PDF Inicio & Sesión 2026/05/20 (Slide 29)",
+        prompts: null,
+        duration: "40 min"
+      },
+      {
+        id: 9,
+        title: "Ingeniería Inversa de Plantilla de PTD con IA",
+        module: "Proyecto PTD",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Crear un borrador de plantilla de Plan de Transformación Digital analizando un archivo de éxito de cursos anteriores.",
+        instructions: [
+          "Descargar el PowerPoint largo (caso de éxito de transformación) que Alberto subió al Moodle.",
+          "Adjuntar el archivo PPTX o PDF en tu chat de IA predilecto.",
+          "Pedirle a la IA que analice la estructura del documento y elimine toda información comercial de la empresa previa.",
+          "Solicitar que te devuelva una plantilla de trabajo limpia, estructurada en Markdown, lista para aplicar a tu propio caso práctico."
+        ],
+        quote: "He cargado el archivo... he analizado el PPT y efectivamente... es una plantilla metodológica para elaborar un plan de transformación digital. La estructura subyacente es muy clara.",
+        source: "Sesión 2026/06/11 (20:28:05 - 20:28:25)",
+        prompts: "Actúa como un auditor senior de consultoría estratégica. Analiza este plan de transformación digital adjunto. Extrae el índice, los encabezados y la lógica de cada sección. Devuélveme una plantilla de proyecto estructurada en Markdown (.md), con explicaciones entre corchetes de lo que el alumno debe rellenar en cada sección. Asegúrate de incluir la sección de Portada, Análisis de Situación actual, Propuesta de Valor, Plan de Implantación y Presupuesto.",
+        duration: "30 min"
+      },
+      {
+        id: 10,
+        title: "Creación del Espacio PTD y Elección de Tema",
+        module: "Proyecto PTD",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Establecer la base documental de tu proyecto final ('Fuente Única de la Verdad') y comunicarla formalmente en el formulario oficial.",
+        instructions: [
+          "Crear una carpeta en tu disco duro o Drive llamada 'proyecto'.",
+          "Acceder a la plantilla oficial de Google Docs compartida por el docente y forzar una copia (`docs.google.com/.../copy`).",
+          "Definir el tema/empresa de tu proyecto (ejemplo: 'La huerta en casa' u otro negocio de tu interés).",
+          "Rellenar el formulario oficial de Google Forms comunicando tu tema elegido para que Alberto pueda tutorizarte."
+        ],
+        quote: "Hacer una carpeta en tu ordenador que llamas proyecto y haces una copia ahí... del plan de transformación digital... Recordar que tenéis que decidir un tema.",
+        source: "Sesión 2026/06/11 (19:10:37) y PDF Inicio (Slide 59)",
+        prompts: null,
+        duration: "15 min"
+      },
+      {
+        id: 11,
+        title: "Generar Portada e Identificación del PTD con IA",
+        module: "Proyecto PTD",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Redactar el inicio de tu proyecto final aplicando los prompts de la guía del repositorio de Alberto en GitHub.",
+        instructions: [
+          "Acceder al repositorio de GitHub de Alberto (`albertomozo/TDIGITAL`).",
+          "Abrir el archivo `/PROMPTS/ejemplos/guia_PTD_con_prompts_IA.md`.",
+          "Copiar el prompt de la sección de Portada.",
+          "Adaptarlo con los datos de tu empresa seleccionada (ej. 'La huerta en casa').",
+          "Ejecutarlo en tu IA de confianza y pegar el resultado formateado en la portada de tu documento base."
+        ],
+        quote: "Actúa como consultor de transformación digital... Genera la portada... de un plan de transformación digital para la siguiente empresa: 'La huerta en casa'.",
+        source: "Sesión 2026/06/10 (18:18:54 - 18:19:14)",
+        prompts: "Actúa como consultor experto de transformación digital de la Escuela de Organización Industrial (EOI). Genera la portada detallada y formal para el Plan de Transformación Digital de mi empresa. Nombre de la empresa: [Insertar Nombre, ej: La huerta en casa]. Incluye un identificador de documento con código de control único basado en la nomenclatura de fecha AAAA-MM-DD y una descripción ejecutiva de un párrafo sobre el modelo de negocio.",
+        duration: "20 min"
+      },
+      {
+        id: 12,
+        title: "Redactar Análisis DAFO y Matriz CAME Estratégica",
+        module: "Proyecto PTD",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Construir las secciones de análisis interno y externo de tu PTD con ayuda de prompts estructurados.",
+        instructions: [
+          "Ir al archivo de prompts de EOI de Alberto.",
+          "Localizar el prompt correspondiente al análisis DAFO / PESTEL.",
+          "Introducir la información de tu sector y ejecutarlo.",
+          "Para complementar el DAFO, pedir a la IA la matriz CAME (Corregir debilidades, Afrontar amenazas, Mantener fortalezas, Explotar oportunidades) e integrarla de forma ordenada con tablas en tu Word/Docs."
+        ],
+        quote: "Yo puedo preguntar que me diga lo que es un dafo, pero si entiendo lo que es un dafo y hago algunos ejemplos me vendría mejor. El análisis DAFO y el CAME.",
+        source: "Sesión 2026/06/10 (18:50:08 - 18:52:59)",
+        prompts: "Actúa como consultor estratégico de transformación digital. Para mi empresa [Nombre de Empresa], elabora un análisis detallado del entorno actual. Genera primero una matriz DAFO (Fortalezas, Oportunidades, Debilidades, Amenazas) con al menos 4 puntos específicos por cuadrante enfocados en el impacto de tecnologías digitales. Posteriormente, genera la matriz de acción CAME cruzando los datos del DAFO, con planes de acción prácticos e inmediatos.",
+        duration: "30 min"
+      },
+      {
+        id: 13,
+        title: "Creación Automática de Calendarios (Automatización 01)",
+        module: "Automatizaciones",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Crear de forma automatizada un calendario de Google Calendar a partir de las fechas de un PDF o documento de texto del curso.",
+        instructions: [
+          "Utilizar una Inteligencia Artificial para extraer las fechas de entrega y sesiones del PDF del curso.",
+          "Solicitar a la IA que ordene los datos en formato CSV con el esquema estándar de Google Calendar (Subject, Start Date, Start Time, End Date, End Time, Description).",
+          "Guardar el archivo como `.csv`.",
+          "Importarlo directamente en tu Google Calendar para tener las alertas automáticas del curso en tu móvil."
+        ],
+        quote: "Automatiza la creación de calendarios. IA con PDF adjunto + CSV + importación aplicación.",
+        source: "PDF Automatizaciones (Slide 13)",
+        prompts: "Actúa como un experto en extracción de datos. Analiza el siguiente fragmento de fechas [Pegar fechas o texto]. Extráeme todos los eventos y devuélvemelos estructurados en un bloque de código CSV compatible con Google Calendar, utilizando cabeceras en inglés: 'Subject,Start Date,Start Time,End Date,End Time,Description,Location'. Usa el formato de fecha MM/DD/AAAA.",
+        duration: "25 min"
+      },
+      {
+        id: 14,
+        title: "Creación de Cuestionario en GAS (Google Apps Script)",
+        module: "Automatizaciones",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Programar la creación de un Google Form con GAS de forma automatizada utilizando el script compartido por Alberto.",
+        instructions: [
+          "Abrir Google Drive y crear un script en Google Apps Script, o abrir el editor de extensiones en una Hoja de Cálculo.",
+          "Utilizar el enlace de compartición de Gemini de Alberto (`gemini.google.com/share/2aa30093fc71`) para obtener el código de GAS.",
+          "Pegar el código en el editor de Google Apps Script.",
+          "Ejecutar el script otorgando los permisos de seguridad requeridos por Google.",
+          "Verificar la creación instantánea del formulario 'Encuesta: Uso de la IA en el Alumnado' en tu Google Drive."
+        ],
+        quote: "Crear google form con GAS... Generar form con Google App Scripts... En este caso hemos utilizado el método del script para generar automáticamente el test.",
+        source: "PDF Automatizaciones (Slide 13 y 19)",
+        prompts: "Escribe un código completo de Google Apps Script para automatizar la creación de un Google Form titulado 'Encuesta de Madurez Digital'. Debe contener 3 secciones: 1. Datos de la empresa (Texto), 2. Adopción de IA (Lista desplegable con opciones: Diariamente, Semanalmente, Nunca), 3. Principales barreras para la digitalización (Casillas de verificación: Falta de presupuesto, Falta de formación, Resistencia al cambio). Al final, que guarde las respuestas en una hoja de cálculo vinculada.",
+        duration: "30 min"
+      },
+      {
+        id: 15,
+        title: "Automatización Google Forms -> Google Sheets -> Slack (Zapier)",
+        module: "Automatizaciones",
+        priority: "Alta",
+        status: "Pendiente",
+        description: "Configurar un Zap en Zapier para notificar de forma inmediata la entrada de un nuevo contacto o alumno en tu canal de Slack.",
+        instructions: [
+          "Crear o ingresar a tu cuenta gratuita de Zapier.",
+          "Crear un nuevo 'Zap'.",
+          "Configurar el TRIGGER: Conectar 'Google Sheets', seleccionar la hoja de respuestas de tu formulario y elegir el evento 'New Spreadsheet Row'.",
+          "Configurar la ACTION: Conectar con 'Slack', elegir la acción 'Send Channel Message' y seleccionar un canal de pruebas (ejemplo: `#ej08-notion` o `#nuevo-canal`).",
+          "Diseñar el cuerpo del mensaje en formato enriquecido (utilizando emojis e incluyendo los datos dinámicos como Nombre, Email y Teléfono).",
+          "Realizar un test y publicar el Zap."
+        ],
+        quote: "Envío de información a un mail o canal de slack al dispararse un evento (zapier)... De formulario a contactos estructurados... Zapier: Google Form -> Sheets -> Slack.",
+        source: "PDF Automatizaciones (Slide 13 y 77)",
+        prompts: null,
+        duration: "35 min"
+      },
+      {
+        id: 16,
+        title: "Modelar e Integrar Base de Datos de Alumnos en Notion",
+        module: "Notion y Colaboración",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Diseñar una tabla de Notion interactiva para el registro de contactos y vincularla mediante automatizaciones.",
+        instructions: [
+          "Crear una base de datos de tipo 'Table' en Notion llamada 'Registro de Alumnos'.",
+          "Definir las columnas/propiedades: Nombre (Title), Email (Email), Teléfono (Phone), URL LinkedIn (URL) y Estado de Grupo (Select).",
+          "Introducir 3 registros de prueba con correos y números telefónicos ficticios.",
+          "Comprobar visualmente los bloques de Notion e intentar incrustar el widget de calendario."
+        ],
+        quote: "Mañana vamos a ver una aplicación que se integra en todo este sistema, veremos un poco notion como documentación, entonces veremos cómo podemos rellenar un notion a través de un formulario.",
+        source: "Sesión 2026/06/01 (17:55:00) y PDF Automatizaciones (Slide 44)",
+        prompts: null,
+        duration: "20 min"
+      },
+      {
+        id: 17,
+        title: "Sincronización Notion - Slack con Zapier (Automatización 07)",
+        module: "Automatizaciones",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Vincular el CRM de alumnos en Notion con Slack para que notifique cada vez que se agrega una fila de datos.",
+        instructions: [
+          "Ir a Zapier y crear un flujo.",
+          "Trigger: Notion -> 'New Database Item'. Conectar con la base de datos de alumnos creada en la tarea anterior.",
+          "Action: Slack -> 'Send Channel Message'.",
+          "Formatear el texto de salida para que envíe un formato de tipo JSON simplificado junto con los campos en negrita: `*NUEVO ALUMNO* - Nombre: {{Propiedad Nombre}}...`.",
+          "Publicar la automatización y testear añadiendo un registro nuevo en Notion."
+        ],
+        quote: "Automatización - 07 - NOTION - SLACK... Salida en JSON... para conformar el grupo.",
+        source: "PDF Automatizaciones (Slide 41 - 46)",
+        prompts: null,
+        duration: "30 min"
+      },
+      {
+        id: 18,
+        title: "Retrospectiva y Definición de OKRs en Miro",
+        module: "Notion y Colaboración",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Establecer metas organizadas y resultados clave (OKR) para la implantación de la transformación digital utilizando Miro.",
+        instructions: [
+          "Abrir Miro y crear un tablero con la plantilla de 'Mind Map' u 'OKRs'.",
+          "Definir 2 objetivos a largo plazo para tu caso del PTD (por ejemplo, 'Incrementar ventas directas online').",
+          "Asociar 3 Resultados Clave cuantificables a cada objetivo (ej. 'Lanzar pasarela de pago en febrero', 'Conseguir 200 leads cualificados con Google Forms').",
+          "Añadir notas colaborativas de colores para asignación de responsables."
+        ],
+        quote: "Diseños DAFO, Business model Canva (Canva), KPI formulario, OKR Miro... tablero de Miro, diagramas, plantillas brainstorming.",
+        source: "PDF Inicio (Slide 77) y Sesión 2026/06/09 (19:48:36)",
+        prompts: null,
+        duration: "25 min"
+      },
+      {
+        id: 19,
+        title: "Grabar y Transcribir Sesiones Prácticas (Sugerida/Implícita)",
+        module: "Inteligencia Artificial",
+        priority: "Baja",
+        status: "Pendiente",
+        description: "Mecanismo para capturar el conocimiento de videollamadas o reuniones presenciales para alimentar tu base de datos central en NotebookLM.",
+        instructions: [
+          "Grabar un audio de voz corto (explicando una sección de tu proyecto de transformación) en formato MP3 o WAV.",
+          "Subir el archivo de audio directamente como fuente de NotebookLM.",
+          "Esperar a que finalice la transcripción automática e interactuar pidiéndole: 'Genera un glosario de términos clave basado en mi audio' o 'Extrae un checklist de acciones rápidas'."
+        ],
+        quote: "En una reunión presencial, podéis grabar la reunión (informando a los usuarios) y el audio obtenido pasarlo a NotebookLM que os permite tener la transcripción de la misma.",
+        source: "PDF Inicio (Slide 27)",
+        prompts: null,
+        duration: "15 min"
+      },
+      {
+        id: 20,
+        title: "Ejecutar una Automatización Libre de Práctica",
+        module: "Automatizaciones",
+        priority: "Media",
+        status: "Pendiente",
+        description: "Diseñar de forma autónoma una integración libre usando Make o Zapier adaptada a un flujo real de tu día a día.",
+        instructions: [
+          "Identificar una tarea repetitiva en tu entorno laboral o personal (ej. descargar archivos de Gmail a Drive, recibir un tuit específico en Telegram, etc.).",
+          "Configurar los conectores y probar el flujo de datos.",
+          "Documentar en tu PTD cómo este simple conector ahorra horas de trabajo repetitivo en tu empresa."
+        ],
+        quote: "Hacer primero una automatización manual en una nueva herramienta y el segundo, que os aprendáis a desenvolveros vosotros mismos... una vez que habéis decidido que quiero hacer algo.",
+        source: "Sesión 2026/06/04 (16:11:51)",
+        prompts: "Dame 5 ideas creativas de automatización No-Code para una PYME comercializadora de hortalizas a domicilio que utiliza Google Workspace para capturar leads y WhatsApp/Gmail para comunicación con clientes. Quiero flujos de máximo 2 pasos usando Zapier.",
+        duration: "30 min"
+      }
+    ];
+
+    function App() {
+      const [tasks, setTasks] = useState(initialTasks);
+      const [filterModule, setFilterModule] = useState("Todos");
+      const [filterPriority, setFilterPriority] = useState("Todos");
+      const [filterStatus, setFilterStatus] = useState("Todos");
+      const [searchQuery, setSearchQuery] = useState("");
+      const [selectedTask, setSelectedTask] = useState(initialTasks[0]);
+      
+      // Notas específicas del usuario por cada tarea
+      const [taskNotes, setTaskNotes] = useState({});
+      const [currentNote, setCurrentNote] = useState(taskNotes[initialTasks[0].id] || "");
+
+      // Añadir tareas personalizadas
+      const [isAdding, setIsAdding] = useState(false);
+      const [newTitle, setNewTitle] = useState("");
+      const [newModule, setNewTitleModule] = useState("Proyecto PTD");
+      const [newPriority, setNewPriority] = useState("Media");
+      const [newDesc, setNewDesc] = useState("");
+
+      // Banner de almacenamiento colaborativo
+      const [showUpgradeBanner, setShowUpgradeBanner] = useState(true);
+      const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+
+      // Módulos únicos para el filtro
+      const modules = ["Todos", "Inicio y Entorno", "Gestión de Datos", "Inteligencia Artificial", "Proyecto PTD", "Automatizaciones", "Notion y Colaboración", "Comunicación"];
+
+      // Gestión del completado de tareas
+      const toggleTaskCompletion = (taskId) => {
+        setTasks(prev => prev.map(t => {
+          if (t.id === taskId) {
+            const nextStatus = t.status === "Completada" ? "Pendiente" : "Completada";
+            return { ...t, status: nextStatus };
+          }
+          return t;
+        }));
+      };
+
+      // Manejar selección de tarea
+      const handleSelectTask = (task) => {
+        setSelectedTask(task);
+        setCurrentNote(taskNotes[task.id] || "");
+      };
+
+      // Guardar nota de la tarea seleccionada en memoria
+      const handleSaveNote = () => {
+        setTaskNotes(prev => ({
+          ...prev,
+          [selectedTask.id]: currentNote
+        }));
+        // Alerta personalizada premium (no de sistema)
+        const toast = document.getElementById("toast-success");
+        toast.classList.remove("opacity-0");
+        setTimeout(() => toast.classList.add("opacity-0"), 2000);
+      };
+
+      // Copiar prompt al portapapeles de manera segura
+      const handleCopyPrompt = (promptText) => {
+        const tempTextArea = document.createElement("textarea");
+        tempTextArea.value = promptText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempTextArea);
+
+        const toast = document.getElementById("toast-copy");
+        toast.classList.remove("opacity-0");
+        setTimeout(() => toast.classList.add("opacity-0"), 2000);
+      };
+
+      // Agregar tarea personalizada
+      const handleAddTask = (e) => {
+        e.preventDefault();
+        if (!newTitle.trim()) return;
+        const newTask = {
+          id: tasks.length + 1,
+          title: newTitle,
+          module: newModule,
+          priority: newPriority,
+          status: "Pendiente",
+          description: newDesc || "Tarea personalizada añadida por el usuario para su plan estratégico.",
+          instructions: ["Analizar los requerimientos con Inteligencia Artificial.", "Diseñar la dinámica de la actividad.", "Compartir resultados en el grupo de clase."],
+          quote: "Añadida de manera independiente por el alumno para fortalecer su madurez digital.",
+          source: "Personalizada por el Alumno",
+          prompts: "Actúa como consultor experto. Ayúdame a estructurar la siguiente tarea de digitalización: " + newTitle,
+          duration: "15 min"
+        };
+        setTasks(prev => [...prev, newTask]);
+        setNewTitle("");
+        setNewDesc("");
+        setIsAdding(false);
+      };
+
+      // Exportar todas las notas y tareas en un reporte de Markdown descargable
+      const handleExportReport = () => {
+        let markdown = `# REPORTE DE AUDITORÍA Y AVANCE DE TAREAS\n`;
+        markdown += `*Programa de Agentes del Cambio en Transformación Digital e IA*\n`;
+        markdown += `*Docente: Alberto Mozo Avellaned*\n`;
+        markdown += `*Fecha de generación: ${new Date().toLocaleDateString()}*\n\n`;
+        markdown += `## ESTADO GENERAL DE AVANCE\n`;
+        const completedCount = tasks.filter(t => t.status === "Completada").length;
+        markdown += `- Tareas completadas: ${completedCount} de ${tasks.length} (${Math.round((completedCount/tasks.length)*100)}%)\n\n`;
+        
+        markdown += `## LISTA DE DETALLES Y NOTAS\n\n`;
+        tasks.forEach(t => {
+          markdown += `### [${t.status === "Completada" ? "X" : " "}] ${t.title} (${t.module})\n`;
+          markdown += `- **Prioridad:** ${t.priority}\n`;
+          markdown += `- **Duración Estimada:** ${t.duration}\n`;
+          markdown += `- **Referencia de clase:** *"${t.quote}"* (${t.source})\n`;
+          const note = taskNotes[t.id];
+          if (note) {
+            markdown += `- **Mis Notas de Ejecución:** ${note}\n`;
+          } else {
+            markdown += `- **Mis Notas de Ejecución:** *Sin notas todavía.*\n`;
+          }
+          markdown += `\n---\n\n`;
+        });
+
+        const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.setAttribute("download", `Reporte_Tareas_Agentes_Del_Cambio.md`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      // Tareas filtradas dinámicamente
+      const filteredTasks = useMemo(() => {
+        return tasks.filter(t => {
+          const matchModule = filterModule === "Todos" || t.module === filterModule;
+          const matchPriority = filterPriority === "Todos" || t.priority === filterPriority;
+          const matchStatus = filterStatus === "Todos" || 
+            (filterStatus === "Completadas" && t.status === "Completada") ||
+            (filterStatus === "Pendientes" && t.status === "Pendiente");
+          const matchSearch = t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            t.description.toLowerCase().includes(searchQuery.toLowerCase());
+          return matchModule && matchPriority && matchStatus && matchSearch;
+        });
+      }, [tasks, filterModule, filterPriority, filterStatus, searchQuery]);
+
+      // Métricas de progreso
+      const completedTasksCount = tasks.filter(t => t.status === "Completada").length;
+      const progressPercent = Math.round((completedTasksCount / tasks.length) * 100) || 0;
+
+      return (
+        <div class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 selection:bg-indigo-500 selection:text-white">
+          
+          {/* TOASTS DE ACCIÓN */}
+          <div id="toast-success" class="fixed top-5 right-5 bg-indigo-600 text-white px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>¡Nota de ejecución guardada en memoria!</span>
+          </div>
+
+          <div id="toast-copy" class="fixed top-5 right-5 bg-teal-600 text-white px-4 py-3 rounded-xl shadow-2xl transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+            <span>Prompt copiado al portapapeles</span>
+          </div>
+
+          {/* BANNER DE ACTUALIZACIÓN COLABORATIVA */}
+          {showUpgradeBanner && (
+            <div class="bg-gradient-to-r from-indigo-700 via-indigo-900 to-zinc-900 px-4 py-3 text-white relative flex flex-wrap justify-between items-center text-xs md:text-sm border-b border-indigo-600/30">
+              <div class="flex items-center gap-2 mx-auto md:mx-0">
+                <span class="bg-indigo-500 text-white font-extrabold px-2 py-0.5 rounded text-[10px] tracking-wide uppercase">Multiplayer</span>
+                <span class="font-medium">¿Deseas guardar tu progreso de forma permanente y colaborar en tiempo real con tu grupo de clase?</span>
+              </div>
+              <div class="flex items-center gap-4 mx-auto md:mx-0 mt-2 md:mt-0">
+                <button onClick={() => setShowUpgradeModal(true)} class="bg-white text-indigo-950 hover:bg-zinc-100 font-semibold px-3 py-1 rounded-lg transition text-xs">
+                  Saber más
+                </button>
+                <button onClick={() => setShowUpgradeBanner(false)} class="text-zinc-300 hover:text-white transition">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* CABECERA PRINCIPAL */}
+          <header class="border-b border-zinc-800 bg-zinc-900/60 backdrop-blur-md sticky top-0 z-30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div class="flex items-center gap-4">
+                <div class="p-2.5 bg-indigo-600/10 text-indigo-500 rounded-xl border border-indigo-500/20">
+                  <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+                <div>
+                  <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    Programa Agentes del Cambio
+                    <span class="text-xs bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 rounded-full font-normal">Módulo 1</span>
+                  </h1>
+                  <p class="text-xs text-zinc-400 mt-0.5">Docente: <span class="text-zinc-200 font-medium">Alberto Mozo Avellaned</span> | Transformación Digital e Inteligencia Artificial</p>
+                </div>
+              </div>
+              <div class="flex gap-2 w-full md:w-auto">
+                <button onClick={handleExportReport} class="flex-1 md:flex-initial flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition border border-zinc-700/60">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  Exportar Reporte (.md)
+                </button>
+                <button onClick={() => setIsAdding(true)} class="flex-1 md:flex-initial flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-xl text-sm font-semibold transition shadow-lg shadow-indigo-600/25">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                  Nueva Tarea
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-6">
+            
+            {/* PANEL DE FILTROS, BUSCADOR Y ESTADÍSTICAS (IZQUIERDA) */}
+            <div class="w-full lg:w-1/3 flex flex-col gap-6">
+              
+              {/* TARJETA DE PROGRESO */}
+              <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-indigo-600/10 rounded-full blur-2xl"></div>
+                <div class="flex justify-between items-center mb-3">
+                  <h3 class="text-sm font-bold text-zinc-400 uppercase tracking-wider">Tu Progreso</h3>
+                  <span class="text-2xl font-black text-indigo-400">{progressPercent}%</span>
+                </div>
+                <div class="w-full bg-zinc-800 rounded-full h-3 mb-4 overflow-hidden p-0.5 border border-zinc-700/30">
+                  <div class="bg-gradient-to-r from-indigo-500 to-teal-400 h-2 rounded-full transition-all duration-500" style={{ width: `${progressPercent}%` }}></div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="bg-zinc-950/60 p-3 rounded-xl border border-zinc-800/80">
+                    <span class="text-xs text-zinc-500 block mb-1">Completadas</span>
+                    <span class="text-xl font-bold text-white">{completedTasksCount} <span class="text-xs font-normal text-zinc-400">/ {tasks.length}</span></span>
+                  </div>
+                  <div class="bg-zinc-950/60 p-3 rounded-xl border border-zinc-800/80">
+                    <span class="text-xs text-zinc-500 block mb-1">Pendientes</span>
+                    <span class="text-xl font-bold text-white">{tasks.length - completedTasksCount}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* BUSCADOR Y FILTROS */}
+              <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-xl flex flex-col gap-4">
+                <h3 class="text-sm font-bold text-zinc-300 flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
+                  Buscador e Inteligencia
+                </h3>
+                
+                {/* BUSCADOR TEXTUAL */}
+                <div class="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Buscar tarea, descripción o prompt..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-4 py-2.5 pl-10 text-sm focus:outline-none transition placeholder-zinc-600 text-zinc-200"
+                  />
+                  <svg class="w-4 h-4 text-zinc-600 absolute left-3.5 top-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </div>
+
+                {/* FILTRO DE MÓDULO */}
+                <div>
+                  <label class="text-xs text-zinc-500 font-semibold block mb-1.5">Módulo Académico</label>
+                  <select 
+                    value={filterModule}
+                    onChange={(e) => setFilterModule(e.target.value)}
+                    class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 text-zinc-300"
+                  >
+                    {modules.map(mod => <option key={mod} value={mod}>{mod}</option>)}
+                  </select>
+                </div>
+
+                {/* FILTROS SECUNDARIOS */}
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <label class="text-xs text-zinc-500 font-semibold block mb-1.5">Prioridad</label>
+                    <select 
+                      value={filterPriority}
+                      onChange={(e) => setFilterPriority(e.target.value)}
+                      class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 text-zinc-300"
+                    >
+                      <option value="Todos">Todas</option>
+                      <option value="Alta">Alta</option>
+                      <option value="Media">Media</option>
+                      <option value="Baja">Baja</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-xs text-zinc-500 font-semibold block mb-1.5">Estado</label>
+                    <select 
+                      value={filterStatus}
+                      onChange={(e) => setFilterStatus(e.target.value)}
+                      class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-indigo-500 text-zinc-300"
+                    >
+                      <option value="Todos">Todos</option>
+                      <option value="Pendientes">Pendientes</option>
+                      <option value="Completadas">Completadas</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* RESETEAR FILTROS */}
+                {(filterModule !== "Todos" || filterPriority !== "Todos" || filterStatus !== "Todos" || searchQuery !== "") && (
+                  <button 
+                    onClick={() => {
+                      setFilterModule("Todos");
+                      setFilterPriority("Todos");
+                      setFilterStatus("Todos");
+                      setSearchQuery("");
+                    }}
+                    class="text-xs text-zinc-400 hover:text-white transition flex items-center justify-center gap-1 mt-1 font-semibold"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    Limpiar todos los filtros
+                  </button>
+                )}
+              </div>
+
+              {/* LECTURAS Y RECURSOS OFICIALES */}
+              <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 shadow-xl">
+                <h3 class="text-sm font-bold text-zinc-300 mb-4 flex items-center gap-2">
+                  <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                  Fuentes y Divulgadores
+                </h3>
+                <div class="flex flex-col gap-3 text-xs">
+                  <a href="https://notebooklm.google.com/" target="_blank" class="flex justify-between items-center bg-zinc-950 hover:bg-zinc-800/80 p-3 rounded-xl border border-zinc-800/60 transition group">
+                    <span class="font-medium text-zinc-300 group-hover:text-white transition">Manual NotebookLM EOI</span>
+                    <svg class="w-4 h-4 text-zinc-600 group-hover:text-indigo-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
+                  <a href="https://github.com/albertomozo/TDIGITAL" target="_blank" class="flex justify-between items-center bg-zinc-950 hover:bg-zinc-800/80 p-3 rounded-xl border border-zinc-800/60 transition group">
+                    <span class="font-medium text-zinc-300 group-hover:text-white transition">Repositorio prompts Alberto Mozo</span>
+                    <svg class="w-4 h-4 text-zinc-600 group-hover:text-indigo-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
+                  <a href="https://docs.google.com/document/d/1YRqjxO3dbTKldydaLmcJcvmILHIiqNL3hztGh8fCWME/edit" target="_blank" class="flex justify-between items-center bg-zinc-950 hover:bg-zinc-800/80 p-3 rounded-xl border border-zinc-800/60 transition group">
+                    <span class="font-medium text-zinc-300 group-hover:text-white transition">Plantilla Oficial PTD</span>
+                    <svg class="w-4 h-4 text-zinc-600 group-hover:text-indigo-400 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
+                  <div class="p-3 bg-zinc-950 border border-zinc-800/60 rounded-xl">
+                    <span class="font-bold text-zinc-400 block mb-1 text-[11px] uppercase tracking-wider">Divulgadores Recomendados</span>
+                    <span class="text-zinc-300 block font-medium">Alex Rayón &amp; Miren Agirregomezkorta</span>
+                    <span class="text-zinc-500 block text-[10px] mt-0.5">Disponibles en LinkedIn para mentorías y tendencias de IA.</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* LISTADO DINÁMICO DE TAREAS (CENTRO) */}
+            <div class="w-full lg:w-2/3 flex flex-col gap-4">
+              
+              <div class="flex justify-between items-center">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">
+                  <span>Listado de Tareas</span>
+                  <span class="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full font-medium">{filteredTasks.length} encontradas</span>
+                </h2>
+              </div>
+
+              {filteredTasks.length === 0 ? (
+                <div class="bg-zinc-900 border border-zinc-800 border-dashed rounded-2xl p-12 text-center flex flex-col items-center justify-center">
+                  <div class="p-4 bg-zinc-950 text-zinc-600 rounded-full mb-4 border border-zinc-800">
+                    <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  </div>
+                  <h4 class="text-base font-semibold text-white">No se encontraron tareas</h4>
+                  <p class="text-sm text-zinc-500 mt-1 max-w-sm">Prueba ajustando los filtros de búsqueda o el módulo del curso para encontrar lo que necesitas.</p>
+                </div>
+              ) : (
+                <div class="flex flex-col gap-3.5 max-h-[750px] overflow-y-auto pr-1">
+                  {filteredTasks.map(task => {
+                    const isSelected = selectedTask && selectedTask.id === task.id;
+                    const isCompleted = task.status === "Completada";
+
+                    return (
+                      <div 
+                        key={task.id}
+                        onClick={() => handleSelectTask(task)}
+                        class={`bg-zinc-900 border ${isSelected ? 'border-indigo-500 ring-2 ring-indigo-500/10' : 'border-zinc-800/80 hover:border-zinc-700/80'} rounded-2xl p-4 shadow-xl transition-all duration-200 cursor-pointer relative flex flex-col md:flex-row gap-4 justify-between items-start md:items-center`}
+                      >
+                        {/* CONTENEDOR CHECKBOX Y TÍTULO */}
+                        <div class="flex items-start gap-3.5 flex-1">
+                          
+                          <div 
+                            onClick={(e) => {
+                              e.stopPropagation(); // Evitar seleccionar la tarea al pulsar el checkbox
+                              toggleTaskCompletion(task.id);
+                            }}
+                            class={`w-6 h-6 rounded-lg flex items-center justify-center border transition mt-0.5 ${isCompleted ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-zinc-700 hover:border-indigo-500'}`}
+                          >
+                            {isCompleted && (
+                              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                            )}
+                          </div>
+
+                          <div class="flex-1">
+                            <h3 class={`text-sm font-bold tracking-tight transition ${isCompleted ? 'line-through text-zinc-500' : 'text-zinc-100'}`}>
+                              {task.title}
+                            </h3>
+                            <p class="text-xs text-zinc-400 mt-1 line-clamp-2">{task.description}</p>
+                            
+                            {/* BADGES DE MÓDULO, PRIORIDAD, DURACIÓN */}
+                            <div class="flex flex-wrap items-center gap-2 mt-3">
+                              <span class="text-[10px] bg-zinc-950 text-zinc-400 px-2 py-0.5 rounded-md font-medium border border-zinc-800">
+                                {task.module}
+                              </span>
+                              <span class={`text-[10px] px-2 py-0.5 rounded-md font-semibold ${
+                                task.priority === "Alta" ? "bg-red-500/10 text-red-400 border border-red-500/20" :
+                                task.priority === "Media" ? "bg-amber-500/10 text-amber-400 border border-amber-500/20" :
+                                "bg-teal-500/10 text-teal-400 border border-teal-500/20"
+                              }`}>
+                                Prioridad {task.priority}
+                              </span>
+                              <span class="text-[10px] text-zinc-500 flex items-center gap-1 font-medium">
+                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                {task.duration}
+                              </span>
+                              {taskNotes[task.id] && (
+                                <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded-md font-semibold border border-indigo-500/30 flex items-center gap-1">
+                                  <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                                  Con Notas
+                                </span>
+                              )}
+                            </div>
+
+                          </div>
+                        </div>
+
+                        {/* ACCIONES RÁPIDAS EN CARD */}
+                        <div class="flex items-center gap-2 self-end md:self-auto border-t md:border-t-0 border-zinc-800/60 pt-3 md:pt-0 w-full md:w-auto justify-end">
+                          <span class="text-xs text-indigo-400 md:opacity-0 group-hover:opacity-100 transition flex items-center gap-1 font-semibold">
+                            Detalles 
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                          </span>
+                        </div>
+
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* PANEL DETALLADO DE TAREA SELECCIONADA */}
+              {selectedTask && (
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl relative overflow-hidden mt-2 p-6 flex flex-col gap-6">
+                  
+                  {/* CABECERA DETALLES */}
+                  <div class="flex justify-between items-start gap-4">
+                    <div>
+                      <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="text-xs bg-indigo-600/10 text-indigo-400 border border-indigo-500/20 px-2.5 py-0.5 rounded-full font-bold">
+                          {selectedTask.module}
+                        </span>
+                        <span class="text-xs text-zinc-500 font-semibold flex items-center gap-1">
+                          Duración estimada: {selectedTask.duration}
+                        </span>
+                      </div>
+                      <h2 class="text-lg font-bold text-white tracking-tight">{selectedTask.title}</h2>
+                    </div>
+                    <button 
+                      onClick={() => toggleTaskCompletion(selectedTask.id)}
+                      class={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 ${
+                        selectedTask.status === "Completada" 
+                          ? "bg-zinc-800 text-zinc-400 border border-zinc-700 hover:bg-zinc-700/80" 
+                          : "bg-indigo-600 text-white hover:bg-indigo-500 shadow-lg shadow-indigo-600/20"
+                      }`}
+                    >
+                      {selectedTask.status === "Completada" ? (
+                        <>
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          Completada
+                        </>
+                      ) : (
+                        <>
+                          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" /></svg>
+                          Marcar Completada
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* DESCRIPCIÓN */}
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Descripción General</h4>
+                    <p class="text-sm text-zinc-300 leading-relaxed">{selectedTask.description}</p>
+                  </div>
+
+                  {/* INSTRUCCIONES PASO A PASO */}
+                  <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Instrucciones de Ejecución</h4>
+                    <ul class="flex flex-col gap-2.5">
+                      {selectedTask.instructions.map((inst, index) => (
+                        <li key={index} class="flex gap-3 text-sm text-zinc-300 leading-relaxed">
+                          <span class="flex-shrink-0 w-5 h-5 rounded-full bg-zinc-950 text-indigo-400 flex items-center justify-center font-bold text-xs border border-zinc-800/80">{index + 1}</span>
+                          <span>{inst}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* CITAS Y REFERENCIAS DEL DOCENTE */}
+                  <div class="bg-zinc-950/80 border border-zinc-800 rounded-xl p-4 relative overflow-hidden">
+                    <div class="absolute right-3 top-3 text-zinc-800 font-serif text-5xl select-none leading-none pointer-events-none">“</div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-1.5 flex items-center gap-1.5">
+                      <svg class="w-4 h-4 text-indigo-400/80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                      Explicación literal del docente
+                    </h4>
+                    <p class="text-xs text-zinc-400 font-medium italic leading-relaxed">"{selectedTask.quote}"</p>
+                    <span class="text-[10px] text-zinc-500 block mt-2 text-right font-semibold">Fuente: {selectedTask.source}</span>
+                  </div>
+
+                  {/* PROMPT DE APOYO PARA INTELIGENCIA ARTIFICIAL */}
+                  {selectedTask.prompts && (
+                    <div class="bg-indigo-600/5 border border-indigo-500/10 rounded-xl p-4">
+                      <div class="flex justify-between items-center mb-2">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400/95 flex items-center gap-1.5">
+                          <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          Prompt de Aceleración con IA
+                        </h4>
+                        <button 
+                          onClick={() => handleCopyPrompt(selectedTask.prompts)}
+                          class="text-xs bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/20 px-2 py-1 rounded-lg transition flex items-center gap-1"
+                        >
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                          Copiar Prompt
+                        </button>
+                      </div>
+                      <p class="text-xs text-zinc-300 font-mono bg-zinc-950 p-3 rounded-lg border border-zinc-800/80 overflow-x-auto leading-relaxed select-all">
+                        {selectedTask.prompts}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* SECCIÓN DE PLAN DE EJECUCIÓN Y NOTAS DEL ALUMNO */}
+                  <div class="border-t border-zinc-800 pt-5">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2 flex items-center gap-1.5">
+                      <svg class="w-4 h-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-3.828l8.586-8.586z" /></svg>
+                      Mi Plan de Acción y Notas de Ejecución
+                    </h4>
+                    <p class="text-xs text-zinc-500 mb-3">Redacta aquí tu idea, el tema seleccionado, o los conectores específicos que vas a utilizar para esta tarea. Se mantendrán guardados en la memoria de la sesión.</p>
+                    <div class="flex flex-col gap-2.5">
+                      <textarea 
+                        rows="3"
+                        placeholder="Escribe tu plan de acción para esta tarea... (ej: 'Utilizaré Zapier para enlazar la hoja de cálculo del test con el canal #ej08-notion')"
+                        value={currentNote}
+                        onChange={(e) => {
+                          setCurrentNote(e.target.value);
+                          setTaskNotes(prev => ({
+                            ...prev,
+                            [selectedTask.id]: e.target.value
+                          }));
+                        }}
+                        class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm focus:outline-none transition text-zinc-200"
+                      />
+                      <button 
+                        onClick={handleSaveNote}
+                        class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white px-4 py-2 rounded-xl text-xs font-bold border border-zinc-700/60 transition self-end flex items-center gap-1.5"
+                      >
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        Guardar Plan de Acción
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              )}
+
+            </div>
+
+          </main>
+
+          {/* FOOTER */}
+          <footer class="border-t border-zinc-900 bg-zinc-950 py-8 text-center text-xs text-zinc-600 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+              <span>© 2026 Programa Agentes del Cambio - Gestión de Datos, IA y Automatizaciones.</span>
+              <span class="flex items-center gap-1.5">
+                Auditor de Madurez Digital y Planificación Académica
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
+              </span>
+            </div>
+          </footer>
+
+          {/* MODAL: NUEVA TAREA PERSONALIZADA */}
+          {isAdding && (
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+              <div class="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative">
+                
+                <h3 class="text-lg font-bold text-white mb-1">Añadir Tarea Estratégica</h3>
+                <p class="text-xs text-zinc-500 mb-5">Agrega dinámicas sugeridas por tu empresa o retos adicionales de digitalización para realizar un seguimiento unificado.</p>
+
+                <form onSubmit={handleAddTask} class="flex flex-col gap-4">
+                  <div>
+                    <label class="text-xs text-zinc-400 font-semibold block mb-1">Título de la Tarea</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="Ejemplo: Diseñar Estrategia de Ciberseguridad" 
+                      value={newTitle}
+                      onChange={(e) => setNewTitle(e.target.value)}
+                      class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm focus:outline-none transition text-zinc-200"
+                    />
+                  </div>
+
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-xs text-zinc-400 font-semibold block mb-1">Módulo</label>
+                      <select 
+                        value={newModule}
+                        onChange={(e) => setNewTitleModule(e.target.value)}
+                        class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm focus:outline-none transition text-zinc-300"
+                      >
+                        <option value="Proyecto PTD">Proyecto PTD</option>
+                        <option value="Automatizaciones">Automatizaciones</option>
+                        <option value="Inteligencia Artificial">Inteligencia Artificial</option>
+                        <option value="Notion y Colaboración">Notion y Colaboración</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="text-xs text-zinc-400 font-semibold block mb-1">Prioridad</label>
+                      <select 
+                        value={newPriority}
+                        onChange={(e) => setNewPriority(e.target.value)}
+                        class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm focus:outline-none transition text-zinc-300"
+                      >
+                        <option value="Alta">Alta</option>
+                        <option value="Media">Media</option>
+                        <option value="Baja">Baja</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="text-xs text-zinc-400 font-semibold block mb-1">Breve Descripción</label>
+                    <textarea 
+                      rows="3"
+                      placeholder="Detalla de qué trata esta actividad práctica de digitalización..." 
+                      value={newDesc}
+                      onChange={(e) => setNewDesc(e.target.value)}
+                      class="w-full bg-zinc-950 border border-zinc-800 focus:border-indigo-500 rounded-xl px-3 py-2 text-sm focus:outline-none transition text-zinc-200"
+                    />
+                  </div>
+
+                  <div class="flex gap-3 justify-end mt-4">
+                    <button 
+                      type="button"
+                      onClick={() => setIsAdding(false)} 
+                      class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-4 py-2 rounded-xl text-xs font-bold transition"
+                    >
+                      Cancelar
+                    </button>
+                    <button 
+                      type="submit"
+                      class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-xs font-bold transition shadow-lg shadow-indigo-600/20"
+                    >
+                      Añadir Tarea
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          )}
+
+          {/* MODAL: UPGRADE COLABORATIVO (SIN MENCIONAR FIRESTORE) */}
+          {showUpgradeModal && (
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+              <div class="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center flex flex-col items-center">
+                <div class="p-3.5 bg-indigo-600/10 text-indigo-400 rounded-full mb-4 border border-indigo-500/20">
+                  <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Sincronización en la Nube y Trabajo Multiusuario</h3>
+                <p class="text-sm text-zinc-400 leading-relaxed mb-6">
+                  Actualmente estás utilizando la versión de sesión única. Al activar la base de datos colaborativa, podrás guardar tu progreso permanentemente en tu cuenta, sincronizar tu avance con tus compañeros y trabajar colaborativamente en tiempo real en los entregables del plan de transformación.
+                </p>
+                <div class="flex flex-col gap-2 w-full">
+                  <button 
+                    onClick={() => {
+                      // Alerta informativa
+                      const toast = document.getElementById("toast-success");
+                      toast.innerHTML = "<span>Solicitud de conexión enviada al administrador</span>";
+                      toast.classList.remove("opacity-0");
+                      setTimeout(() => toast.classList.add("opacity-0"), 3000);
+                      setShowUpgradeModal(false);
+                    }}
+                    class="bg-indigo-600 hover:bg-indigo-500 text-white py-2.5 rounded-xl text-xs font-bold transition w-full shadow-lg shadow-indigo-600/25"
+                  >
+                    Solicitar Conexión de Servidor Colaborativo
+                  </button>
+                  <button 
+                    onClick={() => setShowUpgradeModal(false)}
+                    class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 py-2.5 rounded-xl text-xs font-bold transition w-full"
+                  >
+                    Continuar en Modo Local
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+</body>
+</html>
