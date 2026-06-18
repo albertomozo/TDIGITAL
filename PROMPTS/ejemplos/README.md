@@ -9,6 +9,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Asistencia / Soporte** – [`asistencia-soporte.md`](asistencia-soporte.md) – ejemplos de prompts para atención al cliente o help desk.
 - **Generación de documentación** – [`generacion-documentacion.md`](generacion-documentacion.md) – instruir al modelo para crear manuales, guías, fichas técnicas.
 - **Imagenes** - [`imagenes.md`](imagenes.md) - prompts básicos de plantillas para imagenes
+- **Videos Gemini** - [`video-gemini-prompt.md`](video-gemini-prompt.md) - prompts básicos para generar video en  gemini
 - **Transformación digital** – [`transformacion-digital.md`](transformacion-digital.md)
 - **Presentaciones** - [`presentaciones.md`](presentaciones.md)
 - **Educacion** – [`educacion.md`](educacion.md)
