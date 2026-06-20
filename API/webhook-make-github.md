@@ -104,6 +104,8 @@ Una vez que el webhook ha aprendido la estructura de datos, puedes conectar los 
 
 ### Paso 5: Buenas prácticas y Seguridad Avanzada (Filtro HMAC)
 
+ℹ️
+
 Cualquiera que descubra la URL de tu webhook de Make podría enviar datos falsos para activar alertas ficticias. Para evitarlo, utilizaremos el **Secret** criptográfico que configuramos en GitHub mediante un filtro de validación de firmas.
 
 GitHub envía en la cabecera HTTP de cada petición un parámetro llamado `X-Hub-Signature-256`, el cual contiene la firma digital de los datos. La validación matemática de esta firma responde a la siguiente ecuación:
@@ -134,3 +136,4 @@ Para configurar este filtro de seguridad en Make:
 
 
 Si un atacante intenta enviar datos falsos, la firma calculada de manera local no coincidirá con la cabecera recibida, por lo que el filtro bloqueará la ejecución de inmediato. Si la firma es correcta, el flujo continuará su ejecución y enviará la notificación en tiempo real a tu equipo.
+

@@ -243,3 +243,4 @@ MIT — Siéntete libre de usar, modificar y distribuir este contenido.
 - [ ] Herramientas de evaluación de prompts.
 - [ ] Base de datos de casos de éxito.
 - [ ] Enlazar otras herramientas.
+- [ ] Prototipos alumnos.
