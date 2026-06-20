@@ -242,3 +242,4 @@ MIT — Siéntete libre de usar, modificar y distribuir este contenido.
 - [ ] Tutoriales en video.
 - [ ] Herramientas de evaluación de prompts.
 - [ ] Base de datos de casos de éxito.
+- [ ] Enlazar otras herramientas.
