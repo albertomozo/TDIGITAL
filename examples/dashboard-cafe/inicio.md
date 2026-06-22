@@ -49,9 +49,7 @@ Es acumulativo porque cada módulo **añade una capa** sobre la anterior. Al fin
 
 -----------------
 
-¿Quieres que te cree el **archivo Excel de ejemplo** con datos ficticios ya cargados y el dashboard armado? También puedo preparar la **guía del ejercicio** paso a paso para los participantes.
-
-Perfecto. Voy a crear un Excel completo con datos ficticios realistas en todas las hojas, incluyendo fórmulas y un dashboard.Aquí tienes el Excel completo con todo relleno. El archivo **CafeDigital_Master.xlsx** tiene 5 hojas con colores de pestaña diferenciados:
+El archivo **CafeDigital_Master.xlsx** tiene 5 hojas con colores de pestaña diferenciados:
 
 **📋 Satisfaccion** (pestaña azul) — 90 registros ficticios de encuestas con fecha, hora, producto, calificación 1-5, si regresan y comentarios.
 
