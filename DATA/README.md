@@ -38,7 +38,7 @@ Estos datos pueden almacenarse en tablas, archivos CSV, hojas de cálculo, bases
 ## Ejemplo práctico en este repositorio
 Un caso concreto que muestra este concepto está en:
 
-- `examples/dashboard-cafe/inicio.md`
+[ejemplos/dashboard-cafe/inicio.md](ejemplos/dashboard-cafe/inicio.md)
 
 Allí se explica cómo una cafetería recolecta datos de tres fuentes:
 - encuestas de satisfacción,
@@ -50,6 +50,10 @@ Luego esos datos se consolidan en un dashboard que responde preguntas de negocio
 - ¿Qué producto es más rentable?
 - ¿Cómo influye la satisfacción en las ventas?
 - ¿El margen cubre los costos?
+
+## Otro ejemplo 
+
+[mihuerta](ejemplos/mihuerta/HUERTA_DASHBOARD_IA.txt)
 
 ## Enlace a la documentación complementaria
 Puedes ver la presentación relacionada aquí:
