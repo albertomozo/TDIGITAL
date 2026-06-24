@@ -13,3 +13,6 @@ https://chatgpt.com/share/6a3ac90f-3a74-83eb-b751-b89609f185ea
 https://gemini.google.com/share/e7cc26311a3f
 Click the link to view conversation with Kimi AI Assistant
 https://www.kimi.com/share/19ef5a49-3f12-89ca-8000-00004bb5f903
+
+https://copilot.microsoft.com/conversations/join/3vCdkz7qLL7XGj8SJZY2p
+

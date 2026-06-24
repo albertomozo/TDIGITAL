@@ -13,7 +13,7 @@ La idea es simple: una cafetería pequeña que **digitaliza su operación** reco
 ### Las 3 fuentes de datos (una por módulo del curso)
 
 **Módulo 1 — Formulario / Encuesta**
-Los clientes escanean un QR al salir y responden 3 preguntas en Google Forms o Microsoft Forms: ¿Cómo calificarías tu visita? ¿Qué producto pediste? ¿Volverías?. Esto genera una hoja de respuestas automática. Los participantes aprenden que los datos pueden llegar solos, sin digitarlos manualmente.
+Los clientes escanean un QR al salir y responden 3 preguntas en Google Forms o Microsoft Forms: ¿Cómo calificarías tu visita? ¿Qué producto pediste? ¿Volverías?. Esto genera una hoja de respuestas automática. Los datos pueden llegar solos, sin digitarlos manualmente.
 
 **Módulo 2 — Archivo Excel / CSV**
 El cajero registra cada venta en una hoja simple: fecha, hora, producto, cantidad, precio. Este archivo se exporta diariamente. Los participantes aprenden a estructurar bien una tabla (sin celdas combinadas, sin colores como datos, con encabezados claros) y a importar un CSV.
