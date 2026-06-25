@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Dashboard de Aprendizaje Canva</title>
+<style>
+body{font-family:Arial,sans-serif;margin:20px;max-width:1200px}
+h1,h2{border-bottom:1px solid #ccc;padding-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.card{border:1px solid #ccc;border-radius:8px;padding:12px}
+.progress{width:100%;height:28px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #ddd;padding:8px}
+.done{background:#e8f6e8}
+textarea{width:100%;height:70px}
+</style>
+<script>
+function update(){
+ let total=document.querySelectorAll('.reto').length;
+ let done=document.querySelectorAll('.reto:checked').length;
+ let pct=Math.round((done/total)*100);
+ document.getElementById('pct').innerText=pct+"%";
+ document.getElementById('bar').value=pct;
+
+ document.querySelectorAll('.reto').forEach(cb=>{
+   cb.closest('tr').className=cb.checked?'done':'';
+ });
+}
+</script>
+</head>
+<body onload="update()">
+
+<h1>Centro de Control del Curso Canva</h1>
+
+<div class="grid">
+<div class="card">
+<h2>Progreso</h2>
+<p>Avance global: <strong id="pct">0%</strong></p>
+<progress id="bar" class="progress" max="100" value="0"></progress>
+</div>
+
+<div class="card">
+<h2>Objetivo del Curso</h2>
+<p>Aprender Canva mediante proyectos reales, investigación autónoma y creación de contenidos profesionales.</p>
+</div>
+
+<div class="card">
+<h2>Competencias</h2>
+<ul>
+<li>Diseño visual</li>
+<li>Comunicación digital</li>
+<li>Presentaciones</li>
+<li>Redes sociales</li>
+<li>Infografías</li>
+<li>IA Generativa</li>
+</ul>
+</div>
+</div>
+
+<h2>Hoja de Ruta</h2>
+<table>
+<tr><th>Completado</th><th>Reto</th><th>Competencias</th><th>Entregable</th></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Tarjeta profesional</td><td>Plantillas, tipografías</td><td>PDF + PNG</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Cartel evento</td><td>Capas e imágenes</td><td>Cartel A4</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Post Instagram</td><td>Redes sociales</td><td>Imagen cuadrada</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Infografía</td><td>Visualización</td><td>Infografía PDF</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Presentación</td><td>Diapositivas</td><td>8 diapositivas</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Marca corporativa</td><td>Branding</td><td>Manual básico</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Revista digital</td><td>Maquetación</td><td>6 páginas</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>IA en Canva</td><td>Magic Design</td><td>Informe + diseño</td></tr>
+<tr><td><input class="reto" type="checkbox" onchange="update()"></td><td>Proyecto Final</td><td>Integración</td><td>Portfolio completo</td></tr>
+</table>
+
+<h2>Documentación de Referencia</h2>
+<div class="grid">
+<div class="card">
+<h3>Diseño</h3>
+<ul>
+<li>Jerarquía visual</li>
+<li>Contraste</li>
+<li>Alineación</li>
+<li>Espacios en blanco</li>
+</ul>
+</div>
+<div class="card">
+<h3>Presentaciones</h3>
+<ul>
+<li>1 idea por diapositiva</li>
+<li>Poco texto</li>
+<li>Uso de imágenes</li>
+<li>Llamada a la acción</li>
+</ul>
+</div>
+<div class="card">
+<h3>IA Generativa</h3>
+<ul>
+<li>Prompts descriptivos</li>
+<li>Iteración</li>
+<li>Revisión humana</li>
+<li>Mejora continua</li>
+</ul>
+</div>
+</div>
+
+<h2>Diario de Aprendizaje</h2>
+<p>¿Qué he descubierto hoy?</p>
+<textarea></textarea>
+
+<p>¿Qué herramienta de Canva me ha resultado más útil?</p>
+<textarea></textarea>
+
+<p>¿Qué necesito investigar?</p>
+<textarea></textarea>
+
+<h2>Rúbrica de Autoevaluación</h2>
+<table>
+<tr><th>Criterio</th><th>1-5</th></tr>
+<tr><td>Uso de herramientas Canva</td><td>____</td></tr>
+<tr><td>Diseño visual</td><td>____</td></tr>
+<tr><td>Creatividad</td><td>____</td></tr>
+<tr><td>Autonomía</td><td>____</td></tr>
+<tr><td>Calidad de los entregables</td><td>____</td></tr>
+</table>
+
+</body>
+</html>

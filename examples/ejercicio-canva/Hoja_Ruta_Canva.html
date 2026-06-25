@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Hoja de Ruta Canva</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:1000px;margin:auto;padding:20px;line-height:1.5}
+h1,h2{color:#333}
+.card{border:1px solid #ddd;border-radius:8px;padding:12px;margin:10px 0}
+.done{background:#eef9ee}
+details{margin-top:8px}
+</style>
+<script>
+function marcar(cb){
+  cb.parentElement.parentElement.classList.toggle('done', cb.checked);
+}
+</script>
+</head>
+<body>
+<h1>Hoja de Ruta de Aprendizaje de Canva</h1>
+<p>Marca cada reto cuando lo completes.</p>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 1: Tarjeta profesional</label>
+<details><summary>Objetivos</summary>Plantillas, textos, tipografías, iconos y exportación.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 2: Cartel de evento</label>
+<details><summary>Objetivos</summary>Capas, fondos, imágenes, transparencias y alineación.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 3: Publicación Instagram</label>
+<details><summary>Objetivos</summary>Formatos para redes sociales y diseño visual.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 4: Infografía educativa</label>
+<details><summary>Objetivos</summary>Diagramas, iconos y organización de información.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 5: Presentación profesional</label>
+<details><summary>Objetivos</summary>Diapositivas, temas, transiciones y notas.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 6: Crear una marca</label>
+<details><summary>Objetivos</summary>Logo, colores corporativos y branding.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 7: Revista digital</label>
+<details><summary>Objetivos</summary>Documentos multipágina y maquetación.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Reto 8: IA en Canva</label>
+<details><summary>Objetivos</summary>Magic Design, IA generativa y mejora de contenidos.</details></div>
+
+<div class="card"><label><input type="checkbox" onchange="marcar(this)"> Proyecto Final</label>
+<details><summary>Entregables</summary>Logo, cartel, presentación, publicación social e infografía.</details></div>
+
+</body>
+</html>

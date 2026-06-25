@@ -2,7 +2,7 @@ La filosofía de partir de un documento central como el **PTD_02** (Plan de Tran
 
 A partir de este gran núcleo de información, podemos extraer, descomponer y diseñar una infinidad de **"artefactos visuales y de comunicación"** dependiendo del canal, el formato y el público, maximizando el rendimiento del contenido sin tener que inventar nada desde cero.
 
-A continuación, tienes un catálogo exhaustivo de **todos los artefactos imaginables** clasificados por categorías y tipologías de uso, expandiendo los que ya teníamos para integrar marketing, branding, contenido multimedia y comunicación corporativa:
+A continuación, mostramos  un catálogo  **artefactos** clasificados por categorías y tipologías de uso
 
 ---
 
