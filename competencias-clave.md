@@ -227,6 +227,9 @@ Este enfoque funciona muy bien en proyectos, equipos y desarrollo profesional.
 - Registrar aprendizajes.
 
 ---
+![Infografía resumen](competencias-clave.png)
+
+---
 
 # Actividades prácticas
 
@@ -268,3 +271,6 @@ Las hard skills abren oportunidades.
 Las soft skills sostienen el rendimiento y la colaboración.
 El mindset y las metodologías de trabajo convierten el conocimiento en resultados reales.
 
+## Enlaces
+
+https://gamma.app/docs/Competencias-clave-para-el-trabajo-actual-lmym81zqngy9qdv?mode=doc

@@ -10,6 +10,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Generación de documentación** – [`generacion-documentacion.md`](generacion-documentacion.md) – instruir al modelo para crear manuales, guías, fichas técnicas.
 - **Imagenes** - [`imagenes.md`](imagenes.md) - prompts básicos de plantillas para imagenes
 - **Videos Gemini** - [`video-gemini-prompt.md`](video-gemini-prompt.md) - prompts básicos para generar video en  gemini
+- **Videos Guioón** - [`video-guion.md`](video-guion.md) - guia para realizar un video de varios clips.
 - **Transformación digital** – [`transformacion-digital.md`](transformacion-digital.md)
 - **Presentaciones** - [`presentaciones.md`](presentaciones.md)
 - **Educacion** – [`educacion.md`](educacion.md)

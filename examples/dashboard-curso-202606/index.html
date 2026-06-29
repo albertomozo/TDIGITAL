@@ -1,0 +1,1335 @@
+<!--
+https://ia-herramientas-dashboard.netlify.app
+-->
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-950 text-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadro de Mando - Agentes del Cambio (Transformación Digital & IA)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 3px;
+        }
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.5);
+        }
+    </style>
+</head>
+<body class="h-full overflow-hidden flex flex-col">
+
+    <!-- Header Principal -->
+    <header class="bg-slate-900/80 border-b border-indigo-950/40 backdrop-blur-md px-6 py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-indigo-600/10 rounded-xl border border-indigo-500/20 text-indigo-400">
+                <i data-lucide="cpu" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    Agentes del Cambio
+                    <span class="text-xs font-semibold px-2 py-0.5 bg-indigo-500/10 text-indigo-400 rounded-full border border-indigo-500/20">
+                        TD & IA 2026
+                    </span>
+                </h1>
+                <p class="text-xs text-slate-400">Cuadro de Mando de Aprendizaje y Seguimiento de Tareas • Docente: Alberto Mozo</p>
+            </div>
+        </div>
+        
+        <!-- Progreso del Curso -->
+        <div class="flex items-center gap-4 bg-slate-950/50 p-2.5 rounded-xl border border-indigo-950/40 w-full md:w-auto">
+            <div class="text-right hidden sm:block">
+                <span class="text-xs text-slate-400 block">Progreso de Ejercicios</span>
+                <span class="text-sm font-bold text-white" id="progress-text">0 / 11 completados</span>
+            </div>
+            <div class="relative w-full sm:w-36 h-2.5 bg-slate-900 rounded-full overflow-hidden border border-indigo-950/40">
+                <div id="progress-bar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+            <span class="text-sm font-bold text-indigo-400" id="progress-percent">0%</span>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal con Sidebar -->
+    <div class="flex flex-1 overflow-hidden">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-16 md:w-64 bg-slate-900/40 border-r border-indigo-950/40 flex flex-col justify-between p-3 shrink-0">
+            <nav class="space-y-1.5">
+                <button onclick="switchTab('overview')" id="btn-overview" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group bg-indigo-600 text-white shadow-indigo-600/10 shadow-lg">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Resumen General</span>
+                </button>
+                <button onclick="switchTab('modules')" id="btn-modules" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group">
+                    <i data-lucide="book-open" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Módulos Teóricos</span>
+                </button>
+                <button onclick="switchTab('exercises')" id="btn-exercises" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group">
+                    <i data-lucide="check-square" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Tareas y Ejercicios</span>
+                </button>
+                <button onclick="switchTab('prompter')" id="btn-prompter" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group">
+                    <i data-lucide="terminal" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Generador PTD</span>
+                </button>
+                <button onclick="switchTab('automation')" id="btn-automation" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group">
+                    <i data-lucide="zap" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Simulador Make</span>
+                </button>
+                <button onclick="switchTab('assistant')" id="btn-assistant" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group">
+                    <i data-lucide="message-square" class="w-5 h-5 shrink-0 group-hover:scale-110 transition-transform"></i>
+                    <span class="hidden md:inline">Consultar a Alberto Mozo</span>
+                </button>
+            </nav>
+
+            <!-- Docente Profile Widget (South Park style as mentioned by class!) -->
+            <div class="hidden md:flex flex-col p-3 bg-slate-950/40 rounded-2xl border border-indigo-950/20 gap-2">
+                <div class="flex items-center gap-2.5">
+                    <!-- Custom SVG Docente (South Park likeness circular avatar) -->
+                    <div class="w-10 h-10 rounded-full bg-slate-800 border-2 border-indigo-500 overflow-hidden flex items-center justify-center shrink-0">
+                        <svg viewBox="0 0 100 100" class="w-10 h-10">
+                            <!-- Background Class -->
+                            <rect width="100" height="100" fill="#1e1b4b"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="53" r="30" fill="#fbcfe8"/>
+                            <!-- Hair (Grey South Park curly) -->
+                            <path d="M22,38 C22,25 30,18 50,18 C70,18 78,25 78,38 C84,38 85,30 78,25 C74,20 66,15 50,15 C34,15 26,20 22,25 C15,30 16,38 22,38 Z" fill="#94a3b8"/>
+                            <circle cx="28" cy="38" r="8" fill="#94a3b8"/>
+                            <circle cx="72" cy="38" r="8" fill="#94a3b8"/>
+                            <circle cx="36" cy="24" r="9" fill="#94a3b8"/>
+                            <circle cx="64" cy="24" r="9" fill="#94a3b8"/>
+                            <circle cx="50" cy="20" r="10" fill="#94a3b8"/>
+                            <!-- Glasses -->
+                            <rect x="26" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                            <rect x="56" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                            <line x1="44" y1="48" x2="56" y2="48" stroke="#000" stroke-width="3"/>
+                            <!-- Eyes -->
+                            <circle cx="35" cy="49" r="2.5" fill="#000"/>
+                            <circle cx="65" cy="49" r="2.5" fill="#000"/>
+                            <!-- Mouth -->
+                            <path d="M43,68 Q50,64 57,68" stroke="#000" stroke-width="2.5" fill="none"/>
+                            <!-- Body Coat -->
+                            <path d="M30,82 L70,82 L75,100 L25,100 Z" fill="#15803d"/>
+                            <!-- Coffee Cup -->
+                            <rect x="42" y="85" width="16" height="15" rx="1" fill="#ffffff" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-white block">Alberto Mozo A.</span>
+                        <span class="text-[10px] text-emerald-400 flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Docente En Línea
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Contenido de las Pestañas -->
+        <main class="flex-1 overflow-y-auto p-4 md:p-6 scrollbar-thin">
+            
+            <!-- PESTAÑA: RESUMEN GENERAL (Overview) -->
+            <section id="tab-overview" class="space-y-6">
+                
+                <!-- Tarjetas de Información Rápida -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-slate-900/50 p-5 rounded-2xl border border-indigo-950/40 relative overflow-hidden group">
+                        <div class="absolute -right-3 -bottom-3 text-indigo-500/5 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="clock" class="w-24 h-24"></i>
+                        </div>
+                        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Duración Total</span>
+                        <h3 class="text-2xl font-bold mt-1 text-white">140 Horas</h3>
+                        <p class="text-xs text-slate-400 mt-2">Módulos teórico-prácticos</p>
+                    </div>
+                    <div class="grid grid-cols-1 bg-gradient-to-br from-indigo-900/30 to-purple-950/20 p-5 rounded-2xl border border-indigo-500/20 relative overflow-hidden group">
+                        <div class="absolute -right-3 -bottom-3 text-indigo-500/10 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="calendar" class="w-24 h-24"></i>
+                        </div>
+                        <span class="text-gray-300 text-xs font-semibold uppercase tracking-wider">Inicio del Curso</span>
+                        <h3 class="text-2xl font-bold mt-1 text-white">20 Mayo 2026</h3>
+                        <p class="text-xs text-indigo-300 mt-2">Edición Activa (7ª Generación)</p>
+                    </div>
+                    <div class="bg-slate-900/50 p-5 rounded-2xl border border-indigo-950/40 relative overflow-hidden group">
+                        <div class="absolute -right-3 -bottom-3 text-indigo-500/5 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="laptop" class="w-24 h-24"></i>
+                        </div>
+                        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Materia Principal</span>
+                        <h3 class="text-2xl font-bold mt-1 text-white">Digitalización</h3>
+                        <p class="text-xs text-slate-400 mt-2">Uso práctico de Herramientas e IA</p>
+                    </div>
+                    <div class="bg-slate-900/50 p-5 rounded-2xl border border-indigo-950/40 relative overflow-hidden group">
+                        <div class="absolute -right-3 -bottom-3 text-indigo-500/5 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="layers" class="w-24 h-24"></i>
+                        </div>
+                        <span class="text-gray-400 text-xs font-semibold uppercase tracking-wider">Metodología</span>
+                        <h3 class="text-2xl font-bold mt-1 text-white">No-Code / Low-Code</h3>
+                        <p class="text-xs text-slate-400 mt-2">Aprender haciendo (Hands-on)</p>
+                    </div>
+                </div>
+
+                <!-- Contenedor de Dos Columnas -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Columna de Herramientas del Ecosistema -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 space-y-4 lg:col-span-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                                <i data-lucide="tool" class="text-indigo-400 w-5 h-5"></i>
+                                Ecosistema Tecnológico del Curso
+                            </h3>
+                            <span class="text-xs text-indigo-400 font-semibold px-2 py-0.5 bg-indigo-500/10 rounded-full border border-indigo-500/10">10+ Aplicaciones</span>
+                        </div>
+                        <p class="text-sm text-slate-400">Las herramientas de automatización, inteligencia artificial, diagramación y diseño que trasteamos y dominamos a lo largo de las sesiones formativas:</p>
+                        
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+                            <!-- Slack -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">💬</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Slack</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Comunicación y hilos</span>
+                                </div>
+                            </div>
+                            <!-- Google Workspace -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">📁</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Workspace</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Drive, Sheets, Forms</span>
+                                </div>
+                            </div>
+                            <!-- Notion -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">📓</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Notion</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Base de datos y docs</span>
+                                </div>
+                            </div>
+                            <!-- Zapier -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">⚡</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Zapier</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Automatizaciones</span>
+                                </div>
+                            </div>
+                            <!-- Make -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">⚙️</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Make</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Integración avanzada</span>
+                                </div>
+                            </div>
+                            <!-- NotebookLM -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">🧠</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">NotebookLM</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Estudio y fuentes</span>
+                                </div>
+                            </div>
+                            <!-- Canva -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">🎨</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Canva</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Identidad de marca</span>
+                                </div>
+                            </div>
+                            <!-- Miro -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">🎯</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Miro</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">OKR y canvas</span>
+                                </div>
+                            </div>
+                            <!-- Napkin.ai -->
+                            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-950/60 hover:border-indigo-500/30 transition-all flex items-center gap-3">
+                                <span class="text-lg">✏️</span>
+                                <div class="min-w-0">
+                                    <span class="font-bold text-sm text-white block truncate">Napkin.ai</span>
+                                    <span class="text-[10px] text-slate-400 truncate block">Infografías</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna de Canales de Slack y Enlaces Rápidos -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 space-y-4">
+                        <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                            <i data-lucide="slack" class="text-indigo-400 w-5 h-5"></i>
+                            Estructura de Slack
+                        </h3>
+                        <p class="text-xs text-slate-400">Canales habilitados para la interacción y envío de ejercicios:</p>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between p-2.5 bg-slate-900/70 rounded-xl border border-indigo-950/50">
+                                <span class="text-xs font-semibold text-slate-200"># general-td20260520</span>
+                                <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md border border-indigo-500/10">Anuncios y Tareas</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-slate-900/70 rounded-xl border border-indigo-950/50">
+                                <span class="text-xs font-semibold text-slate-200"># presentaciones</span>
+                                <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md border border-indigo-500/10">Alumnos</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-slate-900/70 rounded-xl border border-indigo-950/50">
+                                <span class="text-xs font-semibold text-slate-200"># redes-sociales</span>
+                                <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md border border-indigo-500/10">Noticias TIC</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2.5 bg-slate-900/70 rounded-xl border border-indigo-950/50">
+                                <span class="text-xs font-semibold text-slate-200"># proyecto</span>
+                                <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md border border-indigo-500/10">Propuestas PTD</span>
+                            </div>
+                        </div>
+
+                        <!-- Botón de Enlace Directo -->
+                        <a href="https://github.com/albertomozo/TDIGITAL" target="_blank" class="flex justify-between items-center p-3 bg-indigo-600/10 border border-indigo-500/30 hover:bg-indigo-600/20 text-indigo-300 font-semibold text-xs rounded-xl transition-all group">
+                            <span>REPOSITORIO DE DOCUMENTACIÓN GITHUB</span>
+                            <i data-lucide="external-link" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Citas del Docente / Introducción a las Sesiones -->
+                <div class="bg-indigo-950/20 border border-indigo-500/20 p-5 rounded-2xl flex flex-col md:flex-row items-center gap-4">
+                    <span class="text-4xl text-indigo-500 shrink-0 select-none">“</span>
+                    <p class="text-sm italic text-slate-300 text-center md:text-left">
+                        "Este curso... se daba más desde un punto de vista mucho más teórico y se ha cambiado radicalmente. Lo que quiero es que os quedéis con conceptos reales aplicados, utilizando herramientas muy poderosas y que la información esté estructurada para no duplicarla." 
+                        <span class="text-indigo-400 font-semibold block mt-1 not-italic text-xs">— Alberto Mozo (Transcripción de clase)</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: MÓDULOS TEÓRICOS -->
+            <section id="tab-modules" class="space-y-6 hidden">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Programa de Materias (140 horas)</h2>
+                        <p class="text-xs text-slate-400">Guía completa de los bloques temáticos de transformación digital e inteligencia artificial.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Módulo 1 -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 hover:border-indigo-500/20 transition-colors">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs text-indigo-400 font-bold tracking-wider uppercase">Módulo 1</span>
+                                <h3 class="text-lg font-bold text-white">Estrategia Digital, Cloud y Herramientas del Curso</h3>
+                                <p class="text-sm text-slate-400 mt-2">Definición de las herramientas colaborativas, sistemas de control de versiones y el concepto de Nube. Establecimiento del canal de Slack con las normas de netiqueta (hilos, emojis, etc.).</p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Conceptos de Cloud</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Permisos en Google Drive</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Calendario de Eventos</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">SSO e Identity Providers (IDP)</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/20 whitespace-nowrap">Semana 1-2</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 2 -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 hover:border-indigo-500/20 transition-colors">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs text-indigo-400 font-bold tracking-wider uppercase">Módulo 2</span>
+                                <h3 class="text-lg font-bold text-white">Fundamentos de IA y Uso Práctico de Asistentes</h3>
+                                <p class="text-sm text-slate-400 mt-2">Uso y comparación de las diferentes vertientes de inteligencia artificial generativa. Creación y estructuración de cuadernos de aprendizaje personalizados en NotebookLM para evitar el exceso de documentación inútil.</p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">NotebookLM</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">IA Generativa (Chats)</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Prompts Estructurados</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Napkin.ai (Infografías)</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/20 whitespace-nowrap">Semana 3</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 3 -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 hover:border-indigo-500/20 transition-colors">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs text-indigo-400 font-bold tracking-wider uppercase">Módulo 3</span>
+                                <h3 class="text-lg font-bold text-white">Captura de Datos, Formularios y Lógica de Flujo</h3>
+                                <p class="text-sm text-slate-400 mt-2">Técnicas avanzadas para el diseño de formularios en Google Forms y su bifurcación por lógica condicional. Creación de flujos condicionales lógicos aplicados a la empresa.</p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Google Forms</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Bifurcaciones Lógicas</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Estructuras Condicionales (Y, O)</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Diagramación de Flujo</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/20 whitespace-nowrap">Semana 4</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 4 -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 hover:border-indigo-500/20 transition-colors">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs text-indigo-400 font-bold tracking-wider uppercase">Módulo 4</span>
+                                <h3 class="text-lg font-bold text-white">Automatización de Procesos (Zapier y Make)</h3>
+                                <p class="text-sm text-slate-400 mt-2">Introducción de disparadores (Triggers) y acciones en integraciones de datos. Configuración de escenarios avanzados de Make y Zapier, routers lógicos, formateo de datos en JSON y envíos a Slack.</p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Zapier</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Make Scenarios</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Ficheros JSON / CSV</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Webhooks</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/20 whitespace-nowrap">Semana 5-6</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 5 -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 hover:border-indigo-500/20 transition-colors">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="space-y-1">
+                                <span class="text-xs text-indigo-400 font-bold tracking-wider uppercase">Módulo 5</span>
+                                <h3 class="text-lg font-bold text-white">Creación de Artefactos Digitales y PTD</h3>
+                                <p class="text-sm text-slate-400 mt-2">Estructuración y diseño del Plan de Transformación Digital (PTD) de un negocio real. Creación de logos en Canva, tableros OKR en Miro, bases de datos y portafolios en Notion.</p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Canva</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Bases de datos Notion</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Miro OKRs</span>
+                                    <span class="text-[10px] bg-slate-950 text-slate-300 border border-indigo-950/60 px-2.5 py-0.5 rounded-full font-medium">Plan de Transformación Digital (PTD)</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full font-semibold border border-indigo-500/20 whitespace-nowrap">Semana 7-8</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: TAREAS Y EJERCICIOS -->
+            <section id="tab-exercises" class="space-y-6 hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Listado de Tareas y Ejercicios</h2>
+                        <p class="text-xs text-slate-400">Marca los ejercicios completados para actualizar tu progreso.</p>
+                    </div>
+                    
+                    <!-- Filtro rápido -->
+                    <div class="flex bg-slate-900 p-1 rounded-xl border border-indigo-950/60 gap-1 self-stretch sm:self-auto">
+                        <button onclick="filterExercises('todos')" id="filter-all" class="text-xs px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition-all">Todos</button>
+                        <button onclick="filterExercises('cloud')" id="filter-cloud" class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Cloud</button>
+                        <button onclick="filterExercises('ia')" id="filter-ia" class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">IA</button>
+                        <button onclick="filterExercises('auto')" id="filter-auto" class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Automatización</button>
+                        <button onclick="filterExercises('design')" id="filter-design" class="text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">Diseño</button>
+                    </div>
+                </div>
+
+                <!-- Grid de Ejercicios -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="exercises-container">
+                    <!-- Dinámico por JS -->
+                </div>
+            </section>
+
+            <!-- PESTAÑA: GENERADOR PTD -->
+            <section id="tab-prompter" class="space-y-6 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Generador Inteligente de Plan de Transformación Digital</h2>
+                    <p class="text-xs text-slate-400">Establece tu tipo de negocio y genera prompts óptimos para que ChatGPT, Claude o Gemini diseñen tu documento del PTD paso a paso.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Configurador del Proyecto -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 space-y-4">
+                        <h3 class="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">1. Define tu caso</h3>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Sector o Tipo de Negocio</label>
+                                <input type="text" id="ptd-business" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Ej: Gimnasio local, Tienda de ropa de montaña...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Sección del PTD a Generar</label>
+                                <select id="ptd-section" onchange="updatePromptTemplate()" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors">
+                                    <option value="identidad">Identidad Corporativa (Misión, Visión, Valores)</option>
+                                    <option value="dafo">Análisis DAFO / Canva de Propuesta de Valor</option>
+                                    <option value="kpi">Cuadro de Mando de Operaciones (KPIs / OKRs)</option>
+                                    <option value="auto">Flujos de Trabajo y Automatización Recomendada</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Enfoque del Plan</label>
+                                <textarea id="ptd-focus" rows="3" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Ej: Digitalizar la gestión de clientes, reducir las llamadas manuales, integrar inteligencia artificial para las consultas de dudas..."></textarea>
+                            </div>
+                        </div>
+
+                        <button onclick="generatePTDPrompt()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-indigo-600/10">
+                            Generar Prompt del Curso
+                        </button>
+                    </div>
+
+                    <!-- Prompt Resultante & Copiado -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 flex flex-col justify-between lg:col-span-2 space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <h3 class="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">2. Prompt Optimizado</h3>
+                                <button onclick="copyGeneratedPrompt()" class="flex items-center gap-1.5 text-xs text-indigo-400 font-semibold px-3 py-1 bg-indigo-500/10 rounded-lg hover:bg-indigo-600/20 border border-indigo-500/10">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                    Copiar Prompt
+                                </button>
+                            </div>
+                            <p class="text-xs text-slate-400">Copia este prompt detallado y pégalo en el chat de tu IA favorita:</p>
+                        </div>
+
+                        <!-- Textarea del Prompt -->
+                        <div class="flex-1 min-h-[180px]">
+                            <textarea id="ptd-prompt-output" readonly class="w-full h-full bg-slate-950 border border-indigo-950/80 rounded-xl p-4 text-xs font-mono text-indigo-300 select-all focus:outline-none scrollbar-thin resize-none"></textarea>
+                        </div>
+
+                        <p class="text-[10px] text-slate-500 italic">*Nota del docente: Con este prompt, la IA te estructurará la respuesta directamente en formato Markdown para que puedas importarla limpiamente en tu documento Notion o Word.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: SIMULADOR MAKE -->
+            <section id="tab-automation" class="space-y-6 hidden">
+                <div>
+                    <h2 class="text-xl font-bold text-white">Simulador de Flujos de Trabajo (Make / Zapier)</h2>
+                    <p class="text-xs text-slate-400">Comprende de manera gráfica cómo se estructuran y conectan los webhooks, triggers y acciones que construimos en clase.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Configuración del Flujo -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 space-y-4">
+                        <h3 class="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">Configuración</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Origen de Datos (Trigger)</label>
+                                <select id="sim-trigger" onchange="drawSimulation()" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none">
+                                    <option value="forms">Google Forms (Nuevo Registro de Respuesta)</option>
+                                    <option value="notion">Notion Database (Nueva Fila Añadida)</option>
+                                    <option value="stripe">Stripe (Cobro Completado de Matrícula)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Filtro / Condicional de Lógica</label>
+                                <select id="sim-filter" onchange="drawSimulation()" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none">
+                                    <option value="none">Sin Filtro (Procesar todo secuencialmente)</option>
+                                    <option value="vip">Filtrar por Idioma == "ES"</option>
+                                    <option value="score">Valoración de Reseña >= 4 estrellas</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Acción Final (Action)</label>
+                                <select id="sim-action" onchange="drawSimulation()" class="w-full bg-slate-950 border border-indigo-950/60 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none">
+                                    <option value="slack">Slack: Enviar mensaje estructurado al canal</option>
+                                    <option value="pdf">HTML to PDF: Crear un contrato en PDF automático</option>
+                                    <option value="sheets">Google Sheets: Crear fila de registro estructurado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="runScenarioAnimation()" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg flex items-center justify-center gap-2">
+                            <i data-lucide="play" class="w-4 h-4"></i>
+                            Ejecutar Escenario (Run Once)
+                        </button>
+                    </div>
+
+                    <!-- Representación Gráfica Interactiva -->
+                    <div class="bg-slate-900/30 p-5 rounded-2xl border border-indigo-950/40 lg:col-span-2 flex flex-col justify-between space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-white text-sm uppercase tracking-wider text-indigo-400">Lienzo del Escenario</h3>
+                            <span id="scenario-status" class="text-[10px] bg-slate-950 text-slate-400 px-2.5 py-1 rounded-full border border-indigo-950/60 flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                                Inactivo (Listo)
+                            </span>
+                        </div>
+
+                        <!-- Simulador Visual Canvas-like -->
+                        <div class="relative w-full h-[220px] bg-slate-950 rounded-2xl border border-indigo-950/80 overflow-hidden flex items-center justify-around p-4">
+                            
+                            <!-- SVG Grid Background -->
+                            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#6366f1 1px, transparent 1px); background-size: 16px 16px;"></div>
+
+                            <!-- Trigger Node -->
+                            <div class="z-10 flex flex-col items-center gap-2 group">
+                                <div id="node-trigger" class="w-16 h-16 rounded-full bg-indigo-950 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                                    <span class="text-2xl" id="icon-trigger">📁</span>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wide">Trigger</span>
+                            </div>
+
+                            <!-- Connection Line 1 -->
+                            <div class="flex-1 h-0.5 bg-slate-800 relative mx-2 max-w-[80px]">
+                                <div id="flow-pulse-1" class="absolute top-0 left-0 w-2.5 h-full bg-indigo-400 rounded-full hidden"></div>
+                            </div>
+
+                            <!-- Router / Filter Node -->
+                            <div class="z-10 flex flex-col items-center gap-2 group">
+                                <div id="node-filter" class="w-14 h-14 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-400 shadow-md">
+                                    <span class="text-lg" id="icon-filter">⚙️</span>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wide">Router</span>
+                            </div>
+
+                            <!-- Connection Line 2 -->
+                            <div class="flex-1 h-0.5 bg-slate-800 relative mx-2 max-w-[80px]">
+                                <div id="flow-pulse-2" class="absolute top-0 left-0 w-2.5 h-full bg-indigo-400 rounded-full hidden"></div>
+                            </div>
+
+                            <!-- Action Node -->
+                            <div class="z-10 flex flex-col items-center gap-2 group">
+                                <div id="node-action" class="w-16 h-16 rounded-full bg-indigo-950 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                                    <span class="text-2xl" id="icon-action">💬</span>
+                                </div>
+                                <span class="text-[10px] font-bold text-slate-300 uppercase tracking-wide">Action</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Mensaje de depuración del flujo -->
+                        <div class="bg-slate-950 border border-indigo-950/60 rounded-xl p-3.5">
+                            <span class="text-xs font-bold text-indigo-400 block mb-1">Registro de Ejecución (Logs):</span>
+                            <div id="scenario-log" class="text-[10px] font-mono text-slate-400 space-y-1 h-[60px] overflow-y-auto scrollbar-thin">
+                                [Escenario listo para iniciarse]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: CONSULTAR A ALBERTO MOZO (Asistente AI) -->
+            <section id="tab-assistant" class="space-y-6 hidden h-full flex flex-col">
+                <div class="shrink-0">
+                    <h2 class="text-xl font-bold text-white">Pregunta al Docente: "Alberto AI"</h2>
+                    <p class="text-xs text-slate-400">Este asistente inteligente simula las respuestas del profesor Alberto Mozo a partir de las transcripciones de las clases de Zoom, manteniendo su característico estilo de enseñanza pragmática.</p>
+                </div>
+
+                <div class="flex-1 bg-slate-900/30 rounded-2xl border border-indigo-950/40 p-4 flex flex-col justify-between min-h-[350px]">
+                    
+                    <!-- Contenedor del Historial de Chat -->
+                    <div id="chat-history" class="flex-1 overflow-y-auto space-y-4 pr-2 scrollbar-thin max-h-[250px] md:max-h-[350px]">
+                        <!-- Mensaje Inicial de Alberto -->
+                        <div class="flex gap-3 max-w-[85%]">
+                            <div class="w-8 h-8 rounded-full bg-slate-800 border border-indigo-500 overflow-hidden flex items-center justify-center shrink-0">
+                                <svg viewBox="0 0 100 100" class="w-8 h-8">
+                                    <rect width="100" height="100" fill="#1e1b4b"/>
+                                    <circle cx="50" cy="53" r="30" fill="#fbcfe8"/>
+                                    <path d="M22,38 C22,25 30,18 50,18 C70,18 78,25 78,38 C84,38 85,30 78,25 C74,20 66,15 50,15 C34,15 26,20 22,25 C15,30 16,38 22,38 Z" fill="#94a3b8"/>
+                                    <circle cx="28" cy="38" r="8" fill="#94a3b8"/>
+                                    <circle cx="72" cy="38" r="8" fill="#94a3b8"/>
+                                    <circle cx="50" cy="20" r="10" fill="#94a3b8"/>
+                                    <rect x="26" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                                    <rect x="56" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                                    <line x1="44" y1="48" x2="56" y2="48" stroke="#000" stroke-width="3"/>
+                                    <circle cx="35" cy="49" r="2.5" fill="#000"/>
+                                    <circle cx="65" cy="49" r="2.5" fill="#000"/>
+                                    <path d="M43,68 Q50,64 57,68" stroke="#000" stroke-width="2.5" fill="none"/>
+                                    <path d="M30,82 L70,82 L75,100 L25,100 Z" fill="#15803d"/>
+                                </svg>
+                            </div>
+                            <div class="bg-indigo-950/40 border border-indigo-950/60 p-3 rounded-2xl rounded-tl-none">
+                                <p class="text-xs text-slate-200">¡Muy buenas tardes! ¿Qué tal? Yo llevo toda la vida en la informática trasteando con bases de datos, webhooks e IA. ¿Tienes dudas sobre el PTD, las automatizaciones con Make o cómo subir tus ficheros a Notion? Pregúntame, que para eso estamos. ¿Vale?</p>
+                                <span class="text-[9px] text-slate-400 mt-1 block">Alberto Mozo • Hace un momento</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input del Mensaje -->
+                    <div class="mt-4 flex gap-2 border-t border-indigo-950/40 pt-4 shrink-0">
+                        <input type="text" id="chat-input" onkeydown="handleChatKeyDown(event)" class="flex-1 bg-slate-950 border border-indigo-950/80 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500" placeholder="Escribe tu duda sobre las clases o herramientas (ej: ¿Qué es Make?)...">
+                        <button onclick="sendChatMessage()" class="p-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-lg flex items-center justify-center">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal de Detalles del Ejercicio -->
+    <div id="exercise-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-indigo-950/80 w-full max-w-lg rounded-2xl p-5 space-y-4 shadow-2xl relative">
+            <button onclick="closeExerciseModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="space-y-1">
+                <span id="modal-category" class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-md border border-indigo-500/10 font-bold uppercase tracking-wider">Categoría</span>
+                <h3 id="modal-title" class="text-lg font-bold text-white">Título del Ejercicio</h3>
+            </div>
+            <p id="modal-description" class="text-xs text-slate-300 leading-relaxed">Instrucciones al detalle de lo que hay que realizar...</p>
+            
+            <div class="bg-slate-950 rounded-xl p-3.5 space-y-2 border border-indigo-950/40">
+                <span class="text-xs font-bold text-indigo-400 flex items-center gap-1.5">
+                    <i data-lucide="info" class="w-4 h-4"></i>
+                    Contexto del Docente (Zoom):
+                </span>
+                <p id="modal-quote" class="text-xs text-slate-400 italic">"Comentarios textuales extraídos de las clases de Zoom para guiarte..."</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Requerimientos:</span>
+                    <span id="modal-tools" class="text-xs font-bold text-white">Drive, Notion, Slack</span>
+                </div>
+                <button id="modal-toggle-btn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-colors">
+                    Marcar Completado
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Datos y Lógica Dinámica -->
+    <script>
+        // Listado Oficial de Ejercicios y Tareas
+        const EXERCISES_DATA = [
+            {
+                id: 1,
+                title: "Roles y Permisos en Google Drive",
+                category: "cloud",
+                categoryLabel: "Cloud",
+                description: "Crear una carpeta organizada en Google Drive con nomenclatura de fechas (Año-Mes-Día). Configurar cuatro archivos con diferentes permisos: uno de solo lectura, otro de comentarios, un canvas compartido de edición y una carpeta con acceso total de edición para compañeros.",
+                tools: "Google Drive, Slack",
+                quote: "\"Es súper importante que tengáis muy claro qué permisos compartís con los clientes. Para que lo probéis, me copiáis los enlaces de vuestro Drive y me los compartís con distintos roles, ¿vale?\"",
+                completed: false
+            },
+            {
+                id: 2,
+                title: "Vincular PDF de Calendario a Google Calendar",
+                category: "cloud",
+                categoryLabel: "Cloud",
+                description: "Tomar el archivo del calendario de la formación en formato PDF, extraer los eventos de clases y días festivos de manera asíncrona, y añadirlos a tu Google Calendar personal, configurando las notificaciones y alarmas.",
+                tools: "Google Calendar, Google Sheets",
+                quote: "\"Tengo el calendario que es un PDF. Lo que hacemos es un ejercicio interesante que tiene muchas variantes: pasar la información de fechas del curso para integrarlo en tu calendario compartido, para que todos vayamos parejos.\"",
+                completed: false
+            },
+            {
+                id: 3,
+                title: "Estructura Forms -> Sheets -> Contactos",
+                category: "cloud",
+                categoryLabel: "Cloud",
+                description: "Crear un formulario de Google Forms de contacto estructurado para tus alumnos. Vincularlo con una hoja de cálculo en Sheets. Exportar los datos recopilados en formato CSV, para luego importarlos en tu libreta de Google Contacts con una etiqueta específica.",
+                tools: "Forms, Sheets, Google Contacts",
+                quote: "\"Me copio los correos en un CSV de la hoja y los subo a las libretas de cada uno de manera limpia. Así os tengo a todos ya fichados de forma estructurada en un momento sin hacerlo a mano.\"",
+                completed: false
+            },
+            {
+                id: 4,
+                title: "Estudio y Resumen en NotebookLM",
+                category: "ia",
+                categoryLabel: "IA Generativa",
+                description: "Abrir NotebookLM, crear un cuaderno llamado 'Inteligencia Artificial TD'. Subir como fuentes los 5 PDFs teóricos del Módulo 1 que están en el Moodle y un video explicativo. Generar una guía de estudio, un mapa mental de conceptos clave y una tabla de datos de tareas.",
+                tools: "NotebookLM, Moodle",
+                quote: "\"Subimos los 5 PDFs que explican el módulo uno de inteligencia artificial. No hay que aprenderse la teoría de memoria, sino NotebookLM para resumirlos, quitar la paja y asimilar los conceptos clave rápidamente.\"",
+                completed: false
+            },
+            {
+                id: 5,
+                title: "Exportación de Presentación a PDF",
+                category: "design",
+                categoryLabel: "Diseño",
+                description: "Crear una presentación en una de las suites recomendadas (PowerPoint, Canva, Google Slides o Gamma) sobre digitalización de empresas y exportarla de forma limpia a un archivo PDF final.",
+                tools: "Gamma, PowerPoint, Canva",
+                quote: "\"Hacemos la presentación acabada y luego la convertimos en un documento PDF. El diseño tiene que ser profesional, claro y directo para las visitas o clientes de tu empresa, ¿vale?\"",
+                completed: false
+            },
+            {
+                id: 6,
+                title: "Google Formulario con Bifurcación",
+                category: "cloud",
+                categoryLabel: "Cloud",
+                description: "Crear un cuestionario condicional avanzado en Google Forms. Si el usuario marca un nivel 'Básico' de informática se le redirige a preguntas conceptuales simples. Si marca 'Avanzado', se le interroga sobre webhooks o lenguajes como React, Angular o PHP.",
+                tools: "Google Forms, Lógica",
+                quote: "\"Hacemos un formulario de ejemplo de valoración de niveles. Si pinchas básico te manda a una sección con preguntas de CPU o Excel; si pinchas avanzado va a otra de programación. Esto os da la entrada a la lógica informática.\"",
+                completed: false
+            },
+            {
+                id: 7,
+                title: "Diseño de Marca en Canva (DAFO/BMC)",
+                category: "design",
+                categoryLabel: "Diseño",
+                description: "Diseñar la identidad visual corporativa de tu empresa ficticia en Canva. Crear el logotipo, un banner promocional, una infografía y plasmar el análisis DAFO en un cuadrante visual estructurado.",
+                tools: "Canva",
+                quote: "\"Hacemos un cuadrante con 4 opciones: causas internas que puedo intervenir y externas que no. Te genera un Canva visual precioso para plasmar de forma rápida los obstáculos críticos y fortalezas de la marca.\"",
+                completed: false
+            },
+            {
+                id: 8,
+                title: "Formulario de KPIs y Métricas",
+                category: "cloud",
+                categoryLabel: "Cloud",
+                description: "Diseñar un formulario estructurado que recopile métricas clave (KPIs) y valoraciones de reseñas (del 1 al 5) para realizar un posterior análisis de satisfacción de clientes.",
+                tools: "Google Forms, Sheets",
+                quote: "\"Diseñamos el formulario de KPIs para que el cliente meta su producto, valoración y reseña. Es la manera más cómoda de recabar datos de valor sin perdernos en el caos, ¿vale?\"",
+                completed: false
+            },
+            {
+                id: 9,
+                title: "Establecer OKRs en Miro",
+                category: "ia",
+                categoryLabel: "IA Generativa",
+                description: "Crear un lienzo en Miro utilizando una plantilla de Objetivos y Resultados Clave (OKRs). Definir 3 objetivos estratégicos de digitalización con sus correspondientes métricas medibles para tu negocio.",
+                tools: "Miro",
+                quote: "\"En Miro creamos tableros compartidos para planificar proyectos de forma visual, organizando lluvias de ideas o los OKR de digitalización de la empresa junto a tu equipo.\"",
+                completed: false
+            },
+            {
+                id: 10,
+                title: "Automatización Forms -> Sheets -> Slack (Zapier/Make)",
+                category: "auto",
+                categoryLabel: "Automatización",
+                description: "Configurar un escenario de automatización (Zap) donde el Trigger sea la inserción de una nueva fila en Google Sheets (procedente de Google Forms) y la acción sea enviar un mensaje estructurado personalizado a un canal de Slack.",
+                tools: "Zapier, Make, Slack",
+                quote: "\"Hacemos la automatización: el disparador es cuando se añade un registro en el Excel, y la acción es que me mande un mensaje en Slack personalizado. Es una masterclass de cómo funciona de verdad la economía y la productividad.\"",
+                completed: false
+            },
+            {
+                id: 11,
+                title: "Creación de PDF automatizada (HTML to PDF)",
+                category: "auto",
+                categoryLabel: "Automatización",
+                description: "Crear un flujo de automatización avanzado en Make que recoja variables de Google Sheets, las procese dinámicamente mediante una plantilla HTML limpia de factura o contrato, y use un módulo de conversión de PDF para guardarla de manera ordenada.",
+                tools: "Make, Google Drive, HTML",
+                quote: "\"Hacemos un ejercicio súper potente: el formulario de creación te recoge los datos, Make los une dentro de una plantilla HTML básica usando variables de fila y te genera un PDF automático en la carpeta. Es oro puro para empresas, ¿vale?\"",
+                completed: false
+            }
+        ];
+
+        // Plantillas de Prompts para el PTD
+        const PROMPT_TEMPLATES = {
+            identidad: {
+                title: "Misión, Visión y Valores",
+                text: "Actúa como un Consultor Experto en Estrategia Digital y Transformación Empresarial. Necesito redactar la Identidad Corporativa de mi negocio, el cual se dedica a: {BUSINESS}.\n\nPor favor, genera:\n1. Una MISIÓN potente y moderna, enfocada en cómo la tecnología y la digitalización nos permiten servir mejor a nuestros clientes.\n2. Una VISIÓN estratégica y ambiciosa proyectada a 3 y 5 años (2029-2031), detallando el nivel de madurez digital que alcanzaremos (ej: canales de captación, automatizaciones de procesos).\n3. Una lista de 5 a 6 VALORES éticos y operativos relevantes para nuestro sector, enfatizando la innovación, la eficiencia operativa y la agilidad.\n\nEstructura la respuesta directamente con formato Markdown limpio (usando encabezados H2, H3, negritas y listas de viñetas) para que pueda copiarlo fácilmente en mi cuaderno de Notion."
+            },
+            dafo: {
+                title: "Matriz DAFO y Canvas de Propuesta de Valor",
+                text: "Actúa como un especialista en ADE y dirección estratégica. Mi negocio es: {BUSINESS}. Queremos enfocar nuestro Plan de Transformación Digital con el siguiente objetivo: {FOCUS}.\n\nGenera una Matriz DAFO en formato de tabla Markdown que analice:\n- DEBILIDADES y FORTALEZAS (Factores internos controlables).\n- AMENAZAS y OPORTUNIDADES (Factores externos no controlables).\n\nPosteriormente, detalla nuestro Canvas de Propuesta de Valor:\n1. El perfil del cliente (Trabajos del cliente, dolores/frustraciones y alegrías/beneficios).\n2. El mapa de valor (Nuestros productos y servicios digitales, aliviadores de frustraciones y creadores de alegrías).\n\nPor favor, usa un formato tabular y de listas estructuradas en Markdown."
+            },
+            kpi: {
+                title: "Cuadro de Mando, KPIs y OKRs",
+                text: "Actúa como un experto en análisis de datos y control de operaciones de IT. Mi negocio es: {BUSINESS}.\n\nPara garantizar el éxito de nuestra transformación digital enfocada en: {FOCUS}, necesito definir un sistema de medición claro.\n\nGenera:\n1. Tres OBJETIVOS clave utilizando la metodología OKR (Objective & Key Results). Cada objetivo debe tener al menos 3 resultados clave que sean cuantitativos, medibles y con fechas límite claras.\n2. Un Cuadro de Mando Operativo con una tabla Markdown que especifique:\n   - Nombre del KPI\n   - Fórmula o Método de cálculo\n   - Frecuencia de medición (Diaria, Semanal, Mensual)\n   - Meta u Objetivo\n   - Fuente de origen del dato (ej: Google Sheets, CRM, Google Analytics)\n\nEstructura todo en Markdown limpio y legible."
+            },
+            auto: {
+                title: "Flujos de Trabajo y Automatización Recomendada",
+                text: "Actúa como un Arquitecto de Automatización No-Code y Especialista en Make/Zapier. Mi negocio es: {BUSINESS}.\n\nPara optimizar nuestro proceso de: {FOCUS}, necesito que diseñes tres automatizaciones clave.\n\nPor cada flujo de automatización, detalla:\n1. Nombre y Objetivo de la automatización.\n2. Disparador (Trigger): Qué evento inicia el flujo, la aplicación origen y el webhook.\n3. Lógica de Enrutamiento o Filtros: Qué condiciones lógicas se deben cumplir (ej: si idioma == 'ES').\n4. Acciones (Actions): Lista secuencial de módulos integrados (ej: Gmail, Slack, OpenAI, Google Contacts) y qué variables se mapean entre ellos.\n5. Beneficio de productividad: Cuántas horas estimadas ahorra a la semana.\n\nEscribe de forma estructurada en Markdown."
+            }
+        };
+
+        // Biografía y base de datos local para el bot de Alberto
+        const ALBERTO_AI_RESPONSES = [
+            {
+                keywords: ["hola", "buenas", "que tal", "saludos"],
+                answer: "¡Muy buenas! ¿Qué tal? Yo por aquí ando preparando las siguientes sesiones y revisando vuestros cuadernos en Drive. Contadme, ¿en qué os puedo echar un cable hoy? ¿Vale?"
+            },
+            {
+                keywords: ["make", "automatizacion", "zapier", "automatizar", "webhook"],
+                answer: "¡Ah, el tema de las automatizaciones! Eso es oro puro para las empresas, de verdad. En clase jugamos con las cajitas (módulos). Lo importante es tener claro el Trigger (disparador) que suele ser una fila nueva de Sheets, y la Acción, que puede ser mandar un JSON formateado a Slack o a un webhook. Trasteadlo en Make que el plan gratuito os da de sobra para aprender. ¿Vale?"
+            },
+            {
+                keywords: ["notion", "base de datos", "tablero", "kanban"],
+                answer: "Notion es como una navaja suiza, a mí me encanta para estructurar la información. Os creáis una tabla de Alumnos o Tareas, definís los campos y luego, ¡pum!, de manera automática Notion os genera un formulario nativo con un enlace para que lo rellene cualquiera. Podéis mover las tareas de 'Pendiente' a 'En progreso' tipo Kanban. Es súper visual, ¿vale?"
+            },
+            {
+                keywords: ["ptd", "plan de transformacion", "transformacion digital", "proyecto"],
+                answer: "El PTD (Plan de Transformación Digital) no es para abotargaros de teoría empresarial. Yo os paso una plantilla en Drive, y con proms inteligentes en IA vamos a ir rellenando la misión, visión, el DAFO y los OKRs aplicados a vuestro tema. No os centréis en que sea una maravilla literaria, centraos en que sea práctico y os solucione problemas reales. ¿De acuerdo?"
+            },
+            {
+                keywords: ["notebooklm", "notebook", "fuentes", "resumen"],
+                answer: "¡NotebookLM de Google es una maravilla! Es un cambio bastante bestial de cómo estudiamos. En vez de leeros 200 páginas de PDFs tochos, los subís como fuentes junto con el enlace de un video de YouTube, y la IA os genera resúmenes, guías de estudio o mapas de conceptos sin inventarse nada. Es ir directo al grano, ¿vale?"
+            },
+            {
+                keywords: ["canva", "bmc", "dafo", "logo", "banner"],
+                answer: "En Canva entra todo el tema de marca digital y diseño visual. Podéis crear vuestro logotipo, la tipografía y un banner para vuestro Classroom o vuestra web. No hay que ser un diseñador profesional, con las plantillas y la IA de Canva lo hacéis como churros en un rato."
+            },
+            {
+                keywords: ["html", "css", "javascript", "programacion", "react", "vanilla"],
+                answer: "Yo llevo toda la vida programando, pero en este curso no os quiero volver locos con código. Si sabéis programar, podéis tirar directo de las APIs de OpenAI en Python o PHP, pero para la mayoría, el Low-Code (Make/Zapier) os soluciona la papeleta. Si queréis, os enseño a hacer una web estática muy sencilla en HTML vanilla para colgar vuestro portafolio sin meteros en React o frameworks raros que os consumen recursos sin necesidad."
+            },
+            {
+                keywords: ["ejercicio 4", "ejercicio", "tarea"],
+                answer: "Los ejercicios están todos subidos en las carpetas y en el Classroom. Lo que tenéis que hacer es trastear paso a paso, hacer capturas de vuestros flujos funcionando y subirme el enlace a vuestro Drive. Yo me encargo de tutorizaros y resolver dudas del día anterior en las clases de Zoom. ¡Ánimo!"
+            }
+        ];
+
+        // Estado de la Aplicación en Memoria (con persistencia en LocalStorage para no perder cambios)
+        let appState = {
+            currentTab: 'overview',
+            exercises: [...EXERCISES_DATA],
+            chatHistory: []
+        };
+
+        // Inicialización al cargar la página
+        window.onload = function() {
+            // Inicializar Lucide Icons
+            lucide.createIcons();
+            
+            // Cargar estado de LocalStorage si existe
+            const savedState = localStorage.getItem('agentes_cambio_state');
+            if (savedState) {
+                try {
+                    const parsed = JSON.parse(savedState);
+                    // Actualizar el estado de completados de ejercicios
+                    parsed.exercises.forEach(savedEx => {
+                        const originalEx = appState.exercises.find(e => e.id === savedEx.id);
+                        if (originalEx) originalEx.completed = savedEx.completed;
+                    });
+                } catch (e) {
+                    console.error("Error cargando LocalStorage, usando estado inicial", e);
+                }
+            }
+
+            // Renderizar vistas iniciales
+            renderExercises();
+            updateProgressBar();
+            updatePromptTemplate();
+            drawSimulation();
+        };
+
+        // Guardar estado en LocalStorage
+        function saveState() {
+            localStorage.setItem('agentes_cambio_state', JSON.stringify({
+                exercises: appState.exercises.map(e => ({ id: e.id, completed: e.completed }))
+            }));
+        }
+
+        // Navegación entre pestañas
+        function switchTab(tabId) {
+            // Ocultar todas las secciones
+            const sections = ['overview', 'modules', 'exercises', 'prompter', 'automation', 'assistant'];
+            sections.forEach(s => {
+                document.getElementById(`tab-${s}`).classList.add('hidden');
+                document.getElementById(`btn-${s}`).className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-slate-900/60 hover:text-white transition-all duration-200 group";
+            });
+
+            // Mostrar la pestaña seleccionada
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).className = "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group bg-indigo-600 text-white shadow-indigo-600/10 shadow-lg";
+            
+            appState.currentTab = tabId;
+            lucide.createIcons();
+        }
+
+        // --- SECCIÓN: EJERCICIOS ---
+        
+        // Renderizar cartas de ejercicios
+        function renderExercises(filter = 'todos') {
+            const container = document.getElementById('exercises-container');
+            container.innerHTML = '';
+
+            const filteredList = appState.exercises.filter(ex => {
+                if (filter === 'todos') return true;
+                return ex.category === filter;
+            });
+
+            filteredList.forEach(ex => {
+                const card = document.createElement('div');
+                card.className = `p-4.5 rounded-2xl border transition-all duration-300 relative flex flex-col justify-between h-[210px] ${
+                    ex.completed 
+                        ? 'bg-emerald-950/10 border-emerald-500/30 hover:border-emerald-500/50' 
+                        : 'bg-slate-900/40 border-indigo-950/40 hover:border-indigo-500/20'
+                }`;
+
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/10 uppercase tracking-wide truncate max-w-[120px]" title="${ex.categoryLabel}">
+                                ${ex.categoryLabel}
+                            </span>
+                            <span class="text-[9px] flex items-center gap-1 font-semibold ${ex.completed ? 'text-emerald-400' : 'text-slate-400'}">
+                                <span class="w-1.5 h-1.5 rounded-full ${ex.completed ? 'bg-emerald-400' : 'bg-slate-500'}"></span>
+                                ${ex.completed ? 'Completado' : 'Pendiente'}
+                            </span>
+                        </div>
+                        <h4 class="font-bold text-sm text-white line-clamp-2 leading-snug">${ex.title}</h4>
+                        <p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">${ex.description}</p>
+                    </div>
+
+                    <div class="flex gap-2 pt-3 border-t border-indigo-950/20">
+                        <button onclick="openExerciseModal(${ex.id})" class="flex-1 py-1.5 bg-slate-950 hover:bg-slate-900 text-slate-300 hover:text-white border border-indigo-950/60 font-semibold text-xs rounded-xl transition-colors">
+                            Detalles e Instrucciones
+                        </button>
+                        <button onclick="toggleExerciseStatus(${ex.id})" class="p-2 rounded-xl border ${
+                            ex.completed 
+                                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20' 
+                                : 'bg-indigo-600/10 border-indigo-500/20 text-indigo-400 hover:bg-indigo-600/20'
+                        } transition-colors" title="${ex.completed ? 'Marcar como pendiente' : 'Marcar como completado'}">
+                            <i data-lucide="${ex.completed ? 'check-circle-2' : 'circle'}" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        // Alternar el estado de completado de un ejercicio
+        function toggleExerciseStatus(id) {
+            const ex = appState.exercises.find(e => e.id === id);
+            if (ex) {
+                ex.completed = !ex.completed;
+                saveState();
+                
+                // Volver a renderizar
+                const activeFilter = document.querySelector('.bg-slate-900 button.bg-indigo-600')?.id.replace('filter-', '') || 'todos';
+                renderExercises(activeFilter === 'all' ? 'todos' : activeFilter);
+                updateProgressBar();
+
+                // Si el modal está abierto, actualizar su estado
+                const modal = document.getElementById('exercise-modal');
+                if (!modal.classList.contains('hidden')) {
+                    setupModalToggleButton(ex);
+                }
+            }
+        }
+
+        // Filtrar ejercicios de manera visual
+        function filterExercises(category) {
+            const filters = ['all', 'cloud', 'ia', 'auto', 'design'];
+            filters.forEach(f => {
+                const btn = document.getElementById(`filter-${f}`);
+                if (f === category || (f === 'all' && category === 'todos')) {
+                    btn.className = "text-xs px-3 py-1.5 rounded-lg bg-indigo-600 text-white font-medium transition-all";
+                } else {
+                    btn.className = "text-xs px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all";
+                }
+            });
+
+            renderExercises(category);
+        }
+
+        // Actualizar la barra de progreso general
+        function updateProgressBar() {
+            const completedCount = appState.exercises.filter(e => e.completed).length;
+            const totalCount = appState.exercises.length;
+            const percentage = Math.round((completedCount / totalCount) * 100);
+
+            document.getElementById('progress-text').innerText = `${completedCount} / ${totalCount} completados`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-percent').innerText = `${percentage}%`;
+        }
+
+        // --- MODAL DE EJERCICIOS ---
+        function openExerciseModal(id) {
+            const ex = appState.exercises.find(e => e.id === id);
+            if (ex) {
+                document.getElementById('modal-title').innerText = ex.title;
+                document.getElementById('modal-category').innerText = ex.categoryLabel;
+                document.getElementById('modal-description').innerText = ex.description;
+                document.getElementById('modal-tools').innerText = ex.tools;
+                document.getElementById('modal-quote').innerText = ex.quote;
+
+                setupModalToggleButton(ex);
+
+                document.getElementById('exercise-modal').classList.remove('hidden');
+                lucide.createIcons();
+            }
+        }
+
+        function setupModalToggleButton(ex) {
+            const btn = document.getElementById('modal-toggle-btn');
+            if (ex.completed) {
+                btn.className = "px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition-colors";
+                btn.innerText = "Completado ✓";
+            } else {
+                btn.className = "px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-colors";
+                btn.innerText = "Marcar Completado";
+            }
+            btn.onclick = function() {
+                toggleExerciseStatus(ex.id);
+            };
+        }
+
+        function closeExerciseModal() {
+            document.getElementById('exercise-modal').classList.add('hidden');
+        }
+
+
+        // --- SECCIÓN: GENERADOR PTD ---
+        
+        // Actualizar plantilla de prompt según la sección seleccionada
+        function updatePromptTemplate() {
+            const section = document.getElementById('ptd-section').value;
+            const template = PROMPT_TEMPLATES[section];
+            const businessInput = document.getElementById('ptd-business').value || "[TU TIPO DE NEGOCIO]";
+            const focusInput = document.getElementById('ptd-focus').value || "[ENFOQUE O OBJETIVO DIGITAL]";
+
+            if (template) {
+                let text = template.text
+                    .replace(/{BUSINESS}/g, businessInput)
+                    .replace(/{FOCUS}/g, focusInput);
+                
+                document.getElementById('ptd-prompt-output').value = text;
+            }
+        }
+
+        // Generar prompt final combinando inputs del usuario
+        function generatePTDPrompt() {
+            const business = document.getElementById('ptd-business').value.trim();
+            const focus = document.getElementById('ptd-focus').value.trim();
+
+            if (!business) {
+                alert("Por favor, introduce primero tu tipo de negocio (ej: Clinica Dental, Restaurante Familiar).");
+                return;
+            }
+
+            updatePromptTemplate();
+        }
+
+        // Copiar prompt al portapapeles (usando execCommand por restricciones de iframe)
+        function copyGeneratedPrompt() {
+            const textarea = document.getElementById('ptd-prompt-output');
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                // Alerta de éxito amigable simulada (no usar alert del navegador)
+                const origText = textarea.value;
+                const copyBtn = document.querySelector('[onclick="copyGeneratedPrompt()"]');
+                copyBtn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i> ¡Copiado!`;
+                lucide.createIcons();
+                setTimeout(() => {
+                    copyBtn.innerHTML = `<i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar Prompt`;
+                    lucide.createIcons();
+                }, 2000);
+            } catch (err) {
+                console.error("Error al copiar texto", err);
+            }
+        }
+
+
+        // --- SECCIÓN: SIMULADOR DE AUTOMATIZACIÓN ---
+        
+        // Actualizar visualización estática de nodos de Make
+        function drawSimulation() {
+            const trigger = document.getElementById('sim-trigger').value;
+            const filter = document.getElementById('sim-filter').value;
+            const action = document.getElementById('sim-action').value;
+
+            // Trigger Icons & Text
+            const triggerMap = {
+                forms: { icon: "📝", name: "Forms Responded", style: "border-purple-500/40 text-purple-400 bg-purple-950/20" },
+                notion: { icon: "📓", name: "Notion Item Created", style: "border-slate-500/40 text-slate-300 bg-slate-900/20" },
+                stripe: { icon: "💳", name: "Stripe Matrícula", style: "border-emerald-500/40 text-emerald-400 bg-emerald-950/20" }
+            };
+
+            // Filter Icons & Text
+            const filterMap = {
+                none: { icon: "⚙️", name: "Pasar Todo", style: "border-slate-700 text-slate-400" },
+                vip: { icon: "🇪🇸", name: "Idioma == 'ES'", style: "border-indigo-500/40 text-indigo-400 bg-indigo-950/10" },
+                score: { icon: "★", name: "Estrellas >= 4", style: "border-amber-500/40 text-amber-400 bg-amber-950/10" }
+            };
+
+            // Action Icons & Text
+            const actionMap = {
+                slack: { icon: "💬", name: "Slack Message", style: "border-pink-500/40 text-pink-400 bg-pink-950/20" },
+                pdf: { icon: "📄", name: "HTML a PDF", style: "border-indigo-500/40 text-indigo-400 bg-indigo-950/20" },
+                sheets: { icon: "📊", name: "Sheets Insert", style: "border-emerald-500/40 text-emerald-400 bg-emerald-950/20" }
+            };
+
+            const selectedTrigger = triggerMap[trigger];
+            const selectedFilter = filterMap[filter];
+            const selectedAction = actionMap[action];
+
+            // Render Trigger Node
+            const tNode = document.getElementById('node-trigger');
+            tNode.className = `w-16 h-16 rounded-full border flex items-center justify-center shadow-lg transition-transform duration-300 ${selectedTrigger.style}`;
+            document.getElementById('icon-trigger').innerText = selectedTrigger.icon;
+
+            // Render Filter Node
+            const fNode = document.getElementById('node-filter');
+            fNode.className = `w-14 h-14 rounded-full border flex items-center justify-center shadow-md ${selectedFilter.style}`;
+            document.getElementById('icon-filter').innerText = selectedFilter.icon;
+
+            // Render Action Node
+            const aNode = document.getElementById('node-action');
+            aNode.className = `w-16 h-16 rounded-full border flex items-center justify-center shadow-lg transition-transform duration-300 ${selectedAction.style}`;
+            document.getElementById('icon-action').innerText = selectedAction.icon;
+        }
+
+        // Ejecutar animación simulada de flujo en Make
+        function runScenarioAnimation() {
+            const statusLabel = document.getElementById('scenario-status');
+            const logBox = document.getElementById('scenario-log');
+            
+            // Reiniciar estado visual
+            statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span> Ejecutando escenario...`;
+            logBox.innerHTML = '';
+
+            addLog("[Scenario] Iniciando ejecución...", "text-indigo-400");
+
+            // Animación Pulso 1
+            const pulse1 = document.getElementById('flow-pulse-1');
+            pulse1.classList.remove('hidden');
+            pulse1.className = "absolute top-0 left-0 w-2.5 h-full bg-indigo-400 rounded-full animate-[ping_1.5s_infinite]";
+            
+            setTimeout(() => {
+                addLog("[Trigger] ¡Webhook detectado! Nuevo registro recibido de la base de datos.", "text-emerald-400");
+                pulse1.classList.add('hidden');
+                
+                // Proceso en el Filtro
+                addLog("[Router] Analizando reglas del enrutamiento...", "text-slate-300");
+                const filter = document.getElementById('sim-filter').value;
+                
+                setTimeout(() => {
+                    let passed = true;
+                    if (filter === 'vip') {
+                        addLog("[Filter] Evaluando condición: Idioma es 'ES'. ¡Resultado: VERDADERO!", "text-indigo-300");
+                    } else if (filter === 'score') {
+                        addLog("[Filter] Evaluando condición: Valoración es >= 4. ¡Resultado: VERDADERO!", "text-indigo-300");
+                    } else {
+                        addLog("[Router] Sin filtros lógicos establecidos. Transmitiendo directamente.", "text-slate-400");
+                    }
+
+                    // Animación Pulso 2
+                    const pulse2 = document.getElementById('flow-pulse-2');
+                    pulse2.classList.remove('hidden');
+                    pulse2.className = "absolute top-0 left-0 w-2.5 h-full bg-indigo-400 rounded-full animate-[ping_1.5s_infinite]";
+
+                    setTimeout(() => {
+                        pulse2.classList.add('hidden');
+                        
+                        // Acción Completada
+                        const action = document.getElementById('sim-action').value;
+                        if (action === 'slack') {
+                            addLog("[Slack] Enviando bloque de JSON estructurado al canal de Slack #ejercicio-make.", "text-pink-400");
+                        } else if (action === 'pdf') {
+                            addLog("[HTML to PDF] Mapeando variables y generando contrato PDF automatizado.", "text-indigo-400");
+                        } else {
+                            addLog("[Google Sheets] Insertando registro estructurado en la hoja del Drive.", "text-emerald-400");
+                        }
+
+                        addLog("[Scenario] Escenario ejecutado con éxito en 0.45 segundos.", "text-emerald-500 font-bold");
+                        statusLabel.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Completado (Éxito)`;
+                    }, 1200);
+
+                }, 1000);
+
+            }, 1200);
+        }
+
+        // Agregar log en la consola de depuración del simulador
+        function addLog(text, colorClass = "text-slate-400") {
+            const logBox = document.getElementById('scenario-log');
+            const log = document.createElement('p');
+            log.className = colorClass;
+            
+            const now = new Date();
+            const timeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+            
+            log.innerText = `[${timeStr}] ${text}`;
+            logBox.appendChild(log);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+
+        // --- SECCIÓN: ASISTENTE CONVERSACIONAL (ALBERTO MOZO AI) ---
+        
+        // Manejar pulsación de tecla Enter en el input de chat
+        function handleChatKeyDown(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        // Enviar y procesar mensaje en el simulador Alberto AI
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const query = input.value.trim();
+            if (!query) return;
+
+            // Mostrar mensaje del alumno
+            appendChatMessage("student", query, "Tú");
+            input.value = '';
+
+            // Hacer scroll del chat al fondo
+            const chatHistory = document.getElementById('chat-history');
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+
+            // Simular retraso del profesor escribiendo
+            setTimeout(() => {
+                const response = searchAlbertoAnswer(query);
+                appendChatMessage("alberto", response, "Alberto Mozo");
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }, 800);
+        }
+
+        // Buscar en la base de datos local de respuestas basadas en Zoom
+        function searchAlbertoAnswer(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Buscar coincidencia por palabras clave
+            for (let item of ALBERTO_AI_RESPONSES) {
+                for (let keyword of item.keywords) {
+                    if (lowerQuery.includes(keyword)) {
+                        return item.answer;
+                    }
+                }
+            }
+
+            // Respuesta por defecto al estilo Alberto Mozo
+            return "Ostras, sobre ese tema en concreto no hemos hablado en detalle en las transcripciones, pero lo investigo y os preparo una infografía o un ejemplo en el Classroom mañana mismo, ¿vale? Recordad que lo verdaderamente importante es que trasteéis vosotros los ejercicios y os peguéis cabezazos con Make o Notion, que así es como se aprende de verdad.";
+        }
+
+        // Agregar globo de mensaje al historial
+        function appendChatMessage(sender, text, name) {
+            const chatHistory = document.getElementById('chat-history');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === "student") {
+                msgDiv.className = "flex gap-3 max-w-[85%] ml-auto justify-end";
+                msgDiv.innerHTML = `
+                    <div class="bg-indigo-600 p-3 rounded-2xl rounded-tr-none text-white text-xs">
+                        <p>${text}</p>
+                        <span class="text-[9px] text-indigo-200 mt-1 block">${name} • Hace un momento</span>
+                    </div>
+                `;
+            } else {
+                msgDiv.className = "flex gap-3 max-w-[85%]";
+                msgDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-slate-800 border border-indigo-500 overflow-hidden flex items-center justify-center shrink-0">
+                        <svg viewBox="0 0 100 100" class="w-8 h-8">
+                            <rect width="100" height="100" fill="#1e1b4b"/>
+                            <circle cx="50" cy="53" r="30" fill="#fbcfe8"/>
+                            <path d="M22,38 C22,25 30,18 50,18 C70,18 78,25 78,38 C84,38 85,30 78,25 C74,20 66,15 50,15 C34,15 26,20 22,25 C15,30 16,38 22,38 Z" fill="#94a3b8"/>
+                            <circle cx="28" cy="38" r="8" fill="#94a3b8"/>
+                            <circle cx="72" cy="38" r="8" fill="#94a3b8"/>
+                            <circle cx="50" cy="20" r="10" fill="#94a3b8"/>
+                            <rect x="26" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                            <rect x="56" y="42" width="18" height="14" rx="2" fill="none" stroke="#000" stroke-width="3"/>
+                            <line x1="44" y1="48" x2="56" y2="48" stroke="#000" stroke-width="3"/>
+                            <circle cx="35" cy="49" r="2.5" fill="#000"/>
+                            <circle cx="65" cy="49" r="2.5" fill="#000"/>
+                            <path d="M43,68 Q50,64 57,68" stroke="#000" stroke-width="2.5" fill="none"/>
+                            <path d="M30,82 L70,82 L75,100 L25,100 Z" fill="#15803d"/>
+                        </svg>
+                    </div>
+                    <div class="bg-indigo-950/40 border border-indigo-950/60 p-3 rounded-2xl rounded-tl-none">
+                        <p class="text-xs text-slate-200">${text}</p>
+                        <span class="text-[9px] text-slate-400 mt-1 block">${name} • Hace un momento</span>
+                    </div>
+                `;
+            }
+
+            chatHistory.appendChild(msgDiv);
+        }
+    </script>
+</body>
+</html>
