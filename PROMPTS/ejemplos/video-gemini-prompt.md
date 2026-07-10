@@ -104,7 +104,11 @@ Combinando los elementos de las listas anteriores de forma coherente:
 * **Resultado final listo para usar:**
 > Plano general de un automóvil deportivo moderno de color negro cromado realizando un derrape a gran velocidad en una curva cerrada en un entorno de una metrópolis cyberpunk futurista con rascacielos infinitos durante la noche, iluminado únicamente por carteles de neón vibrantes. Estilo cinematográfico de Hollywood, con un renderizado hiperdetallado, con texturas nítidas y reflejos realistas. Movimiento de cámara: toma de seguimiento rápida a ras de suelo.
 
+---
+
 [`ejemplos prompt videos`](video-gemini.md)
+
+[`Guión para videos`](video-guion.md)
 
 ```
 

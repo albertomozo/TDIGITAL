@@ -25,6 +25,7 @@ Este directorio contiene **plantillas, patrones y ejemplos** para ayudarte a for
 - `00-modelo.md` — Explicación paso a paso de los elementos clave de un prompt bien estructurado.
 - `01-rol.md` — Cómo definir un rol para el modelo (profesor, experto en marketing, soporte técnico, etc.).
 - `02-contexto.md` — Cómo incluir información de fondo (antecedentes, datos del usuario, historial) para mejorar la respuesta.
+- `ingenieria-prompts.md` — Análisis de cómo la ingeniería de prompts puede derivar en prompts más específicos y especializados.
 - `generales.md` — Colección de plantillas de prompts y clasificación por temáticas.
 - `ejemplos/` — Carpeta con ejemplos de prompts organizados por tipo de uso.
 

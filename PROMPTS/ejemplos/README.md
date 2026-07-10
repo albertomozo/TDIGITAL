@@ -13,6 +13,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Videos Guioón** - [`video-guion.md`](video-guion.md) - guia para realizar un video de varios clips.
 - **Transformación digital** – [`transformacion-digital.md`](transformacion-digital.md)
 - **Presentaciones** - [`presentaciones.md`](presentaciones.md)
+- **Correos electrónicos - Prompts para usar en el correo electrónico [`correos.md`](correos.md)
 - **Educacion** – [`educacion.md`](educacion.md)
 - **Acción pedagógica** – [`educacion2.md`](educacion2.md)
 - **Contabilidad** – [`conta.md`](conta.md)
@@ -22,6 +23,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Preguntas Trampa** – Intentando enganar a las IA [`preguntas-trampa.md`](preguntas-trampa.md)
 - **Pensamiento Critico** – Intentando enganar a las IA [`pensamiento-critico.md`](pensamiento-critico.md)
 - **Plan de transformación digital** - Prompts para generar el PTD [`Plan Transformación Digital`](guia_PTD_con_prompts_IA.md)
+- **PROMPTS para generar PROMPT** - Al final muchas veces PROMPTEAMOS para crear PROMPT personalizados.
 
 ![imagen propmts](Prompts.png)
 
