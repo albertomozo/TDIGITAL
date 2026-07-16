@@ -244,3 +244,10 @@ MIT — Siéntete libre de usar, modificar y distribuir este contenido.
 - [ ] Base de datos de casos de éxito.
 - [ ] Enlazar otras herramientas.
 - [ ] Prototipos alumnos.
+
+## 📕 Cursos asociados
+
+- **IFCT0049** : [CHATGPT E INTELIGENCIA ARTIFICIAL](./IFCT0049)
+
+- **AGENTES DEL CAMBIO**
+[IA APLICADA A LA EMPRESA](https://docs.google.com/presentation/d/1bOklW1vV_n4i12e_FIWYHsn5fF6-nMjMqEaDU326c3w/edit?usp=sharing)

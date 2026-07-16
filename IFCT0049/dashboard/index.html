@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadro de Mando IFCT0049 - Inteligencia Artificial</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons (SVG Helpers alternative) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col lg:flex-row antialiased">
+
+    <!-- SIDEBAR -->
+    <aside class="w-full lg:w-72 bg-slate-900 border-b lg:border-b-0 lg:border-r border-slate-800 flex flex-col justify-between shrink-0">
+        <div>
+            <!-- Header Logo -->
+            <div class="p-6 border-b border-slate-800 flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-indigo-500 to-purple-500 p-2.5 rounded-xl shadow-lg shadow-indigo-500/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-tight text-white">IFCT0049</h1>
+                    <span class="text-xs text-indigo-400 font-medium">ChatGPT e Inteligencia Artificial</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="p-4 space-y-1">
+                <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-lg shadow-indigo-600/10">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z"/></svg>
+                    Cuadro de Mando
+                </button>
+                
+                <button onclick="switchTab('temario')" id="btn-temario" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    Análisis de Contenidos
+                </button>
+
+                <button onclick="switchTab('ejercicios')" id="btn-ejercicios" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                    Ejercicios Prácticos
+                </button>
+
+                <button onclick="switchTab('generador')" id="btn-generador" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    Generador de Prompts
+                </button>
+
+                <button onclick="switchTab('examen')" id="btn-examen" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-400 hover:text-slate-100 hover:bg-slate-800/60">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    Preparador de Examen
+                </button>
+            </nav>
+        </div>
+
+        <!-- Instructor Info Footer -->
+        <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+            <div class="flex items-center gap-3">
+                <div class="relative shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-slate-800 border-2 border-indigo-500 overflow-hidden flex items-center justify-center text-sm font-bold text-slate-200">
+                        AM
+                    </div>
+                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400">Docente Principal</p>
+                    <p class="text-sm font-semibold text-white leading-tight">Alberto Mozo A.</p>
+                </div>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-2 tracking-wide truncate">albertomozodocente@gmail.com</p>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        
+        <!-- TOP NAV HEADER -->
+        <header class="h-16 border-b border-slate-800 bg-slate-900/60 backdrop-blur-md px-6 flex items-center justify-between sticky top-0 z-30">
+            <div class="flex items-center gap-2">
+                <span class="text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded font-mono">DURACIÓN: 60 HORAS</span>
+                <span class="text-xs bg-slate-800 text-slate-400 px-2 py-0.5 rounded font-mono">CÓDIGO: IFCT0049</span>
+            </div>
+            <div class="flex items-center gap-4 text-sm text-slate-400">
+                <span>Ecosistema IA 2026</span>
+                <div class="w-px h-4 bg-slate-800"></div>
+                <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Sincronizado
+                </span>
+            </div>
+        </header>
+
+        <!-- PAGE CONTAINER -->
+        <div class="p-6 max-w-7xl w-full mx-auto space-y-6">
+
+            <!-- PAGE 1: CUADRO DE MANDO -->
+            <section id="page-dashboard" class="tab-page space-y-6">
+                <!-- Welcome Banner -->
+                <div class="relative bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 p-8 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+                    <div class="absolute right-0 top-0 translate-x-20 -translate-y-20 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="text-xs text-indigo-400 font-semibold tracking-wider uppercase">Portal del Alumno</span>
+                        <h2 class="text-3xl font-bold tracking-tight text-white mt-1">Tu Copiloto Digital en Inteligencia Artificial</h2>
+                        <p class="text-slate-300 mt-2 text-sm leading-relaxed">
+                            Aprende a dominar modelos de lenguaje, flujos de prompting avanzados y automatizaciones sin código (Zapier/Make). El 80% del trabajo pesado lo hace la IA, tú eres el editor del 20% crítico y estratégico.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Metrics Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 flex items-center justify-between shadow-sm">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-400 font-medium">Ejercicios Completados</span>
+                            <p class="text-3xl font-extrabold text-white" id="stat-exercises">0 / 12</p>
+                        </div>
+                        <div class="bg-indigo-500/10 p-3 rounded-xl border border-indigo-500/20 text-indigo-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 flex items-center justify-between shadow-sm">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-400 font-medium">Porcentaje de Avance</span>
+                            <p class="text-3xl font-extrabold text-white" id="stat-progress">0%</p>
+                        </div>
+                        <div class="bg-emerald-500/10 p-3 rounded-xl border border-emerald-500/20 text-emerald-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 flex items-center justify-between shadow-sm">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-400 font-medium">Prompts Generados</span>
+                            <p class="text-3xl font-extrabold text-white" id="stat-prompts">0</p>
+                        </div>
+                        <div class="bg-amber-500/10 p-3 rounded-xl border border-amber-500/20 text-amber-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 flex items-center justify-between shadow-sm">
+                        <div class="space-y-1">
+                            <span class="text-xs text-slate-400 font-medium">Nivel de Examen</span>
+                            <p class="text-3xl font-extrabold text-white" id="stat-exam">Pendiente</p>
+                        </div>
+                        <div class="bg-purple-500/10 p-3 rounded-xl border border-purple-500/20 text-purple-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Grid: Interactive Canvas & Exam Outline -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Progress Chart Card -->
+                    <div class="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 class="font-bold text-white text-base">Evolución de Competencias 2026</h3>
+                                <p class="text-slate-400 text-xs mt-0.5">Nivel de desempeño en base a las actividades completadas</p>
+                            </div>
+                            <span class="text-xs text-slate-400 bg-slate-800 px-2.5 py-1 rounded-lg">Canvas Interactivo</span>
+                        </div>
+                        <div class="relative w-full h-64 bg-slate-950/40 rounded-xl overflow-hidden border border-slate-800/60 p-2 flex items-center justify-center">
+                            <canvas id="progressChart" class="w-full h-full"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Hard & Soft Skills / Core Requirements -->
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between shadow-sm">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-bold text-white text-base">Estrategias y Pilares</h3>
+                                <p class="text-slate-400 text-xs mt-0.5">Mindset y bases teóricas de la IA</p>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+                                    <div class="text-indigo-400 mt-0.5 font-mono text-sm">🟢</div>
+                                    <div>
+                                        <p class="text-xs text-slate-300 font-semibold">Semáforo Verde: Uso Creativo</p>
+                                        <p class="text-[11px] text-slate-400 mt-0.5">Poemas, ideas de marketing, copys. Bajo riesgo.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+                                    <div class="text-amber-400 mt-0.5 font-mono text-sm">🟡</div>
+                                    <div>
+                                        <p class="text-xs text-slate-300 font-semibold">Semáforo Amarillo: Informativo</p>
+                                        <p class="text-[11px] text-slate-400 mt-0.5">Conceptos científicos/históricos. Requiere lectura crítica.</p>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-950/50 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+                                    <div class="text-rose-400 mt-0.5 font-mono text-sm">🔴</div>
+                                    <div>
+                                        <p class="text-xs text-slate-300 font-semibold">Semáforo Rojo: Uso Crítico</p>
+                                        <p class="text-[11px] text-slate-400 mt-0.5">Asesoría legal, medicina, finanzas, código. Verificación externa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800/80 mt-4">
+                            <p class="text-slate-500 text-[10px] leading-tight text-center">
+                                "La IA es una asistente brillante, pero una jefa terrible."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 2: TEMARIO Y CONTENIDOS (ANÁLISIS INICIO) -->
+            <section id="page-temario" class="tab-page space-y-6 hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Análisis de la Estructura del Curso</h2>
+                        <p class="text-slate-400 text-sm mt-0.5">Desglose de contenidos y mapa conceptual de la especialidad formativa.</p>
+                    </div>
+                </div>
+
+                <!-- Module Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <!-- Módulo 1 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded">MÓDULO 1</span>
+                            <span class="text-xs text-slate-500">10 Horas</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">El Arte del Prompting (La Llave)</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            Aprender el lenguaje de comunicación con LLMs. Evitar instrucciones vagas aplicando la fórmula máestra <strong>R-C-T-F</strong> (Rol, Contexto, Tarea, Formato), y técnicas como Few-Shot o Chain of Thought.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">R-C-T-F</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Few-Shot</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 2 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded">MÓDULO 2</span>
+                            <span class="text-xs text-slate-500">30 Horas</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">IA Generativa (Creación de Activos)</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            Comprensión técnica y producción de activos multimodales. Redacción avanzada, generación y refinamiento de imágenes (DALL-E 3, Midjourney, Firefly) y edición final dirigida por el usuario.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">DALL-E 3</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Fotorrealismo</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 3 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-2 py-0.5 rounded">MÓDULO 3</span>
+                            <span class="text-xs text-slate-500">20 Horas</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Agentes & Automatización</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            De responder preguntas a ejecutar tareas. Integración con flujos y triggers externos usando herramientas automatizadas como Zapier o Make. Integración con Google Forms, Sheets y Slack.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Zapier/Make</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Triggers & Actions</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 4 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded">MÓDULO LOCAL</span>
+                            <span class="text-xs text-emerald-400">Privacidad</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">IA Local (Soberanía de Datos)</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            Configuración y despliegue de modelos locales (Llama 3, Phi-3, LM Studio) en ordenadores locales para gestionar datos corporativos confidenciales sin depender de conexión a internet ni de servidores de terceros.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">LM Studio</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Llama 3 Offline</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 5 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2 py-0.5 rounded">MÓDULO ÉTICA</span>
+                            <span class="text-xs text-rose-400">Verificación</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Ética, Sesgos y Alucinaciones</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            Análisis crítico. Entender las alucinaciones matemáticas y conceptuales en LLMs, la propiedad intelectual, los sesgos y aplicar herramientas de auditoría sobre el resultado final del modelo.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Alucinaciones</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Sesgos</span>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 6 -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] font-mono bg-purple-500/10 text-purple-400 border border-purple-500/20 px-2 py-0.5 rounded">MÓDULO VÍDEO</span>
+                            <span class="text-xs text-purple-400">CapCut & IA</span>
+                        </div>
+                        <h3 class="font-bold text-white text-base">Vídeo Generativo y Spot Redes</h3>
+                        <p class="text-slate-400 text-xs mt-1.5 leading-relaxed">
+                            Proceso completo desde la ficha del concepto (gancho, dolor, producto, beneficio y acción) hasta la animación mediante herramientas de IA de vídeo y su montaje estructurado en CapCut.
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center gap-2">
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Spots 9:16</span>
+                            <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Canva & Vidu</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Ecosistema de Modelos (de M02_IA_Generativa / IA_GUIA) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h3 class="font-bold text-white text-base mb-4">Ecosistema Global de Modelos (Líderes de Mercado)</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 bg-slate-950/60 border border-slate-800 rounded-xl">
+                            <p class="text-xs text-indigo-400 font-bold uppercase tracking-wide">ChatGPT</p>
+                            <p class="text-sm font-semibold text-white mt-1">El Todo Terreno</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Líder en multimodalidad (texto, voz real y visión). Perfecto para flujos cotidianos.</p>
+                        </div>
+                        <div class="p-4 bg-slate-950/60 border border-slate-800 rounded-xl">
+                            <p class="text-xs text-purple-400 font-bold uppercase tracking-wide">Claude (Anthropic)</p>
+                            <p class="text-sm font-semibold text-white mt-1">El Razonador Humano</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Perfecto para analistas, programadores y análisis de documentos extremadamente largos.</p>
+                        </div>
+                        <div class="p-4 bg-slate-950/60 border border-slate-800 rounded-xl">
+                            <p class="text-xs text-emerald-400 font-bold uppercase tracking-wide">Gemini (Google)</p>
+                            <p class="text-sm font-semibold text-white mt-1">Integración Nube</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Integrado de forma nativa en Google Workspace (Docs, Drive, Gmail) para investigación web.</p>
+                        </div>
+                        <div class="p-4 bg-slate-950/60 border border-slate-800 rounded-xl">
+                            <p class="text-xs text-amber-400 font-bold uppercase tracking-wide">Kimi (Moonshot)</p>
+                            <p class="text-sm font-semibold text-white mt-1">El Rey del Contexto</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Soporta una ventana masiva de tokens (hasta 2 millones) para procesar libros enteros.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 3: EJERCICIOS PRÁCTICOS -->
+            <section id="page-ejercicios" class="tab-page space-y-6 hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Ejercicios Oficiales de la Especialidad</h2>
+                        <p class="text-slate-400 text-sm mt-0.5">Marca los ejercicios conforme los completes. El avance impactará directamente las métricas de tu cuadro de mando.</p>
+                    </div>
+                    <button onclick="marcarTodos()" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs px-3.5 py-2 rounded-xl font-semibold transition-all">
+                        Marcar todos como listos
+                    </button>
+                </div>
+
+                <!-- Exercise List -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Column 1: Checkbox list (Left) -->
+                    <div class="lg:col-span-1 space-y-2">
+                        <div id="exercise-list-container" class="space-y-2 overflow-y-auto max-h-[600px] pr-2">
+                            <!-- Dynamically loaded by script -->
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Detailed Guide Card (Right) -->
+                    <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md flex flex-col justify-between" id="guide-detail-card">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-indigo-400 font-mono tracking-wide" id="guide-num">EJERCICIO 01</span>
+                                <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-mono uppercase" id="guide-tool">Drive</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-white" id="guide-title">Cargando ejercicio...</h3>
+                            <div class="w-full h-px bg-slate-800"></div>
+                            
+                            <!-- Detailed step instruction -->
+                            <div class="space-y-3">
+                                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Instrucción Práctica:</h4>
+                                <p class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-slate-800" id="guide-instruction">
+                                    Cargando...
+                                </p>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Pasos Recomendados para el Alumno:</h4>
+                                <ul class="list-disc pl-5 text-xs text-slate-400 space-y-1.5" id="guide-steps">
+                                    <!-- Dynamic list -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Checkbox state inside details -->
+                        <div class="pt-6 border-t border-slate-800 mt-6 flex items-center justify-between">
+                            <span class="text-xs text-slate-400">¿Completaste esta actividad de forma satisfactoria?</span>
+                            <button id="guide-toggle-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2 rounded-xl font-bold transition-all">
+                                Marcar Completado
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: GENERADOR DE PROMPTS -->
+            <section id="page-generador" class="tab-page space-y-6 hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Generador Inteligente de Prompts</h2>
+                            <p class="text-slate-400 text-sm mt-0.5">Aplica los marcos estructurales oficiales de la especialidad para obtener respuestas perfectas.</p>
+                        </div>
+                        <!-- Inner prompt switcher tabs -->
+                        <div class="bg-slate-950 border border-slate-800 p-1 rounded-xl flex gap-1">
+                            <button onclick="switchPromptType('rctf')" id="p-tab-rctf" class="prompt-tab-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-indigo-600 text-white shadow">
+                                Genérico (R-C-T-F)
+                            </button>
+                            <button onclick="switchPromptType('imagen')" id="p-tab-imagen" class="prompt-tab-btn text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200">
+                                Imágenes IA
+                            </button>
+                            <button onclick="switchPromptType('video')" id="p-tab-video" class="prompt-tab-btn text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200">
+                                Video Spot 9:16
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- PROMPT EDITOR GRID -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        
+                        <!-- Inputs Column -->
+                        <div class="space-y-4">
+                            
+                            <!-- RCTF PANEL -->
+                            <div id="panel-prompt-rctf" class="prompt-panel space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">R - Rol (¿Quién debe ser la IA?)</label>
+                                    <input type="text" id="rctf-rol" oninput="buildPrompt()" placeholder="Ej. experto asesor fiscal en España o profesor de primaria" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">C - Contexto (Situación de fondo)</label>
+                                    <textarea id="rctf-contexto" oninput="buildPrompt()" rows="2" placeholder="Ej. Estoy preparando un informe tributario para un cliente autónomo que vende servicios de software internacional." class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all resize-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">T - Tarea (Acción específica y restrictiva)</label>
+                                    <textarea id="rctf-tarea" oninput="buildPrompt()" rows="2" placeholder="Ej. Explica de forma sencilla cuáles son sus obligaciones de liquidación trimestral de IVA y qué gastos puede deducirse." class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all resize-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">F - Formato de Salida (Estructura de la respuesta)</label>
+                                    <select id="rctf-formato" onchange="buildPrompt()" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                        <option value="Lista de viñetas claras">Lista de viñetas claras (Ideal para escaneo rápido)</option>
+                                        <option value="Tabla comparativa de dos columnas">Tabla comparativa de dos columnas (Precio, Características, etc.)</option>
+                                        <option value="Texto libre o email formal">Texto libre o estructura de email formal</option>
+                                        <option value="Objeto de base de datos tipo JSON">Objeto de base de datos formateado en JSON</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- IMAGEN PANEL -->
+                            <div id="panel-prompt-imagen" class="prompt-panel space-y-4 hidden">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Sujeto Principal (¿Qué sale en la escena?)</label>
+                                    <input type="text" id="img-sujeto" oninput="buildPrompt()" placeholder="Ej. Un bote de crema orgánica de aguacate sobre piedra húmeda" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Entorno y Fondo</label>
+                                        <input type="text" id="img-entorno" oninput="buildPrompt()" placeholder="Ej. En un spa minimalista con plantas tropicales desenfocadas" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Acción / Composición</label>
+                                        <input type="text" id="img-accion" oninput="buildPrompt()" placeholder="Ej. Con gotas de agua fresca deslizándose sobre el envase" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Estilo Artístico</label>
+                                        <select id="img-estilo" onchange="buildPrompt()" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                            <option value="Fotografía publicitaria de estudio">Fotografía publicitaria de estudio</option>
+                                            <option value="Fotorrealismo nítido estilo editorial de revista">Fotorrealismo nítido de revista</option>
+                                            <option value="Modelado renderizado e ilustración 3D minimalista">Ilustración 3D minimalista</option>
+                                            <option value="Estilo Cyberpunk futurista con luces de neón">Cyberpunk futurista</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Iluminación / Atmósfera</label>
+                                        <select id="img-luz" onchange="buildPrompt()" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                            <option value="Luz natural suave de mañana">Luz natural suave</option>
+                                            <option value="Iluminación dramática de estudio con fondo oscuro">Luz dramática de estudio</option>
+                                            <option value="Cálida de atardecer con sombras alargadas">Cálida de atardecer</option>
+                                            <option value="Composición de neón azul y violeta de fondo">Iluminación neón fluorescente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- VIDEO PANEL -->
+                            <div id="panel-prompt-video" class="prompt-panel space-y-4 hidden">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Foco de Producto consistentemente realista</label>
+                                    <input type="text" id="vid-producto" oninput="buildPrompt()" placeholder="Ej. Un grano de café cayendo directamente en una taza caliente de porcelana" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Movimiento de Cámara</label>
+                                        <select id="vid-camara" onchange="buildPrompt()" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                            <option value="camera movement: slow push-in (zoom lento)">Slow push-in (Focaliza producto)</option>
+                                            <option value="camera movement: slow pan side to side (desplazamiento suave)">Slow pan (Cámara lateral suave)</option>
+                                            <option value="camera movement: subtle dolly zoom (movimiento dramático)">Subtle dolly zoom (Comercial)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wide mb-1">Efecto / Movimiento Ambiental</label>
+                                        <select id="vid-ambiente" onchange="buildPrompt()" class="w-full bg-slate-950 border border-slate-800 text-sm text-slate-200 px-4 py-2.5 rounded-xl focus:border-indigo-500 focus:outline-none transition-all">
+                                            <option value="motion: subtle vapor rising up (vapor ascendente)">Vapor y calor ascendente sutil</option>
+                                            <option value="motion: gentle rain drops or reflections (reflejos o agua)">Gotas de agua cayendo suavemente</option>
+                                            <option value="motion: soft wind blowing leaves or elements (viento suave)">Viento suave en elementos secundarios</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Output Column -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between h-full min-h-[300px]">
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Prompt de Salida Generado:</span>
+                                    <span class="text-[10px] bg-slate-800 text-indigo-400 px-2.5 py-0.5 rounded-full font-mono" id="output-badge">R-C-T-F</span>
+                                </div>
+                                <div class="w-full h-px bg-slate-800"></div>
+                                <p id="prompt-output-text" class="text-sm text-indigo-100 leading-relaxed font-mono whitespace-pre-wrap select-all bg-indigo-950/20 p-4 rounded-xl border border-indigo-900/30">
+                                    Actúa como...
+                                </p>
+                            </div>
+
+                            <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+                                <p class="text-[11px] text-slate-500 leading-tight">Haz clic para copiar el prompt y pegarlo directamente en ChatGPT o tu motor multimodal.</p>
+                                <button onclick="copiarPrompt()" class="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-xs px-4 py-2.5 rounded-xl font-bold transition-all shadow-lg shadow-indigo-600/10 shrink-0 flex items-center gap-1.5">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                                    Copiar Prompt
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 5: PREPARADOR DE EXAMEN (IMAGEN / MANUAL) -->
+            <section id="page-examen" class="tab-page space-y-6 hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="bg-indigo-500/10 text-indigo-400 p-2.5 rounded-xl border border-indigo-500/20">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Preparador Teórico del Examen IFCT0049</h2>
+                            <p class="text-slate-400 text-sm mt-0.5">Test interactivo elaborado a partir del manual formativo de ChatGPT e Inteligencia Artificial.</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Quiz Area -->
+                    <div class="space-y-6">
+                        <div class="w-full bg-slate-950 p-6 rounded-2xl border border-slate-800" id="quiz-question-box">
+                            <span class="text-xs text-indigo-400 font-bold uppercase tracking-wider" id="quiz-progress-text">Pregunta 1 de 5</span>
+                            <h3 class="text-lg font-bold text-white mt-1 leading-snug" id="quiz-question-title">¿Cómo se define teóricamente la Inteligencia Artificial (IA)?</h3>
+                            
+                            <div class="mt-4 space-y-2" id="quiz-options-container">
+                                <!-- Loaded dynamically -->
+                            </div>
+
+                            <!-- Next button -->
+                            <div class="mt-6 flex items-center justify-between border-t border-slate-800/80 pt-4">
+                                <p class="text-xs text-slate-400 font-medium" id="quiz-feedback-text">Selecciona una respuesta para continuar.</p>
+                                <button onclick="nextQuizQuestion()" id="quiz-next-btn" disabled class="bg-slate-800 text-slate-400 cursor-not-allowed text-xs px-4 py-2.5 rounded-xl font-bold transition-all">
+                                    Siguiente Pregunta
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quiz result summary (Hidden initially) -->
+                        <div id="quiz-summary-box" class="bg-indigo-950/20 border border-indigo-900/30 p-6 rounded-2xl hidden text-center space-y-4">
+                            <h3 class="text-2xl font-black text-white">¡Test de Autoevaluación Finalizado!</h3>
+                            <p class="text-sm text-indigo-200">Has respondido correctamente <span class="font-extrabold text-white" id="quiz-score-num">0</span> de <span class="font-extrabold text-white">5</span> preguntas.</p>
+                            <div class="w-36 h-2 bg-slate-800 rounded-full mx-auto overflow-hidden">
+                                <div id="quiz-bar" class="h-full bg-indigo-500 w-0 transition-all duration-500"></div>
+                            </div>
+                            <button onclick="restartQuiz()" class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-5 py-2.5 rounded-xl font-bold transition-all inline-block shadow shadow-indigo-600/20">
+                                Volver a Intentar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 border border-indigo-500/30 px-5 py-3 rounded-2xl shadow-xl shadow-slate-950/60 flex items-center gap-3">
+            <span class="text-indigo-400 shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <p class="text-xs text-slate-200 font-semibold" id="toast-message">Texto copiado con éxito</p>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD & EXERCISE LOGIC SCRIPT -->
+    <script>
+        // Array of course exercises based on uploaded EJERCICIOS file
+        const EXERCISES_DATA = [
+            {
+                id: 1,
+                num: "01",
+                title: "DRIVE - Compartir y Roles",
+                tool: "Google Drive",
+                instruction: "Aprende a gestionar la seguridad de tus archivos en Google Drive: crea diversos tipos de documentos (Docs, Sheets, Slides) y aplica correctamente los niveles de permisos (editor, lector, comentarista) para entornos colaborativos.",
+                steps: [
+                    "Crear una carpeta en tu unidad llamada 'agentes de cambio'.",
+                    "Dentro de ella, crea otra carpeta compartida llamada 'trabajos'.",
+                    "Asigna permisos específicos a tus compañeros como 'comentarista' o 'lector'.",
+                    "Verifica desde la ventana 'Compartir' que el enlace general esté restringido o sea público adecuadamente."
+                ]
+            },
+            {
+                id: 2,
+                num: "02",
+                title: "Calendario automatizado",
+                tool: "Calendar & IA",
+                instruction: "Automatiza la creación de eventos: extrae fechas y datos de un documento PDF utilizando IA (por ejemplo ChatGPT o Claude) y trasládalos a Google Calendar para agendar el calendario del curso mediante un formato intermedio CSV.",
+                steps: [
+                    "Descargar el PDF de fechas de la formación.",
+                    "Sube el archivo PDF a la IA y pídele que extraiga un fichero en formato estructurado (CSV o iCalendar).",
+                    "Importa el archivo CSV generado directamente a Google Calendar para agendar el calendario del curso."
+                ]
+            },
+            {
+                id: 3,
+                num: "03",
+                title: "Contactos centralizados",
+                tool: "Forms & Sheets",
+                instruction: "Centraliza la gestión de contactos: crea un formulario para capturar datos de los alumnos, almacena la información estructurada en Google Sheets y genera un archivo CSV listo para importar en Google Contactos.",
+                steps: [
+                    "Crea un Google Form con los campos obligatorios: Nombre, Email, Teléfono.",
+                    "Vincula las respuestas automáticas a una hoja de cálculo Google Sheets.",
+                    "Exporta el rango de correos a formato CSV delimitado por comas.",
+                    "Importa el fichero en Google Contactos creando una etiqueta única para el curso."
+                ]
+            },
+            {
+                id: 4,
+                num: "04",
+                title: "Estudio Inteligente",
+                tool: "NotebookLM",
+                instruction: "Domina NotebookLM: crea un cuaderno de estudio utilizando fuentes contrastadas (videos, PDFs, enlaces) para realizar resúmenes automáticos, extracción de datos clave y generación de notas de estudio.",
+                steps: [
+                    "Abre NotebookLM y crea un cuaderno nuevo.",
+                    "Sube el video explicativo del curso y un par de fuentes contrastadas en formato PDF.",
+                    "Genera de forma asistida notas, resúmenes estructurados y cuestionarios para preparar la autoevaluación."
+                ]
+            },
+            {
+                id: 5,
+                num: "05",
+                title: "Comparativa de IA",
+                tool: "Multimodelo",
+                instruction: "Análisis comparativo de modelos de Inteligencia Artificial: introduce un mismo prompt estructurado en diferentes herramientas de IA generativa (ChatGPT, Claude, Gemini, Kimi) y evalúa las diferencias en la calidad, tono y precisión de los resultados.",
+                steps: [
+                    "Diseña un prompt robusto usando el generador de prompts integrado en este cuadro de mando.",
+                    "Introduce el mismo prompt en al menos tres modelos (ej. ChatGPT, Claude y Gemini).",
+                    "Construye una tabla de auditoría evaluando la precisión, las alucinaciones y la naturalidad del texto de cada IA."
+                ]
+            },
+            {
+                id: 6,
+                num: "06",
+                title: "Presentaciones inteligentes",
+                tool: "Gamma & Slides",
+                instruction: "Creación de presentaciones inteligentes: utiliza herramientas como Gamma o IA integrada en presentaciones para generar estructuras profesionales y exportarlas a formato PDF.",
+                steps: [
+                    "Regístrate en Gamma.app o utiliza el generador integrado de ChatGPT para esquematizar tus diapositivas.",
+                    "Escribe una idea clave para que la IA estructure el contenido, redacte los textos y asigne imágenes coherentes.",
+                    "Presenta directamente desde la nube o exporta el proyecto final en formato PDF."
+                ]
+            },
+            {
+                id: 7,
+                num: "07",
+                title: "Infografías y Diagramas",
+                tool: "Napkin.ai",
+                instruction: "Visualización de datos con Napkin.ai: transforma conceptos complejos e ideas en infografías editables y diagramas de flujo profesionales a partir de texto o esquemas planos.",
+                steps: [
+                    "Abre Napkin.ai y pega un texto largo del manual formativo.",
+                    "Haz clic en los iconos que genera la IA al lado de cada párrafo para visualizar el diagrama correspondiente.",
+                    "Personaliza los colores, formas y textos de la infografía y expórtala en formato PNG o SVG."
+                ]
+            },
+            {
+                id: 8,
+                num: "08",
+                title: "Formularios con bifurcación",
+                tool: "Google Forms",
+                instruction: "Formularios con lógica condicional: diseña un formulario que utilice secciones y bifurcaciones inteligentes para dirigir al usuario a preguntas específicas basadas en sus respuestas previas.",
+                steps: [
+                    "Estructura un cuestionario de evaluación inicial del curso.",
+                    "Crea secciones diferenciadas en Google Forms.",
+                    "Configura la lógica condicional: si el alumno responde 'A', redirige a la Sección 2; si responde 'B', redirige a la Sección 3."
+                ]
+            },
+            {
+                id: 9,
+                num: "09",
+                title: "Automatización simple",
+                tool: "Zapier",
+                instruction: "Automatización de flujos de trabajo (Zapier): conecta Google Forms con Google Sheets y Slack/Gmail. Configura disparadores (Triggers) y acciones para notificar automáticamente cuando se recibe una nueva respuesta.",
+                steps: [
+                    "Regístrate en Zapier.com y conecta tus cuentas.",
+                    "Configura el Trigger: 'New spreadsheet row in Google Sheets'.",
+                    "Configura la Action: 'Send direct message or email' con los campos dinámicos mapeados del formulario."
+                ]
+            },
+            {
+                id: 10,
+                num: "10",
+                title: "Imágenes con IA",
+                tool: "DALL-E 3",
+                instruction: "Generación de activos visuales: domina el prompting para crear imágenes con IA. Practica la definición detallada de sujeto, estilo, entorno e iluminación para obtener resultados fotorrealistas óptimos.",
+                steps: [
+                    "Abre ChatGPT DALL-E 3 o Adobe Firefly.",
+                    "Usa la fórmula de prompting visual: Sujeto + Composición + Entorno + Iluminación + Estilo.",
+                    "Refina el resultado de forma iterativa añadiendo o eliminando parámetros hasta obtener la imagen limpia vertical (9:16) ideal."
+                ]
+            },
+            {
+                id: 11,
+                num: "11",
+                title: "Videos con IA",
+                tool: "Vidu & CapCut",
+                instruction: "Producción de video asistida por IA: experimenta con herramientas generativas (Vidu, Pika) para la creación de clips y monta un spot vertical publicitario de 20-30 segundos de formato 9:16 en CapCut.",
+                steps: [
+                    "Diseña un guion de spot de 5 planos (Gancho, Problema, Solución, Beneficio, Llamada a la acción).",
+                    "Genera las imágenes base limpias y animelas sutilmente mediante Vidu (movimiento lento de cámara).",
+                    "Monta los clips en CapCut aplicando voz en off generativa de ElevenLabs y música de fondo."
+                ]
+            },
+            {
+                id: 12,
+                num: "12",
+                title: "Automatizaciones Make",
+                tool: "Make",
+                instruction: "Automatización avanzada con Make: diseña un escenario que integre un formulario de reseñas en Google Sheets con una IA (Gemini/ChatGPT para análisis de sentimiento) y ejecute una acción automática de respuesta.",
+                steps: [
+                    "Configura un Webhook o disparador sobre tu Google Sheets de reseñas de clientes.",
+                    "Crea un módulo de OpenAI o Gemini en Make con un prompt que clasifique el sentimiento y redacte una respuesta personalizada.",
+                    "Envía la respuesta automática filtrada a un canal corporativo de Slack o correo electrónico de Gmail."
+                ]
+            }
+        ];
+
+        // Quiz Question data based on official IFCT0049 Manual
+        const QUIZ_DATA = [
+            {
+                id: 1,
+                question: "¿Cuál es la fórmula maestra para estructurar un prompt completo según el Módulo 1?",
+                options: [
+                    { text: "R-C-T-F (Rol, Contexto, Tarea, Formato)", isCorrect: true },
+                    { text: "R-I-S-E (Rol, Entrada, Pasos, Expectativa)", isCorrect: false },
+                    { text: "P-A-S (Problema, Agitación, Solución)", isCorrect: false },
+                    { text: "A-I-D-A (Atención, Interés, Deseo, Acción)", isCorrect: false }
+                ],
+                explanation: "La fórmula maestra R-C-T-F (Rol, Contexto, Tarea, Formato) es la base estructurada para transformar prompts vagos en respuestas de nivel profesional."
+            },
+            {
+                id: 2,
+                question: "En el Módulo 5 (Ética y Verificación), ¿qué representa el Semáforo de Verificación Rojo?",
+                options: [
+                    { text: "Uso Creativo de la IA (poemas, copys, lluvia de ideas).", isCorrect: false },
+                    { text: "Uso Crítico de la IA (datos médicos, asesoría legal o fiscal, noticias o cálculos complejos). Requiere verificación externa obligatoria.", isCorrect: true },
+                    { text: "Uso Informativo (explicaciones de conceptos científicos o históricos generales).", isCorrect: false },
+                    { text: "Detección automática de alucinaciones en un local host offline.", isCorrect: false }
+                ],
+                explanation: "El color Rojo del semáforo exige verificación humana estricta y obligatoria, ya que se trata de datos sensibles (médicos, fiscales, legales, etc.) propensos a sufrir alucinaciones de la IA."
+            },
+            {
+                id: 3,
+                question: "¿Cómo funciona un Modelo de Lenguaje de Gran Escala (LLM) como ChatGPT?",
+                options: [
+                    { text: "No piensa, calcula probabilísticamente qué palabra debería ir después de otra basándose en el aprendizaje previo.", isCorrect: true },
+                    { text: "Es un robot con consciencia humana que analiza la semántica a nivel neuronal.", isCorrect: false },
+                    { text: "Es un buscador estático de enlaces similares a Google.", isCorrect: false },
+                    { text: "Ejecuta código local mediante scripts sin necesidad de servidores.", isCorrect: false }
+                ],
+                explanation: "Un LLM es un potente motor de predicción que calcula de manera estadística el siguiente token o palabra basándose en un entrenamiento masivo de datos."
+            },
+            {
+                id: 4,
+                question: "¿Cuál es la principal ventaja de utilizar una IA Local (como LM Studio con Llama 3) según el Módulo 4?",
+                options: [
+                    { text: "Garantiza soberanía total del dato y privacidad, ya que se ejecuta offline sin enviar información a servidores de terceros.", isCorrect: true },
+                    { text: "Tiene acceso en tiempo real a todo el buscador de Google y Gmail.", isCorrect: false },
+                    { text: "Consume menos memoria RAM y procesador que el chat de ChatGPT gratuito.", isCorrect: false },
+                    { text: "Permite automatizar tareas masivas directamente con Make o Zapier cloud.", isCorrect: false }
+                ],
+                explanation: "Al ejecutarse directamente de manera local en el ordenador del usuario, la IA local garantiza confidencialidad total y nula fuga de datos de carácter sensible."
+            },
+            {
+                id: 5,
+                question: "Al realizar un Spot de Video Generativo en CapCut, ¿cuál es el orden correcto de los planos sugeridos?",
+                options: [
+                    { text: "Gancho -> Problema -> Solución/Producto -> Beneficio -> Llamada a la Acción (CTA)", isCorrect: true },
+                    { text: "Producto -> Beneficio -> CTA -> Gancho -> Problema", isCorrect: false },
+                    { text: "Problema -> Gancho -> Solución -> CTA -> Beneficio", isCorrect: false },
+                    { text: "Llamada a la Acción -> Producto -> Gancho -> Problema -> Solución", isCorrect: false }
+                ],
+                explanation: "El spot publicitario ideal para redes de 9:16 sigue el orden lógico de captura de atención rápido: Gancho (0-3s), Problema, Producto/Solución, Beneficio y Llamada a la acción."
+            }
+        ];
+
+        // Active State of completed exercises (Simulating in-memory reactive state)
+        let completedExercises = new Set();
+        let selectedExerciseId = 1;
+        let activePromptType = 'rctf';
+        let promptsGeneratedCount = 0;
+
+        // Quiz State
+        let currentQuizIndex = 0;
+        let selectedOptionIndex = null;
+        let isQuestionAnswered = false;
+        let quizScore = 0;
+
+        // On Load initialization
+        window.onload = function() {
+            loadExerciseList();
+            showExerciseDetails(selectedExerciseId);
+            buildPrompt();
+            loadQuizQuestion();
+            drawChart();
+            
+            // Listen for window resize to redraw canvas beautifully
+            window.addEventListener('resize', drawChart);
+        };
+
+        // Switch navigation tabs
+        function switchTab(targetTab) {
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+            document.getElementById(`page-${targetTab}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-lg', 'shadow-indigo-600/10');
+                btn.classList.add('text-slate-400', 'hover:text-slate-100', 'hover:bg-slate-800/60');
+            });
+
+            const activeBtn = document.getElementById(`btn-${targetTab}`);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-slate-100', 'hover:bg-slate-800/60');
+            activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-lg', 'shadow-indigo-600/10');
+
+            if (targetTab === 'dashboard') {
+                // Redraw canvas to avoid sizing bugs in hidden state
+                setTimeout(drawChart, 50);
+            }
+        }
+
+        // LOAD EXERCISES LIST
+        function loadExerciseList() {
+            const container = document.getElementById('exercise-list-container');
+            container.innerHTML = '';
+            
+            EXERCISES_DATA.forEach(ex => {
+                const isChecked = completedExercises.has(ex.id);
+                const isActive = ex.id === selectedExerciseId;
+                
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 ${isActive ? 'bg-indigo-950/40 border-indigo-500/50 shadow shadow-indigo-500/10' : 'bg-slate-900 border-slate-800 hover:border-slate-700'}`;
+                card.onclick = (e) => {
+                    // Prevent detail click on trigger checking
+                    if (e.target.tagName !== 'INPUT') {
+                        selectedExerciseId = ex.id;
+                        showExerciseDetails(ex.id);
+                        loadExerciseList();
+                    }
+                };
+
+                const flexLeft = document.createElement('div');
+                flexLeft.className = "flex items-center gap-2.5 min-w-0";
+
+                const checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = isChecked;
+                checkbox.className = "w-4 h-4 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 bg-slate-950 accent-indigo-500 cursor-pointer";
+                checkbox.onchange = (e) => {
+                    toggleExerciseComplete(ex.id, e.target.checked);
+                };
+
+                const textWrap = document.createElement('div');
+                textWrap.className = "truncate";
+
+                const title = document.createElement('p');
+                title.className = `text-xs font-bold leading-tight ${isActive ? 'text-indigo-200' : 'text-slate-200'}`;
+                title.innerText = `${ex.num}. ${ex.title}`;
+
+                const toolSpan = document.createElement('span');
+                toolSpan.className = "text-[9px] text-slate-500 font-medium tracking-wide";
+                toolSpan.innerText = ex.tool;
+
+                textWrap.appendChild(title);
+                textWrap.appendChild(toolSpan);
+                flexLeft.appendChild(checkbox);
+                flexLeft.appendChild(textWrap);
+
+                const chevron = document.createElement('span');
+                chevron.className = "text-slate-500";
+                chevron.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+
+                card.appendChild(flexLeft);
+                card.appendChild(chevron);
+                container.appendChild(card);
+            });
+        }
+
+        // SHOW INDIVIDUAL EXERCISE TECHNICAL GUIDE
+        function showExerciseDetails(id) {
+            const ex = EXERCISES_DATA.find(item => item.id === id);
+            if (!ex) return;
+
+            document.getElementById('guide-num').innerText = `EJERCICIO ${ex.num}`;
+            document.getElementById('guide-tool').innerText = ex.tool;
+            document.getElementById('guide-title').innerText = ex.title;
+            document.getElementById('guide-instruction').innerText = ex.instruction;
+
+            const stepsContainer = document.getElementById('guide-steps');
+            stepsContainer.innerHTML = '';
+            ex.steps.forEach(step => {
+                const li = document.createElement('li');
+                li.innerText = step;
+                stepsContainer.appendChild(li);
+            });
+
+            // Toggle button in details view
+            const isCompleted = completedExercises.has(ex.id);
+            const btn = document.getElementById('guide-toggle-btn');
+            if (isCompleted) {
+                btn.innerText = "Marcar Pendiente";
+                btn.className = "bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500/20 text-xs px-4 py-2 rounded-xl font-bold transition-all";
+            } else {
+                btn.innerText = "Marcar Completado";
+                btn.className = "bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2 rounded-xl font-bold transition-all";
+            }
+            btn.onclick = () => {
+                toggleExerciseComplete(ex.id, !isCompleted);
+            };
+        }
+
+        // TOGGLE EXERCISE COMPLETE STATUS
+        function toggleExerciseComplete(id, completed) {
+            if (completed) {
+                completedExercises.add(id);
+            } else {
+                completedExercises.delete(id);
+            }
+            
+            // Re-render UI list and details cards
+            loadExerciseList();
+            showExerciseDetails(selectedExerciseId);
+            
+            // Update stats
+            updateProgressStats();
+            
+            // Redraw beautiful chart
+            drawChart();
+        }
+
+        // STATS COMPUTATION & PROGRESS UPDATES
+        function updateProgressStats() {
+            const count = completedExercises.size;
+            document.getElementById('stat-exercises').innerText = `${count} / 12`;
+            
+            const percentage = Math.round((count / 12) * 100);
+            document.getElementById('stat-progress').innerText = `${percentage}%`;
+
+            // Adjust exam readiness
+            const examBadge = document.getElementById('stat-exam');
+            if (percentage === 100) {
+                examBadge.innerText = "¡Excelente!";
+                examBadge.className = "text-3xl font-extrabold text-emerald-400";
+            } else if (percentage >= 70) {
+                examBadge.innerText = "Preparado";
+                examBadge.className = "text-3xl font-extrabold text-indigo-400";
+            } else if (percentage >= 30) {
+                examBadge.innerText = "En Proceso";
+                examBadge.className = "text-3xl font-extrabold text-amber-400";
+            } else {
+                examBadge.innerText = "Pendiente";
+                examBadge.className = "text-3xl font-extrabold text-slate-500";
+            }
+        }
+
+        // MARK ALL EXERCISES AS COMPLETED
+        function marcarTodos() {
+            EXERCISES_DATA.forEach(ex => completedExercises.add(ex.id));
+            loadExerciseList();
+            showExerciseDetails(selectedExerciseId);
+            updateProgressStats();
+            drawChart();
+            showToast("Todos los ejercicios marcados como completados");
+        }
+
+        // SWITCH PROMPT TYPES
+        function switchPromptType(type) {
+            activePromptType = type;
+            document.querySelectorAll('.prompt-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow');
+                btn.classList.add('text-slate-400', 'hover:text-slate-200');
+            });
+
+            document.getElementById(`p-tab-${type}`).classList.remove('text-slate-400', 'hover:text-slate-200');
+            document.getElementById(`p-tab-${type}`).classList.add('bg-indigo-600', 'text-white', 'shadow');
+
+            document.querySelectorAll('.prompt-panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(`panel-prompt-${type}`).classList.remove('hidden');
+
+            const badge = document.getElementById('output-badge');
+            if (type === 'rctf') {
+                badge.innerText = "R-C-T-F";
+                badge.className = "text-[10px] bg-slate-800 text-indigo-400 px-2.5 py-0.5 rounded-full font-mono";
+            } else if (type === 'imagen') {
+                badge.innerText = "DALL-E 3 / Visual";
+                badge.className = "text-[10px] bg-slate-800 text-purple-400 px-2.5 py-0.5 rounded-full font-mono";
+            } else if (type === 'video') {
+                badge.innerText = "Vidu 9:16 Video";
+                badge.className = "text-[10px] bg-slate-800 text-emerald-400 px-2.5 py-0.5 rounded-full font-mono";
+            }
+
+            buildPrompt();
+        }
+
+        // BUILD AND RENDER PROMPTS LIVE
+        function buildPrompt() {
+            let promptText = "";
+
+            if (activePromptType === 'rctf') {
+                const rol = document.getElementById('rctf-rol').value || "[Rol del Asistente]";
+                const contexto = document.getElementById('rctf-contexto').value || "[Información de contexto / situación]";
+                const tarea = document.getElementById('rctf-tarea').value || "[Tarea restrictiva que la IA debe ejecutar]";
+                const formato = document.getElementById('rctf-formato').value;
+
+                promptText = `Actúa como un ${rol}.\n\nContexto: ${contexto}\n\nTu tarea principal consiste en: ${tarea}\n\nPresenta obligatoriamente la respuesta final en el siguiente formato de salida: ${formato}. Asegúrate de razonar paso a paso de forma lógica (Chain of Thought).`;
+            } else if (activePromptType === 'imagen') {
+                const sujeto = document.getElementById('img-sujeto').value || "[Sujeto principal]";
+                const entorno = document.getElementById('img-entorno').value || "[Fondo / Localización]";
+                const accion = document.getElementById('img-accion').value || "[Composición / Interacción]";
+                const estilo = document.getElementById('img-estilo').value;
+                const luz = document.getElementById('img-luz').value;
+
+                promptText = `${estilo} en formato vertical 9:16 de ${sujeto} en ${entorno}, ${accion}, iluminación ${luz}. Composición publicitaria limpia, sin palabras ni textos incrustados dentro de la imagen, estilo editorial de alta calidad.`;
+            } else if (activePromptType === 'video') {
+                const producto = document.getElementById('vid-producto').value || "[Sujeto o producto de marca]";
+                const camara = document.getElementById('vid-camara').value;
+                const ambiente = document.getElementById('vid-ambiente').value;
+
+                promptText = `Animate this image into a short vertical social media ad clip. Keep the product consistent and realistic. No text, no logos, no distorted hands, no flickering.\n\nFocal point: ${producto}.\n\nCamera Action: ${camara}.\n\nEnvironment motion: ${ambiente}.`;
+            }
+
+            document.getElementById('prompt-output-text').innerText = promptText;
+        }
+
+        // CLIPBOARD COPY HELPER
+        function copiarPrompt() {
+            const textToCopy = document.getElementById('prompt-output-text').innerText;
+            
+            // Standard reliable iframe clipboard helper
+            const textarea = document.createElement('textarea');
+            textarea.value = textToCopy;
+            textarea.style.position = 'fixed'; // prevent scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                promptsGeneratedCount++;
+                document.getElementById('stat-prompts').innerText = promptsGeneratedCount;
+                showToast("¡Prompt copiado al portapapeles con éxito!");
+            } catch (err) {
+                console.error('Error al copiar: ', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // PREMIUM DYNAMIC TOAST ALERTS
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // INTERACTIVE EXAM QUIZ LOADER
+        function loadQuizQuestion() {
+            const q = QUIZ_DATA[currentQuizIndex];
+            document.getElementById('quiz-progress-text').innerText = `Pregunta ${currentQuizIndex + 1} de 5`;
+            document.getElementById('quiz-question-title').innerText = q.question;
+            
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = '';
+
+            document.getElementById('quiz-feedback-text').innerText = "Selecciona una opción para validar.";
+            document.getElementById('quiz-feedback-text').className = "text-xs text-slate-400 font-medium";
+
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.disabled = true;
+            nextBtn.className = "bg-slate-800 text-slate-400 cursor-not-allowed text-xs px-4 py-2.5 rounded-xl font-bold transition-all";
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/60 hover:bg-slate-800/60 hover:border-slate-700 text-xs font-semibold text-slate-300 transition-all duration-200 flex items-start gap-3";
+                btn.innerHTML = `<span class="bg-slate-950 border border-slate-800 text-slate-400 w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0">${String.fromCharCode(65 + idx)}</span> <span class="leading-tight">${opt.text}</span>`;
+                
+                btn.onclick = () => {
+                    if (!isQuestionAnswered) {
+                        validateQuizAnswer(idx, btn);
+                    }
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        // VALIDATE SELECTED OPTION
+        function validateQuizAnswer(selectedIdx, btnElement) {
+            isQuestionAnswered = true;
+            const q = QUIZ_DATA[currentQuizIndex];
+            const isCorrect = q.options[selectedIdx].isCorrect;
+
+            const feedback = document.getElementById('quiz-feedback-text');
+            const nextBtn = document.getElementById('quiz-next-btn');
+
+            if (isCorrect) {
+                quizScore++;
+                btnElement.classList.remove('border-slate-800', 'bg-slate-900/60');
+                btnElement.classList.add('border-emerald-500/50', 'bg-emerald-950/20', 'text-emerald-200');
+                btnElement.querySelector('span').className = "bg-emerald-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0";
+                
+                feedback.innerText = "¡Correcto! " + q.explanation;
+                feedback.className = "text-xs text-emerald-400 font-semibold leading-relaxed max-w-xl";
+            } else {
+                btnElement.classList.remove('border-slate-800', 'bg-slate-900/60');
+                btnElement.classList.add('border-rose-500/50', 'bg-rose-950/20', 'text-rose-200');
+                btnElement.querySelector('span').className = "bg-rose-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0";
+                
+                // Highlight correct option as secondary indicator
+                const optionButtons = document.getElementById('quiz-options-container').children;
+                q.options.forEach((opt, idx) => {
+                    if (opt.isCorrect) {
+                        optionButtons[idx].classList.add('border-emerald-500/30', 'bg-emerald-950/10');
+                    }
+                });
+
+                feedback.innerText = "Incorrecto. " + q.explanation;
+                feedback.className = "text-xs text-rose-400 font-semibold leading-relaxed max-w-xl";
+            }
+
+            nextBtn.disabled = false;
+            nextBtn.className = "bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2.5 rounded-xl font-bold transition-all shadow shadow-indigo-600/10";
+        }
+
+        // NEXT QUIZ STEPPER
+        function nextQuizQuestion() {
+            isQuestionAnswered = false;
+            currentQuizIndex++;
+
+            if (currentQuizIndex < QUIZ_DATA.length) {
+                loadQuizQuestion();
+            } else {
+                // Show quiz final evaluation
+                document.getElementById('quiz-question-box').classList.add('hidden');
+                document.getElementById('quiz-summary-box').classList.remove('hidden');
+                
+                document.getElementById('quiz-score-num').innerText = quizScore;
+                const widthPercent = (quizScore / 5) * 100;
+                document.getElementById('quiz-bar').style.width = `${widthPercent}%`;
+            }
+        }
+
+        // RESTART QUIZ
+        function restartQuiz() {
+            quizScore = 0;
+            currentQuizIndex = 0;
+            isQuestionAnswered = false;
+            document.getElementById('quiz-summary-box').classList.add('hidden');
+            document.getElementById('quiz-question-box').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        // INTERACTIVE HTML5 CANVAS BAR CHART
+        function drawChart() {
+            const canvas = document.getElementById('progressChart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            // Responsive resolution scale fix
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+
+            const width = rect.width;
+            const height = rect.height;
+
+            // Clear frame
+            ctx.clearRect(0, 0, width, height);
+
+            // Chart configuration
+            const labels = ["Prompting (M1)", "Generativo (M2)", "Agentes (M3)", "IA Local (M4)", "Ética & Auditoría"];
+            
+            // Map actual completed exercises dynamically to sections progress
+            // Module 1: ex 1, 2, 5
+            const m1Count = [1, 2, 5].filter(id => completedExercises.has(id)).length;
+            const m1Progress = Math.round((m1Count / 3) * 100);
+
+            // Module 2: ex 6, 7, 10, 11
+            const m2Count = [6, 7, 10, 11].filter(id => completedExercises.has(id)).length;
+            const m2Progress = Math.round((m2Count / 4) * 100);
+
+            // Module 3: ex 3, 8, 9, 12
+            const m3Count = [3, 8, 9, 12].filter(id => completedExercises.has(id)).length;
+            const m3Progress = Math.round((m3Count / 4) * 100);
+
+            // Module 4: offline check (we assign baseline mock or ex 4 / 12)
+            const m4Progress = completedExercises.has(4) ? 100 : 20;
+
+            // Module 5: ethics score
+            const m5Progress = completedExercises.has(5) ? 100 : 30;
+
+            const dataset = [m1Progress, m2Progress, m3Progress, m4Progress, m5Progress];
+
+            // Render chart background grid
+            ctx.strokeStyle = "rgba(71, 85, 105, 0.15)";
+            ctx.lineWidth = 1;
+            ctx.font = "bold 9px sans-serif";
+            ctx.fillStyle = "#94a3b8";
+
+            // Y-axis grid & labels
+            const yLines = 4;
+            for (let i = 0; i <= yLines; i++) {
+                const val = (100 / yLines) * i;
+                const y = height - 40 - ((height - 60) / yLines) * i;
+                
+                ctx.beginPath();
+                ctx.moveTo(40, y);
+                ctx.lineTo(width - 20, y);
+                ctx.stroke();
+
+                ctx.fillText(`${val}%`, 10, y + 3);
+            }
+
+            // Draw bars
+            const barWidth = Math.min(45, (width - 60) / labels.length - 20);
+            const gap = (width - 60 - barWidth * labels.length) / (labels.length - 1);
+
+            for (let i = 0; i < labels.length; i++) {
+                const x = 50 + i * (barWidth + gap);
+                const barHeight = ((height - 60) * dataset[i]) / 100;
+                const y = height - 40 - barHeight;
+
+                // Create gradient for premium visual looks
+                const gradient = ctx.createLinearGradient(x, y, x, height - 40);
+                gradient.addColorStop(0, '#6366f1'); // Indigo 500
+                gradient.addColorStop(1, '#312e81'); // Indigo 900
+
+                // Render Bar
+                ctx.fillStyle = gradient;
+                // Round corner rect logic
+                ctx.beginPath();
+                ctx.roundRect(x, y, barWidth, barHeight, [6, 6, 0, 0]);
+                ctx.fill();
+
+                // Draw score value top text
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 10px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(`${dataset[i]}%`, x + barWidth / 2, y - 6);
+
+                // Render Labels below bars
+                ctx.fillStyle = "#94a3b8";
+                ctx.font = "500 9px sans-serif";
+                
+                // Wrap text to fits space
+                const label = labels[i];
+                ctx.fillText(label, x + barWidth / 2, height - 20);
+            }
+        }
+    </script>
+</body>
+</html>

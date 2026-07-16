@@ -4,6 +4,7 @@ Guía práctica de Markdown para alumnos y docentes: teoría, práctica y tenden
 
 [Pagina Wikipedia](https://es.wikipedia.org/wiki/Markdown)
 
+
 ## 📁 Contenido
 
 - `manual.md` — Introducción a Markdown, filosofía, uso con IA y sintaxis avanzada.
@@ -63,7 +64,9 @@ Si quieres mejorar el contenido, abre un PR con:
 - **Ficheros de texto plano**
 [XML/JSON/CSV](https://docs.google.com/presentation/d/1ikE4ntCLaaioY1_c8p74foxRLYJIbwQ0-EMNidHSFfw/edit?usp=sharing)
 
-** Articulo sobre Markdown**
+- **Articulo sobre Markdown**
 [Markdown](https://xtrategia.substack.com/p/markdown?triedRedirect=true)
+
+
 
 

@@ -1,0 +1,212 @@
+Tarea,Materia,Tipo de recurso,Descripción,Categoría (Inferred),Estado (Inferred)
+Creación de Ficha de concepto,Inicio / Idea y guion,Ejercicio práctico,"Responder por escrito a 5 preguntas clave: qué vendo, a quién, problema, emoción y acción.",Conceptualización publicitaria,Pendiente
+Elaboración de Guion técnico,Inicio / Idea y guion,Ejercicio práctico,"Completar una tabla de 5 planos definiendo imagen, movimiento de cámara, texto/voz y objetivo.",Planificación narrativa,Pendiente
+Generación de Imágenes base,IA para usos concretos / Imagen base,Ejercicio práctico,"Crear 3 imágenes (problema, producto, beneficio) en formato 9:16 usando prompts estructurados.",Generación visual,Pendiente
+Animación de clips con IA,IA para usos concretos / Vídeo IA,Ejercicio práctico,Generar 3 versiones de movimiento para cada imagen base y seleccionar la mejor mediante criterio crítico.,Generación de vídeo,Pendiente
+Montaje estructural (Test mudo),Automatizaciones / CapCut,Ejercicio práctico,Realizar el primer montaje en CapCut sin audio ni textos para validar el ritmo y la estructura visual.,Edición de vídeo,Pendiente
+Integración de Audio (Voz y música),IA para usos concretos / CapCut,Ejercicio práctico,Añadir voz en off (dos versiones) y base musical de 30 segundos ajustando niveles de volumen.,Postproducción sonora,Pendiente
+Inserción de Textos y subtítulos,Documentación / CapCut,Ejercicio práctico,"Añadir ganchos visuales, beneficios y llamada a la acción legibles en dispositivos móviles.",Diseño de comunicación,Pendiente
+Exportación y Defensa oral,Competencias clave,Ejercicio práctico,Exportar el spot final en MP4 a 1080p y defender las decisiones creativas ante el grupo.,Comunicación profesional,Pendiente
+Ecosistema modular de herramientas,Herramientas de documentación,Manual / Consulta,"Guía sobre el uso de Canva, Leonardo, Vidu, Suno y ElevenLabs según la necesidad del flujo.",Arquitectura de herramientas,Completado
+Control de calidad del clip IA,Arquitectura de los Sistemas de Informáticos,Manual / Consulta,"Lista de verificación para evitar deformaciones del producto, movimientos incoherentes o textos fantasma.",Control de calidad,Completado
+Organización de carpeta de entrega,Documentación Notion / canva,Manual / Consulta,"Estructura de archivos ordenada (01_guion, 02_imagenes, etc.) para la entrega final profesional.",Gestión de activos,Completado
+Presentación del curso,INICIO: Presentación,Manual,"Información general sobre el programa formativo 'ChatGPT e Inteligencia Artificial', objetivos y parámetros del contexto formativo.",Introducción,Pendiente
+Fundamentos de Inteligencia Artificial y ChatGPT,Cloud (Google drive),Manual,"Módulo 1: Introducción a conceptos básicos, historia, evolución y tipos de IA (débil vs fuerte).",Teoría,Pendiente
+Análisis de la arquitectura de sistemas (Funcionamiento ChatGPT),Arquitectura de los Sistemas de Informáticos,Manual,"Estudio de la arquitectura del modelo, algoritmos subyacentes y procesamiento del lenguaje natural (NLP).",Arquitectura,Pendiente
+Investigación de Proveedores de Identidad y seguridad,Proveedores de Identidad,Manual,Identificación de riesgos éticos y seguridad asociados con la IA y el manejo de datos.,Seguridad,Pendiente
+Casos de estudio y proyectos prácticos con ChatGPT,IA para usos concretos,Ejercicio,"Realización de ejercicios prácticos aplicando ChatGPT en sectores como medicina, educación y servicio al cliente.",Práctica,Pendiente
+Integración de ChatGPT en Bing y navegadores,Primera integracion (calendario),Ejercicio,Demostraciones prácticas del uso de asistentes de IA en plataformas de búsqueda y navegadores web.,Integración,Pendiente
+Uso de IA generalista (GPT-4),IA generalista,Manual,"Estudio de avances recientes, modelos pre-entrenados y transferencia de aprendizaje enfocados en GPT-4.",IA Avanzada,Pendiente
+Análisis de Superalineación y Ética,IA para usos concretos,Manual,Estudio del concepto de Superalineación para garantizar que la IA se alinee con valores humanos.,Ética,Pendiente
+Implementación de ChatGPT en proyectos reales,Automatizaciones,Ejercicio,Guía paso a paso para la implementación y optimización del rendimiento del ChatGPT en entornos reales.,Desarrollo,Pendiente
+Integración en aplicaciones web y móviles,Herramientos de documentación,Ejercicio,Ejercicio práctico de integración de modelos de lenguaje en plataformas externas y aplicaciones.,Integración,Pendiente
+Evaluación Teórico-Práctica Final,Competencias clave,Ejercicio,"Realización de pruebas de evaluación, casos y problemas para medir el desempeño y adquisición de competencias.",Evaluación,Pendiente
+Configuración de Google Drive y Cloud,Cloud (Google drive),Manual de consulta,"Estudio de conceptos de computación en la nube, acceso remoto, escalabilidad y gestión de costes.",Infraestructura Digital,Pendiente
+Gestión de Proveedores de Identidad y Seguridad,Proveedores de Identidad,Manual de consulta,"Buenas prácticas en contraseñas, autenticación multifactor y protección de identidades digitales.",Ciberseguridad,Pendiente
+Integración de Calendario y Automatización,Primera integracion (calendario),Ejercicio práctico,Detección de oportunidades de automatización y lógica de procesos para optimizar tareas diarias.,Productividad,Pendiente
+Uso de IA Generalista y Responsable,IA generalista,Manual de consulta,"Análisis de límites, sesgos y validación manual de respuestas generadas por IA.",Inteligencia Artificial,Pendiente
+Análisis con NotebookLM,NOTEBOOKLM,Manual de consulta,Uso de asistentes inteligentes para el análisis predictivo y organización de contenido.,Inteligencia Artificial,Pendiente
+Arquitectura de Sistemas e Información,Arquitectura de los Sistemas de Informáticos,Manual de consulta,Comprensión de la lógica de procesos y resolución estructurada de problemas complejos.,Ingeniería de Software,Pendiente
+Uso de IA para Usos Concretos,IA para usos concretos,Manual de consulta,Aplicación de IA para generación de contenido específico y automatización de tareas repetitivas.,Inteligencia Artificial,Pendiente
+Diseño de Presentaciones en Gamma,Presentación Gamma,Manual de consulta,Comunicación efectiva en entornos digitales mediante el uso de herramientas de presentación.,Comunicación Digital,Pendiente
+Creación de Infografías con Napkin,Infografías Napkin,Manual de consulta,Visualización de datos e información de forma clara y profesional.,Diseño y Datos,Pendiente
+Diagramación en Miro,Diagramas Miro,Ejercicio práctico,Uso de herramientas visuales para la resolución de problemas y diseño de flujos.,Colaboración,Pendiente
+Documentación en Notion / Canva,Documentacion Notion / canva,Manual de consulta,Redacción profesional y adaptación de mensajes según el canal y la herramienta.,Herramientas de Documentación,Pendiente
+Automatización de Procesos,Automatizaciones,Ejercicio práctico,Identificar tareas donde aplicar automatización y pensamiento computacional.,Eficiencia Operativa,Pendiente
+Ciberseguridad y Protección de Datos,Ciberseguridad,Manual de consulta,Implementación de copias de seguridad y detección de phishing.,Seguridad Informatica,Pendiente
+Mapa de Competencias Digitales,Competencias clave,Ejercicio práctico,"Identificar herramientas tecnológicas, habilidades técnicas a dominar y competencias a reforzar.",Autoevaluación,En progreso
+Caso Práctico en Grupo: Resolución de Conflictos,Competencias clave,Ejercicio práctico,Análisis de fallos de coordinación y comunicación en situaciones reales.,Soft Skills,Pendiente
+Creación de Tablero Kanban,Competencias clave,Ejercicio práctico,"Configuración de columnas (Por hacer, En proceso, Hecho) para gestionar un proyecto.",Metodologías Ágiles,Pendiente
+Plan Personal de Mejora,Competencias clave,Ejercicio práctico,"Definición de una hard skill, una soft skill y una metodología a aplicar inmediatamente.",Desarrollo Profesional,Pendiente
+Lectura de Fundamentos de IA,IA generalista,Manual,"Estudio de la definición de IA, clasificación entre IA débil y fuerte, y sistemas que imitan la inteligencia humana.",Teoría Básica,Pendiente
+Análisis de Machine Learning,IA generalista,Manual,"Comprensión de los tipos de aprendizaje: supervisado, no supervisado y por refuerzo.",Teoría Técnica,Pendiente
+Estudio de NLP y ChatGPT,IA generalista,Manual,Conceptos de Procesamiento del Lenguaje Natural y arquitectura Transformer detrás de ChatGPT.,Teoría Técnica,Pendiente
+Optimización de Modelos,IA para usos concretos,Manual,"Estudio de técnicas de ajuste de parámetros, hiperparámetros y Fine-tuning para sectores específicos.",Optimización Avanzada,Pendiente
+Ejercicio de Prompt: Fiscalidad,IA para usos concretos,Ejercicio práctico,Crear un prompt para que la IA actúe como experto fiscal explicando el IVA a un autónomo.,Ingeniería de Prompts,Pendiente
+Ejercicio de Prompt: Gestión de Clientes,IA para usos concretos,Ejercicio práctico,Redacción de un correo profesional para solicitar documentación contable a un cliente.,Ingeniería de Prompts,Pendiente
+Ejercicio de Prompt: Gestión Contable,IA para usos concretos,Ejercicio práctico,Elaborar una lista de consejos para organizar la contabilidad diaria y flujo de caja.,Ingeniería de Prompts,Pendiente
+Evaluación de Riesgos y Ética,Ciberseguridad,Manual,"Análisis de alucinaciones, privacidad de datos (RGPD) y sesgos en el uso de la IA.",Seguridad y Ética,Pendiente
+Aplicación de Buenas Prácticas,Competencias clave,Manual,"Implementación de validación sistemática, anonimización y refinamiento iterativo de consultas.",Productividad,Pendiente
+Conceptos básicos de IA,IA generalista,Manual,Estudio de la definición de IA y clasificación entre IA Débil y IA Fuerte.,Teoría Fundamental,Pendiente
+Aprendizaje Automático,Arquitectura de los Sistemas de Informáticos,Manual,"Comprensión de Machine Learning, tipos de aprendizaje (supervisado, no supervisado y refuerzo).",Arquitectura Técnica,Pendiente
+Procesamiento del Lenguaje Natural,IA generalista,Manual,Estudio de NLP y funcionamiento de modelos de lenguaje como ChatGPT.,Tecnologías de IA,Pendiente
+Optimización y Fine-tuning,Arquitectura de los Sistemas de Informáticos,Manual,Técnicas de ajuste de parámetros y entrenamiento específico de modelos para sectores.,Optimización Avanzada,Pendiente
+Ética y Seguridad en la IA,Ciberseguridad,Manual,"Análisis de sesgos, alucinaciones y privacidad de datos en el uso de herramientas públicas.",Seguridad y Ética,Pendiente
+Buenas Prácticas de Anonimización,Ciberseguridad,Manual,"Obligatoriedad de eliminar datos sensibles (DNI, nombres) antes de usar prompts.",Gestión de Datos,Pendiente
+Explicación del IVA para autónomos,IA para usos concretos,Ejercicio práctico,Prompt 1: Explicar conceptos de fiscalidad y obligaciones de liquidación trimestral.,Gestión Fiscal,Pendiente
+Redacción de email de reclamación,Herramientos de documentación,Ejercicio práctico,Prompt 2: Redactar un email profesional para reclamar facturas pendientes de pago.,Comunicación Corporativa,Pendiente
+Resumen esquematizado de obligaciones,IA para usos concretos,Ejercicio práctico,Prompt 3: Esquematizar las obligaciones fiscales trimestrales mediante IA.,Productividad,Pendiente
+Preparación de examen teórico,Competencias clave,Manual,Revisión de términos clave en negrita y organización de listas para el examen IFCT0049.,Evaluación,Pendiente
+Resumir artículos,IA generalista,Manual/Guía,Técnica para condensar documentos largos (ej. 10 páginas) en puntos clave usando LLMs.,Procesamiento de Texto,Pendiente
+Redactar correos profesionales,IA generalista,Manual/Guía,Uso de prompts para generar comunicaciones formales como reclamaciones de facturas.,Productividad,Pendiente
+Brainstorming de ideas,IA generalista,Manual/Guía,Generación de listas creativas (ej. títulos de blogs) mediante IA.,Creatividad,Pendiente
+Mejora de estilo y tono,IA generalista,Manual/Guía,Reescritura de párrafos para ajustar la persuasión y formalidad.,Edición de Contenido,Pendiente
+Generación de imágenes con fórmulas,IA para usos concretos,Manual/Guía,"Aplicación de parámetros (sujeto, acción, entorno, estilo) para crear arte visual.",Generación Visual,Pendiente
+Análisis de documentos largos con Claude,IA generalista,Manual/Guía,Uso de modelos con ventanas de contexto amplias para analizar libros o códigos.,Análisis de Datos,Pendiente
+Búsqueda de información verificable,IA generalista,Manual/Guía,Uso de Perplexity AI como motor de respuestas con citas y fuentes web.,Investigación,Pendiente
+Procesamiento masivo de información (Kimi),IA generalista,Manual/Guía,"Carga de múltiples PDFs, vídeos o audios para resúmenes precisos.",Gestión del Conocimiento,Pendiente
+Tu Campaña Exprés: Eslogan y Redes,IA para usos concretos,Ejercicio,Crear un eslogan y un post para un producto imaginario usando ChatGPT o Claude.,Marketing Digital,Pendiente
+Tu Campaña Exprés: Imagen Publicitaria,IA para usos concretos,Ejercicio,Generar la imagen visual de la campaña usando DALL-E o Midjourney.,Diseño Gráfico,Pendiente
+Integración en Google Workspace,Cloud (Google drive),Manual/Guía,Uso de Gemini para redactar correos y documentos directamente en la nube.,Automatización de Oficina,Pendiente
+Asistencia en Microsoft Office,Herramientos de documentación,Manual/Guía,"Uso de Copilot dentro de Word, Excel y PowerPoint.",Productividad Corporativa,Pendiente
+Comparar resultados de Prompt Pobre vs. Prompt Pro,IA generalista,Ejercicio práctico,"Actividad 'El Reto del Antes y Después' donde se comparan una petición vaga de receta contra una estructurada con rol, contexto y restricciones.",Prompting,Pendiente
+Aplicar la Fórmula Maestra R-C-T-F,IA generalista,Material de consulta,"Guía sobre los cuatro elementos clave de un prompt: Rol, Contexto, Tarea y Formato.",Prompting,Completado
+Uso de formatos de salida estratégicos,IA generalista,Material de consulta,"Tabla comparativa de formatos (JSON, Tablas, Listas, Guiones) y sus ventajas según el uso.",Prompting,Completado
+Implementar Few-Shot Prompting (Ejemplos),IA generalista,Ejercicio práctico,Pedir a la IA que genere contenido imitando un estilo específico proporcionado mediante ejemplos.,Estrategias de IA,Pendiente
+Aplicar Chain of Thought (Pensar paso a paso),IA generalista,Ejercicio práctico,Añadir la instrucción 'razona paso a paso' en tareas complejas para reducir errores lógicos.,Estrategias de IA,Pendiente
+Inversión de roles (Pide que te pregunte),IA generalista,Ejercicio práctico,Instruir a la IA para que realice preguntas necesarias antes de ejecutar una planificación compleja.,Estrategias de IA,Pendiente
+Consulta de Librería de Prompts en GitHub,IA generalista,Manual / Recurso externo,Acceso al repositorio de prompts documentados para diferentes casos de uso.,Documentación,Pendiente
+"Estudio de Marcos de Prompting (RISE, CARE, AIDA, etc.)",IA generalista,Material de consulta,Infografía detallada sobre 9 marcos diferentes para estructurar peticiones a la IA.,Prompting Avanzado,Pendiente
+Análisis de la línea de tiempo de Prompting,IA generalista,Material de consulta,Presentación sobre la evolución del prompting en diferentes modelos de IA.,Historia de la IA,Pendiente
+Configuración de entorno de IA Local,Cloud (Google drive) / IA Local,Ejercicio práctico,Instalación de software (LM Studio o GPT4All) para ejecutar modelos de lenguaje en el ordenador personal sin dependencia de la nube.,Soberanía del Dato,Pendiente
+Descarga de modelos Open Source,IA para usos concretos / IA Local,Ejercicio práctico,Búsqueda y descarga de modelos específicos como Llama 3 8B Instruct o Phi-3 según la potencia del hardware disponible.,Gestión de Recursos,Pendiente
+Prueba de Privacidad (Caja Fuerte de Ideas),Ciberseguridad / IA Local,Ejercicio práctico,Redactar un documento con información sensible sin conexión a internet para verificar la ejecución local y la privacidad total.,Privacidad y Seguridad,Pendiente
+Revisión de requisitos de Hardware,Arquitectura de los Sistemas de Informáticos,Material de consulta,"Análisis de la GPU, VRAM y RAM necesaria para ejecutar diferentes tamaños de modelos (7B, 13B, 70B).",Infraestructura Técnica,Leído
+Estudio de ventajas de la IA Local,IA generalista,Material de consulta,"Comprensión de los beneficios: Privacidad total, funcionamiento sin internet, ahorro de suscripciones y propiedad del dato.",Estrategia Digital,Leído
+"Guía de herramientas: LM Studio, GPT4All y Ollama",Herramientos de documentación,Material de consulta,Comparativa de las 3 mejores herramientas para principiantes según la interfaz y el uso de CPU/GPU.,Software de IA,Leído
+Definición de conceptos de datos,Arquitectura de los Sistemas de Informáticos,Manual/Lectura,"Lectura y comprensión de qué es un dato, su importancia y cómo se transforma en información útil.",Fundamentos Digitales,Pendiente
+Análisis de la evolución del dato,Arquitectura de los Sistemas de Informáticos,Manual/Lectura,Estudio de las 5 etapas de evolución desde datos aislados hasta datos inteligentes con IA.,Historia de la Tecnología,Pendiente
+Revisión de Ética y Privacidad,Ciberseguridad,Manual/Lectura,Estudio sobre el manejo responsable de datos y cumplimiento de normas de privacidad.,Seguridad y Ética,Pendiente
+Caso práctico: Dashboard Cafetería,IA para usos concretos,Ejercicio Práctico,"Analizar cómo una cafetería recolecta datos de satisfacción, ventas y compras para consolidarlos en un dashboard.",Análisis de Datos,Pendiente
+Análisis de fuentes de datos (Cafetería),Cloud (Google drive),Ejercicio Práctico,"Identificar el uso de archivos CSV, Excel y encuestas para la toma de decisiones.",Gestión de Información,Pendiente
+Visualización de presentación complementaria,Presentación,Material de consulta,Revisión del material visual en Google Slides sobre la temática TDIGITAL.,Recursos Externos,Pendiente
+Ejemplo práctico MiHuerta,Automatizaciones,Ejercicio Práctico,Exploración del ejemplo práctico 'mihuerta' mencionado en el repositorio.,Proyectos,Pendiente
+Configuración de Google Drive,Cloud (Google drive),Manual,Configuración inicial y gestión de archivos en la nube de Google.,Infraestructura Cloud,Pendiente
+Gestión de Proveedores de Identidad,Proveedores de Identidad,Manual,Configuración y uso de sistemas de autenticación y acceso.,Seguridad de Acceso,Pendiente
+Primera integración con calendario,Primera integracion (calendario),Ejercicio práctico,Conectar la IA con el calendario para organizar reuniones y eventos.,Productividad / Agentes,Pendiente
+Uso de IA generalista,IA generalista,Manual,Conceptos básicos y diferencias entre chatbots y agentes de ejecución.,Fundamentos de IA,Pendiente
+Investigación con NotebookLM,NOTEBOOKLM,Manual,Uso de la herramienta de Google para análisis de documentos.,Documentación Inteligente,Pendiente
+Análisis de Arquitectura de Sistemas,Arquitectura de los Sistemas de Informáticos,Manual,Estudio de los componentes y flujos de información en sistemas.,Arquitectura IT,Pendiente
+Actividad: Tu Asistente de Investigación,IA para usos concretos,Ejercicio práctico,Crear un informe sobre tendencias de sostenibilidad 2026 usando IA con acceso a internet.,Investigación y Análisis,Pendiente
+Creación de presentaciones con Gamma,Presentación Gamma,Ejercicio práctico,Generación automática de diapositivas mediante IA.,Diseño y Presentación,Pendiente
+Diseño de infografías con Napkin,Infografías Napkin,Ejercicio práctico,Transformar texto en esquemas visuales e infografías.,Comunicación Visual,Pendiente
+Modelado de diagramas en Miro,Diagramas Miro,Ejercicio práctico,Creación de flujos de trabajo y diagramas colaborativos.,Colaboración Digital,Pendiente
+Documentación en Notion / Canva,Documentacion Notion / canva,Manual,Uso de herramientas para la creación de wikis y materiales visuales.,Gestión del Conocimiento,Pendiente
+Diseño de Formularios,Formularios,Ejercicio práctico,Creación de herramientas de recolección de datos.,Captura de Datos,Pendiente
+Configuración de Automatizaciones,Automatizaciones,Ejercicio práctico,Uso de Zapier o extensiones para conectar apps y ejecutar flujos.,Automatización de Procesos,Pendiente
+Auditoría de Ciberseguridad,Ciberseguridad,Manual,Supervisión de datos sensibles y seguridad en el uso de agentes.,Seguridad Informática,Pendiente
+Evaluación de Competencias Clave,Competencias clave,Manual,Identificación de habilidades necesarias para el entorno digital e IA.,Desarrollo Profesional,Pendiente
+Lectura: Introducción al Nuevo Copiloto Digital,INICIO: Presentación,Manual,Explicación de la IA como asistente y conceptos clave de IA Generativa.,Teoría Básica,Pendiente
+Dominio de Conceptos Básicos,IA generalista,Manual,"Definición de términos esenciales como Prompt, Alucinación y Multimodalidad.",Vocabulario Técnico,Pendiente
+Ejercicio: Aplicación de la fórmula R-C-T-F,IA generalista,Ejercicio práctico,"Aplicar Rol, Contexto, Tarea y Formato para crear prompts efectivos.",Ingeniería de Prompts,Pendiente
+Práctica de Técnicas Few-shot y Chain of Thought,IA generalista,Ejercicio práctico,Entrenamiento de la IA mediante ejemplos y razonamiento paso a paso.,Ingeniería de Prompts,Pendiente
+Generación y Resumen de Textos,IA para usos concretos,Ejercicio práctico,Uso de modelos para producción de contenido textual y síntesis.,Productividad,Pendiente
+Creación de Imágenes (Midjourney/DALL-E),Infografías Napkin,Ejercicio práctico,Generación de material visual a partir de descripciones textuales.,Diseño Visual,Pendiente
+Configuración de Agentes de IA,Automatizaciones,Ejercicio práctico,Creación de flujos de trabajo automatizados para calendarios y archivos.,Automatización,Pendiente
+Instalación de IA Local para Privacidad,Ciberseguridad,Ejercicio práctico,Instalación de modelos en PC propio para garantizar soberanía de datos.,Seguridad y Privacidad,Pendiente
+Detección de Alucinaciones y Sesgos,Competencias clave,Ejercicio práctico,Evaluación crítica de la veracidad y ética en los resultados de la IA.,Ética y Verificación,Pendiente
+Análisis Comparativo: Buscador vs IA Generativa,IA generalista,Manual,Estudio de las diferencias entre rastreo de información y modelado de datos.,Fundamentos,Pendiente
+Exploración de Ecosistema de Herramientas 2026,IA para usos concretos,Manual,"Revisión de líderes del sector: ChatGPT, Gemini, Claude, Copilot y Perplexity.",Herramientas,Pendiente
+Uso de NotebookLM para análisis,NOTEBOOKLM,Ejercicio práctico,Aplicación de habilidades de Claude en el entorno de NotebookLM.,Análisis de Datos,Pendiente
+Lectura del Modelo de Prompt,IA generalista,Manual,Lectura y comprensión del archivo 00-modelo.md para entender la estructura de un prompt completo.,Prompt Engineering,Pendiente
+Definición de Roles,IA generalista,Manual,"Estudio del archivo 01-rol.md sobre cómo definir roles específicos (profesor, experto, etc.) para la IA.",Prompt Engineering,Pendiente
+Inclusión de Contexto,IA generalista,Manual,Revisión de 02-contexto.md para aprender a incluir información de fondo y antecedentes en las peticiones.,Prompt Engineering,Pendiente
+Análisis de Ingeniería de Prompts,IA generalista,Manual,Estudio de ingenieria-prompts.md sobre la especialización de prompts.,Prompt Engineering,Pendiente
+Práctica con Plantillas Generales,IA generalista,Ejercicio,Uso de la colección de plantillas en generales.md para aplicar prompts por temáticas.,Productividad,Pendiente
+Exploración de Ejemplos Prácticos,IA para usos concretos,Ejercicio,"Explorar la carpeta de ejemplos para aplicar prompts en investigación, soporte o educación.",Casos de Uso,Pendiente
+Personalización de Prompts,IA generalista,Ejercicio,Copiar un prompt de la biblioteca y reemplazar los marcadores entre corchetes para ajustarlo al contexto propio.,Personalización,Pendiente
+Configuración de Cloud / Drive,Cloud (Google drive),Manual,Configuración básica y gestión de archivos en la nube según el índice de la presentación.,Infraestructura,Pendiente
+Integración de Calendario,Primera integracion (calendario),Ejercicio,Realizar la primera integración práctica conectando el calendario con el ecosistema digital.,Integraciones,Pendiente
+Uso de NotebookLM,NOTEBOOKLM,Ejercicio,Carga de fuentes y generación de resúmenes o insights utilizando la herramienta NotebookLM.,IA Especializada,Pendiente
+Diseño de Infografías con Napkin,Infografías Napkin,Ejercicio,Creación de recursos visuales y esquemas utilizando la herramienta Napkin.,Visualización,Pendiente
+Documentación en Notion / Canva,Documentacion Notion / canva,Ejercicio,Creación y organización de documentos colaborativos en Notion o diseños en Canva.,Documentación,Pendiente
+Auditoría de Ciberseguridad,Ciberseguridad,Manual,Revisión de conceptos de seguridad y protección de identidad según los proveedores de identidad.,Seguridad,Pendiente
+Configuración de Cloud y Drive,Cloud (Google drive),Ejercicio práctico,"Compartir archivos y gestionar roles (editor, lector, comentarista) en Google Drive.",Almacenamiento y Colaboración,Pendiente
+Integración de Calendario,Primera integracion (calendario),Ejercicio práctico,Pasar fechas de un PDF a Google Calendar utilizando IA para agendar el curso.,Productividad,Pendiente
+Gestión de Contactos,Formularios,Ejercicio práctico,"Crear formulario, conectar con Sheets y generar CSV para importar a Google Contactos.",Gestión de Datos,Pendiente
+Uso de NotebookLM,NOTEBOOKLM,Ejercicio práctico,"Crear cuaderno de estudio, resumir vídeos y extraer datos de fuentes contrastadas.",IA Especializada,Pendiente
+Comparativa de IA Generativa,IA generalista,Ejercicio práctico,Comparar resultados de diferentes modelos de IA introduciendo un mismo prompt.,Análisis de IA,Pendiente
+Generación de Presentaciones,Presentación Gamma,Ejercicio práctico,Uso de Gamma y otras herramientas para crear presentaciones y exportarlas a PDF.,Creación de Contenido,Pendiente
+Creación de Infografías,Infografías Napkin,Ejercicio práctico,Transformar texto en diagramas de flujo e infografías editables con Napkin.ai.,Diseño Visual,Pendiente
+Formularios con Lógica,Formularios,Ejercicio práctico,Diseño de formularios con secciones y bifurcaciones según respuestas.,Recolección de Información,Pendiente
+Automatización Simple (Zapier),Automatizaciones,Ejercicio práctico,Conectar Forms con Sheets y Slack/Gmail mediante disparadores.,Automatización de Procesos,Pendiente
+Generación de Imágenes,IA para usos concretos,Ejercicio práctico,"Dominar el prompting para crear imágenes definiendo estilo, entorno e iluminación.",IA Generativa Visual,Pendiente
+Creación de Vídeo,IA para usos concretos,Ejercicio práctico,Producción de clips y narrativa visual automatizada con herramientas de IA.,IA Generativa Multimedia,Pendiente
+Automatización Avanzada (Make),Automatizaciones,Ejercicio práctico,Integrar formulario de reseñas con IA para análisis y valoración automática.,Automatización de Procesos,Pendiente
+Manual de Arquitectura y Sistemas,Arquitectura de los Sistemas de Informáticos,Material de consulta,Estudio de la base teórica de la arquitectura de sistemas informáticos.,Teoría de Sistemas,Pendiente
+Guía de Ciberseguridad,Ciberseguridad,Material de consulta,Conceptos y buenas prácticas en seguridad informática y protección de datos.,Seguridad,Pendiente
+Lectura sobre Alucinaciones,IA generalista,Manual,Estudio del fenómeno de las alucinaciones en IA y aplicación de la 'Prueba del Algodón' para verificar enlaces.,Verificación de contenidos,Pendiente
+Análisis de Sesgos,IA generalista,Manual,Comprensión de los prejuicios heredados (género y culturales) en modelos de IA entrenados en internet.,Ética en IA,Pendiente
+Gestión de Privacidad y Seguridad,Cloud (Google drive),Manual,Aplicación de la 'Regla de Oro' para proteger datos sensibles y uso de IA local para confidencialidad.,Seguridad informática,Pendiente
+Aplicación del Semáforo de Verificación,IA para usos concretos,Manual,"Uso del sistema de colores (Verde, Amarillo, Rojo) para clasificar el riesgo según el uso de la IA.",Metodología de trabajo,Pendiente
+Actividad: 'Caza al Mentiroso',IA generalista,Ejercicio,Pedir la biografía de Juan Pablo Silvestre para observar cómo la IA inventa información coherente pero falsa.,Práctica crítica,Pendiente
+Verificación de fuentes externas,Ciberseguridad,Ejercicio,Solicitar enlaces a la IA y comprobar si devuelven un error 404 para detectar alucinaciones.,Validación de datos,Pendiente
+Configuración de Cloud y Google Drive,Cloud (Google drive),Ejercicio,Configuración inicial de herramientas de almacenamiento y colaboración en la nube.,Infraestructura Digital,Pendiente
+Gestión de Proveedores de Identidad,Proveedores de Identidad,Ejercicio,Integración y gestión de sistemas de acceso y seguridad de identidad.,Seguridad y Acceso,Pendiente
+Primera integración: Calendario,Primera integracion (calendario),Ejercicio,Sincronización y automatización básica de tareas mediante el calendario.,Productividad,Pendiente
+Uso de IA Generativa Generalista,IA generalista,Ejercicio,Aplicación de modelos de lenguaje para tareas comunes.,Inteligencia Artificial,Pendiente
+Análisis con NotebookLM,NOTEBOOKLM,Ejercicio,Uso de la herramienta de Google para análisis de documentos y fuentes.,Análisis de Datos,Pendiente
+Arquitectura de Sistemas de Información,Arquitectura de los Sistemas de Informáticos,Manual,Estudio de los componentes y estructuras que forman los sistemas informáticos.,Sistemas,Material de consulta
+IA para usos concretos,IA para usos concretos,Ejercicio,Implementación de soluciones de IA en nichos específicos.,Inteligencia Artificial,Pendiente
+Diseño de Presentaciones con Gamma,Presentación Gamma,Ejercicio,Creación de presentaciones dinámicas utilizando IA.,Diseño,Pendiente
+Creación de Infografías con Napkin,Infografías Napkin,Ejercicio,Visualización de datos y conceptos mediante herramientas de diseño asistido.,Visualización,Pendiente
+Diseño de Diagramas en Miro,Diagramas Miro,Ejercicio,Elaboración de flujos y diagramas de arquitectura de forma colaborativa.,Colaboración,Pendiente
+Documentación en Notion / Canva,Documentacion Notion / canva,Ejercicio,Uso de herramientas modernas para la creación de manuales y guías.,Documentación,Pendiente
+Automatización de procesos,Automatizaciones,Ejercicio,Creación de flujos de trabajo automáticos entre diferentes aplicaciones.,Automatización,Pendiente
+Fundamentos de Ciberseguridad,Ciberseguridad,Manual,Conceptos clave y protección de activos digitales.,Seguridad,Material de consulta
+Simulador de Examen IFCT0049,Competencias clave,Ejercicio,Test interactivo para validar conocimientos teóricos del curso.,Evaluación,Pendiente
+Generador de Prompts (Fórmula R-C-T-F),IA generalista,Ejercicio,"Uso del generador automático para prompts genéricos, imágenes y videos.",Ingeniería de Prompts,Pendiente
+Configuración inicial de Google Drive y entorno Cloud,Cloud (Google drive),Manual,Configuración y uso de herramientas de almacenamiento en la nube para gestión de archivos.,Infraestructura Cloud,Pendiente
+Gestión de Proveedores de Identidad (IdP),Proveedores de Identidad,Manual,Estudio y configuración de sistemas de autenticación y acceso.,Seguridad y Acceso,Pendiente
+Sincronización de Calendario,Primera integracion (calendario),Ejercicio práctico,Integración y automatización de eventos en el calendario personal/profesional.,Productividad,Pendiente
+Generación de eslóganes con IA,IA generalista,Ejercicio práctico,Uso de funciones de IA para crear eslóganes creativos basados en instrucciones específicas.,IA Generativa,Completado
+Consultas de información geográfica con IA,IA generalista,Ejercicio práctico,Cálculo de distancias entre ciudades (Ej: Donostia a Madrid) mediante prompts.,IA Generativa,Completado
+Extracción de datos estructurados,IA generalista,Ejercicio práctico,Extraer números de pedido y datos específicos de un bloque de texto usando fórmulas de IA.,Procesamiento de Datos,Completado
+Traducción automática de textos,IA generalista,Ejercicio práctico,Traducción de registros de compra del español al inglés mediante funciones de IA.,Idiomas,Completado
+Clasificación automática de gastos,IA generalista,Ejercicio práctico,"Categorización de gastos (Viajes, Alimentación, Suministros, Vivienda) a partir de descripciones.",Finanzas / Clasificación,Completado
+Análisis de documentos con NotebookLM,NOTEBOOKLM,Manual,Uso de NotebookLM para la gestión del conocimiento y análisis de fuentes.,IA para Investigación,Pendiente
+Diseño de Arquitectura de Sistemas,Arquitectura de los Sistemas de Informáticos,Manual,Comprensión de los componentes y estructuras de los sistemas de información modernos.,Arquitectura IT,Pendiente
+Creación de presentaciones automáticas,Presentación Gamma,Ejercicio práctico,Uso de Gamma para generar presentaciones visuales mediante inteligencia artificial.,IA Creativa,Pendiente
+Generación de infografías inteligentes,Infografías Napkin,Ejercicio práctico,Uso de Napkin para transformar texto en diagramas e infografías visuales.,Visualización de Datos,Pendiente
+Diagramación colaborativa,Diagramas Miro,Ejercicio práctico,Creación de flujos y diagramas en la herramienta Miro.,Diseño de Procesos,Pendiente
+Documentación y Wiki de proyectos,Documentacion Notion / canva,Manual,Organización de la información y diseño de documentos en Notion y Canva.,Documentación,Pendiente
+Creación de Formularios y Recogida de Datos,Formularios,Ejercicio práctico,Diseño de formularios digitales para la captura de información.,Captura de Datos,Pendiente
+Diseño de Automatizaciones de flujo de trabajo,Automatizaciones,Ejercicio práctico,Configuración de disparadores y acciones para automatizar tareas repetitivas.,Automatización,Pendiente
+Protocolos de Ciberseguridad,Ciberseguridad,Manual,Estudio de buenas prácticas y protección de la información digital.,Seguridad,Pendiente
+Evaluación de Competencias Clave,Competencias clave,Manual,Análisis de las habilidades necesarias en el entorno digital actual.,Soft Skills,Pendiente
+Configuración de Google Drive,Cloud (Google drive),Manual/Configuración,Configuración inicial de la cuenta y gestión de archivos en la nube.,Infraestructura,Pendiente
+Integración de Proveedores de Identidad,Proveedores de Identidad,Ejercicio práctico,Configurar el acceso mediante proveedores externos de identidad.,Seguridad,Pendiente
+Primera integración con Calendario,Primera integracion (calendario),Ejercicio práctico,Sincronización de tareas y eventos con Google Calendar.,Productividad,Pendiente
+Uso de IA Generalista,IA generalista,Manual de uso,Exploración de prompts y capacidades de modelos de lenguaje generales.,IA,Pendiente
+Creación de base de conocimientos en NotebookLM,NOTEBOOKLM,Ejercicio práctico,Uso de NotebookLM para el análisis de documentos y generación de resúmenes.,IA,Pendiente
+Análisis de Arquitectura de Sistemas,Arquitectura de los Sistemas de Informáticos,Material de consulta,Estudio de los componentes y diseño de sistemas informáticos actuales.,Hardware/Software,Pendiente
+Diseño de Presentación en Gamma,Presentación Gamma,Ejercicio práctico,Creación de una presentación automática mediante IA en Gamma.,Diseño,Pendiente
+Creación de infografías con Napkin,Infografías Napkin,Ejercicio práctico,Transformación de texto en elementos visuales e infografías.,Visualización,Pendiente
+Modelado de Diagramas en Miro,Diagramas Miro,Ejercicio práctico,Creación de flujos y esquemas colaborativos en Miro.,Colaboración,Pendiente
+Documentación en Notion / Canva,Documentacion Notion / canva,Manual/Ejercicio,Centralización de información y diseño de documentos corporativos.,Gestión de información,Pendiente
+Diseño de Formularios,Formularios,Ejercicio práctico,Creación de formularios para captura de datos y encuestas.,Datos,Pendiente
+Implementación de Automatizaciones,Automatizaciones,Ejercicio práctico,Creación de flujos de trabajo automáticos entre diferentes aplicaciones.,Eficiencia,Pendiente
+Auditoría de Ciberseguridad,Ciberseguridad,Material de consulta,Estudio de vulnerabilidades y mejores prácticas de protección.,Seguridad,Pendiente
+Desarrollo de Competencias Clave,Competencias clave,Manual/Evaluación,Identificación y refuerzo de las habilidades digitales fundamentales.,Soft Skills,Pendiente
+Compartir carpetas y roles en Drive,Cloud (Google drive),Ejercicio,Configuración de permisos y gestión de grupos de contacto para compartir recursos en Google Drive.,Gestión de archivos,Pendiente
+Pasar PDF a Google Calendar,Primera integracion (calendario),Ejercicio,Uso de IA para extraer datos de un PDF de formación y generar un archivo CSV para importar en el calendario.,Integración,Pendiente
+Gestión de alumnos en Notion,Documentacion Notion / canva,Ejercicio,Creación de una base de datos en Notion para la gestión de contactos y alumnos.,Documentación,Pendiente
+Análisis de diagramas de flujo,Diagramas Miro,Ejercicio,Uso de herramientas como Miro para el diseño y análisis de flujos de trabajo visuales.,Visualización,Pendiente
+Configuración de Zapier,Automatizaciones,Ejercicio,Conectar formularios de Google con Slack o Gmail mediante disparadores (triggers) y acciones.,Automatización No-Code,Pendiente
+Automatización con Make (Reseñas),Automatizaciones,Ejercicio,Crear un flujo que clasifique el sentimiento de reseñas mediante IA y envíe notificaciones.,Automatización No-Code,Pendiente
+Generación de infografías con Napkin,Infografías Napkin,Ejercicio,Transformar texto en esquemas visuales e infografías editables usando IA.,IA Generativa Visual,Pendiente
+Creación de presentaciones con Gamma,Presentación Gamma,Ejercicio,Generar presentaciones estructuradas a partir de prompts o documentos usando Gamma.app.,IA Generativa,Pendiente
+Migración de Slack a Discord,Automatizaciones,Ejercicio,Estudio y búsqueda de alternativas para exportar datos entre plataformas de comunicación.,Gestión de datos,Pendiente
+Manual de Automatización No-Code,Automatizaciones,Manual,"Guía maestra sobre fundamentos, procesos de creación y comparativa de plataformas (Zapier, Make, n8n).",Material de consulta,Completado
+Ciberseguridad en IA - Buenas Prácticas,Ciberseguridad,Manual,"Documento sobre riesgos de filtración de datos, inyección de prompts y uso seguro de IAs en la nube y locales.",Seguridad,Completado
+Test de autoevaluación,Automatizaciones,Ejercicio,Evaluación final de conocimientos sobre el módulo de automatizaciones.,Evaluación,Pendiente
