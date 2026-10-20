@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de instrucciones personalizadas</title>
+<style>
+:root{--bg:#f4f6fb;--panel:#fff;--ink:#20253a;--muted:#667085;--line:#dfe4ef;--accent:#5b5bd6;--accent2:#ececff;--good:#16794b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(125deg,#24244d,#5555c9);color:white;padding:32px 22px 28px}
+.wrap{max-width:1180px;margin:auto}header h1{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.15;margin:0 0 10px}header p{max-width:760px;margin:0;color:#e6e7ff}
+main{max-width:1180px;margin:22px auto;padding:0 16px 36px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 8px 26px #25254b0b;min-width:0}
+h2{font-size:1.18rem;margin:0 0 4px} .sub{color:var(--muted);font-size:.92rem;margin:0 0 18px}
+.section{padding:17px 0;border-top:1px solid var(--line)}.section:first-of-type{border-top:0;padding-top:0}
+.section h3{font-size:1rem;margin:0 0 12px}.field{margin:0 0 13px}label{display:block;font-weight:650;font-size:.9rem;margin-bottom:5px}
+input,textarea,select{font:inherit;color:var(--ink);width:100%;padding:10px 11px;border:1px solid #cbd2e1;border-radius:9px;background:#fff}
+textarea{min-height:78px;resize:vertical}input:focus,textarea:focus,select:focus{outline:3px solid #dadaff;border-color:var(--accent)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.check{display:flex;align-items:flex-start;gap:8px;font-weight:500;background:#f8f9fd;border:1px solid var(--line);padding:9px;border-radius:9px;font-size:.9rem}
+.check input{width:auto;margin-top:5px;accent-color:var(--accent)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}button{border:0;border-radius:10px;padding:10px 14px;font:650 .92rem system-ui;cursor:pointer}
+.primary{background:var(--accent);color:#fff}.secondary{background:var(--accent2);color:#34349b}.plain{background:#f0f2f7;color:#34394d}.danger{background:#fff0f0;color:#9b2c2c}
+button:hover{filter:brightness(.97)}button:focus-visible{outline:3px solid #a6a6ff;outline-offset:2px}
+.preview{position:sticky;top:14px;align-self:start}.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.live{font-size:.78rem;color:var(--good);font-weight:700}
+#output{white-space:pre-wrap;overflow-wrap:anywhere;background:#fafaff;border:1px solid var(--line);border-radius:12px;padding:16px;min-height:360px;max-height:62vh;overflow:auto;font: .91rem/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.counter{font-size:.82rem;color:var(--muted);margin-top:8px;display:flex;justify-content:space-between;gap:10px}.hint{background:#fff8e7;border:1px solid #f2dfad;border-radius:10px;padding:12px;font-size:.88rem;color:#684c14;margin-top:14px}
+footer{text-align:center;color:var(--muted);font-size:.83rem;padding:0 16px 24px}
+@media(max-width:850px){main{grid-template-columns:1fr}.preview{position:static}#output{max-height:none}.grid2{grid-template-columns:1fr}}
+@media(max-width:460px){.checks{grid-template-columns:1fr}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>Generador de instrucciones personalizadas</h1>
+<p>Construye un conjunto de instrucciones para ChatGPT adaptado a tu forma de trabajar. Completa solo lo que te aporte valor y revisa el texto antes de copiarlo.</p>
+</div></header>
+<main>
+<section class="panel" aria-label="Formulario de personalización">
+<h2>1. Define tus preferencias</h2><p class="sub">No necesitas rellenar todos los campos. El resultado se actualiza automáticamente.</p>
+<div class="section">
+<h3>Tu contexto</h3>
+<div class="field"><label for="role">¿A qué te dedicas o qué papel desempeñas?</label><input id="role" placeholder="Ej.: formador, estudiante, responsable de proyectos"></div>
+<div class="field"><label for="context">Contexto que conviene tener en cuenta</label><textarea id="context" placeholder="Ej.: trabajo con grupos diversos, preparo materiales prácticos, uso herramientas digitales…"></textarea></div>
+<div class="field"><label for="goals">¿Para qué utilizas principalmente ChatGPT?</label><textarea id="goals" placeholder="Ej.: diseñar cursos, analizar información, planificar proyectos, resolver dudas técnicas…"></textarea></div>
+</div>
+<div class="section">
+<h3>Cómo quieres las respuestas</h3>
+<div class="grid2">
+<div class="field"><label for="tone">Tono</label><select id="tone"><option value="Profesional, claro y cercano">Profesional y cercano</option><option value="Directo, conciso y práctico">Directo y conciso</option><option value="Académico, riguroso y preciso">Académico y riguroso</option><option value="Didáctico, paciente y motivador">Didáctico y didáctico</option><option value="Creativo, natural y expresivo">Creativo</option><option value="Formal, institucional y objetivo">Formal e institucional</option></select></div>
+<div class="field"><label for="detail">Nivel de detalle</label><select id="detail"><option value="Equilibrado: suficiente detalle sin extenderse innecesariamente">Equilibrado</option><option value="Breve: primero la conclusión y después lo esencial">Breve</option><option value="Amplio: explica el razonamiento, los matices y los pasos">Amplio y profundo</option><option value="Adaptativo: ajusta la extensión a la complejidad de la consulta">Adaptativo según la tarea</option></select></div>
+<div class="field"><label for="format">Formato preferido</label><select id="format"><option value="Usa títulos claros, listas y tablas solo cuando faciliten la comprensión">Títulos y listas; tablas útiles</option><option value="Prioriza párrafos breves y evita estructuras innecesarias">Párrafos breves</option><option value="Prioriza tablas comparativas, listas de comprobación y pasos numerados">Tablas y listas de comprobación</option><option value="Adapta el formato al resultado solicitado">El que mejor encaje</option></select></div>
+<div class="field"><label for="language">Idioma</label><select id="language"><option value="Responde en español de España, salvo que solicite otro idioma">Español de España</option><option value="Responde en el idioma en que escriba el usuario">El idioma de mi consulta</option><option value="Responde en español claro y evita tecnicismos innecesarios">Español claro y sencillo</option><option value="Usa terminología técnica especializada cuando sea pertinente">Lenguaje técnico especializado</option></select></div>
+</div>
+</div>
+<div class="section">
+<h3>Reglas de trabajo</h3>
+<div class="checks">
+<label class="check"><input type="checkbox" id="clarify" checked> Si falta un dato importante, pregunta antes de asumir</label>
+<label class="check"><input type="checkbox" id="honesty" checked> Distingue hechos, estimaciones y opiniones; no inventes datos</label>
+<label class="check"><input type="checkbox" id="examples" checked> Incluye ejemplos aplicados cuando ayuden</label>
+<label class="check"><input type="checkbox" id="steps"> Explica procedimientos paso a paso</label>
+<label class="check"><input type="checkbox" id="critique"> Señala riesgos, límites y posibles mejoras</label>
+<label class="check"><input type="checkbox" id="sources"> Indica fuentes o enlaces cuando sean relevantes</label>
+<label class="check"><input type="checkbox" id="alternatives"> Compara alternativas antes de recomendar</label>
+<label class="check"><input type="checkbox" id="accessibility"> Usa lenguaje accesible y define los términos técnicos</label>
+</div>
+<div class="field" style="margin-top:14px"><label for="avoid">¿Qué debería evitar?</label><textarea id="avoid" placeholder="Ej.: introducciones largas, repetir la pregunta, jerga sin explicar, conclusiones vagas…"></textarea></div>
+<div class="field"><label for="extra">Otras instrucciones o preferencias</label><textarea id="extra" placeholder="Añade criterios específicos para tu trabajo o tus proyectos."></textarea></div>
+</div>
+<div class="section">
+<h3>Plantillas rápidas</h3><p class="sub">Puedes cargar una base y después adaptarla a tu caso.</p>
+<div class="actions">
+<button class="secondary" type="button" data-preset="teacher">Docente / formador</button>
+<button class="secondary" type="button" data-preset="analyst">Análisis y proyectos</button>
+<button class="secondary" type="button" data-preset="simple">Uso general sencillo</button>
+<button class="plain" type="button" id="clear">Vaciar formulario</button>
+</div>
+</div>
+</section>
+<section class="panel preview">
+<div class="preview-head"><div><h2>2. Tus instrucciones generadas</h2><p class="sub" style="margin:4px 0 0">Texto editable: puedes corregirlo aquí antes de usarlo.</p></div><span class="live">● En directo</span></div>
+<textarea id="output" aria-label="Instrucciones personalizadas generadas" spellcheck="true"></textarea>
+<div class="counter"><span id="count">0 caracteres</span><span id="status" aria-live="polite">Listo para revisar</span></div>
+<div class="actions">
+<button class="primary" id="copy" type="button">Copiar instrucciones</button>
+<button class="secondary" id="download" type="button">Descargar .txt</button>
+<button class="plain" id="refresh" type="button">Regenerar desde el formulario</button>
+</div>
+<div class="hint"><strong>Consejo:</strong> las instrucciones personalizadas funcionan mejor si son claras, estables y priorizan lo importante. No incluyas contraseñas ni datos sensibles. Para tareas concretas, añade instrucciones específicas en el propio chat.</div>
+</section>
+</main>
+<footer>Herramienta local: los campos se procesan en esta página y no se envían a ningún servidor.</footer>
+<script>
+const $=id=>document.getElementById(id);
+const fields=['role','context','goals','tone','detail','format','language','avoid','extra'];
+const checks=['clarify','honesty','examples','steps','critique','sources','alternatives','accessibility'];
+function clean(s){return s.trim()}
+function generate(){
+ const parts=[];
+ const role=clean($('role').value), context=clean($('context').value), goals=clean($('goals').value);
+ parts.push('CÓMO QUIERO QUE RESPONDAS');
+ parts.push('• Tono: '+$('tone').value+'.');
+ parts.push('• Nivel de detalle: '+$('detail').value+'.');
+ parts.push('• Formato: '+$('format').value+'.');
+ parts.push('• Idioma: '+$('language').value+'.');
+ if(role||context||goals){
+  parts.push('\nMI CONTEXTO');
+  if(role)parts.push('• Mi papel o actividad: '+role+'.');
+  if(context)parts.push('• Contexto relevante: '+context);
+  if(goals)parts.push('• Usos principales de ChatGPT: '+goals);
+ }
+ const rules=[];
+ const map={clarify:'Si falta información esencial, formula una pregunta concreta antes de hacer suposiciones importantes.',honesty:'Sé preciso y transparente. No inventes datos, referencias ni capacidades; distingue los hechos de las hipótesis y señala la incertidumbre.',examples:'Incluye ejemplos concretos y aplicados cuando faciliten la comprensión.',steps:'En procedimientos, organiza las instrucciones en pasos ordenados y verificables.',critique:'Advierte de riesgos, limitaciones, errores posibles y oportunidades de mejora cuando sean relevantes.',sources:'Cuando la respuesta dependa de información externa o actual, aporta fuentes fiables y enlaces si están disponibles.',alternatives:'Cuando existan varias opciones razonables, compáralas con criterios claros y justifica la recomendación.',accessibility:'Explica los tecnicismos necesarios y adapta la complejidad al contexto de la consulta.'};
+ checks.forEach(id=>{if($(id).checked)rules.push('• '+map[id])});
+ if(rules.length)parts.push('\nCRITERIOS DE TRABAJO',...rules);
+ const avoid=clean($('avoid').value), extra=clean($('extra').value);
+ if(avoid)parts.push('\nEVITA\n• '+avoid);
+ if(extra)parts.push('\nINSTRUCCIONES ADICIONALES\n'+extra);
+ parts.push('\nAdapta la respuesta a la petición concreta. Prioriza la utilidad, la exactitud y la claridad; no añadas secciones por sistema si no aportan valor.');
+ return parts.join('\n');
+}
+function update(){const out=$('output');out.value=generate();counter()}
+function counter(){$('count').textContent=$('output').value.length.toLocaleString('es-ES')+' caracteres'}
+fields.concat(checks).forEach(id=>$(id).addEventListener('input',update));
+$('output').addEventListener('input',counter);
+$('refresh').addEventListener('click',()=>{update();$('status').textContent='Texto regenerado';});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('output').value);$('status').textContent='Copiado al portapapeles';}catch(e){$('output').select();document.execCommand('copy');$('status').textContent='Seleccionado para copiar';}});
+$('download').addEventListener('click',()=>{const blob=new Blob([$('output').value],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='instrucciones-personalizadas.txt';a.click();URL.revokeObjectURL(a.href);$('status').textContent='Descarga iniciada';});
+$('clear').addEventListener('click',()=>{fields.forEach(id=>{if(['tone','detail','format','language'].includes(id))$(id).selectedIndex=0;else $(id).value=''});checks.forEach(id=>$(id).checked=['clarify','honesty','examples'].includes(id));$('status').textContent='Formulario vaciado';update();});
+const presets={
+ teacher:{role:'Docente o formador',context:'Diseño actividades para personas con distintos niveles de experiencia y necesito materiales claros, prácticos y aplicables.',goals:'Preparar cursos, ejercicios, guías didácticas, rúbricas y actividades de evaluación.',tone:'Didáctico, paciente y motivador',detail:'Amplio: explica el razonamiento, los matices y los pasos',format:'Prioriza tablas comparativas, listas de comprobación y pasos numerados'},
+ analyst:{role:'Responsable de análisis y proyectos',context:'Necesito estructurar información, evaluar alternativas y convertir ideas en planes ejecutables.',goals:'Analizar problemas, definir objetivos, planificar tareas, valorar riesgos y medir resultados.',tone:'Profesional, claro y cercano',detail:'Adaptativo: ajusta la extensión a la complejidad de la consulta',format:'Usa títulos claros, listas y tablas solo cuando faciliten la comprensión'},
+ simple:{role:'Usuario general',context:'Quiero respuestas comprensibles y útiles para resolver dudas y aprender.',goals:'Resolver preguntas cotidianas, entender conceptos y completar tareas paso a paso.',tone:'Directo, conciso y práctico',detail:'Breve: primero la conclusión y después lo esencial',format:'Prioriza párrafos breves y evita estructuras innecesarias'}
+};
+document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>{const p=presets[b.dataset.preset];Object.entries(p).forEach(([k,v])=>$(k).value=v);$('status').textContent='Plantilla cargada; puedes personalizarla';update();}));
+update();
+</script>
+</body>
+</html>

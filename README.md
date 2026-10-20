@@ -139,7 +139,7 @@ Aprende a estructurar prompts efectivos:
 - **01-rol.md**: Define quién es la IA (profesor, experto en marketing, etc.).
 - **02-contexto.md**: Aporta información de fondo para mejores respuestas.
 - **generales.md**: 50+ prompts clasificados por uso (escritura, análisis, creatividad, etc.).
-- **ejemplos/**: Prompts reales para investigación, soporte, educación, documentación y más.
+- **ejemplos/**: Prompts reales para investigación, soporte, educación, documentación, empleo y más.
 
 ### 📚 **markdown/** — Manual de Markdown
 Guía completa y educativa:

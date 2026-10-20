@@ -14,6 +14,7 @@ Este repositorio de `PROMPTS` reúne ejemplos de peticiones (prompts) clasificad
 - **Transformación digital** – [`transformacion-digital.md`](transformacion-digital.md)
 - **Presentaciones** - [`presentaciones.md`](presentaciones.md)
 - **Correos electrónicos - Prompts para usar en el correo electrónico [`correos.md`](correos.md)
+- **Empleo y búsqueda de trabajo** – [`empleo.md`](empleo.md)
 - **Educacion** – [`educacion.md`](educacion.md)
 - **Acción pedagógica** – [`educacion2.md`](educacion2.md)
 - **Contabilidad** – [`conta.md`](conta.md)
