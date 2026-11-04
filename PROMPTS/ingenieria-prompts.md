@@ -105,5 +105,18 @@ La ingeniería de prompts es una disciplina útil, y su valor crece cuando la IA
 
 Esto transforma la relación con la herramienta: pasamos de dar órdenes simples a crear órdenes cada vez más precisas y especializadas.
 
+## 9.  ¿El fin del PROMPT?
+
+Aprender PROMPTING  es conocer la manera adecuada de comunicarse con los Modelos de IA. Los avances constantes en este  "arte", estan derivando en crear prompt que soliciten a la IA un prompt estructurado.  
+
+**Ejemplo: pedir a la IA que redacte un prompt específico**
+```prompt
+Imagina que queremos preparar una actividad sobre el cambio climático para una clase de 2.º de ESO. En lugar de pedir directamente a la IA que diseñe la actividad, podemos pedirle que construya un prompt claro y completo para hacerlo:
+
+Actúa como especialista en diseño de prompts educativos. Necesito un prompt para pedir a una IA que diseñe una actividad de 50 minutos sobre el cambio climático para estudiantes de 2.º de ESO. La actividad debe fomentar el pensamiento crítico, incluir trabajo en grupos y terminar con una breve puesta en común.
+
+Redacta el prompt con estos apartados: **rol**, **contexto**, **objetivo**, **instrucciones**, **recursos necesarios**, **formato de respuesta** y **criterios de calidad**. No diseñes la actividad todavía: entrégame únicamente el prompt final, listo para copiar y usar. Si te falta algún dato imprescindible, pregúntamelo antes.
+```
+Así, la IA ayuda primero a definir cómo formular la petición. Después podemos revisar y ajustar el prompt generado antes de utilizarlo.
 
 https://docs.google.com/presentation/d/1WB0E7iVPUpIaTKZvPBV-lCWSy-bUZRdkBJ2I9uPoYgM/edit?usp=sharing
