@@ -1,0 +1,11 @@
+id,fecha,solicitante,aula,categoria,descripcion,impacto,urgencia,prioridad,responsable,estado,resolucion,validacion_usuario
+INC-001,2026-11-18,Docente A,Aula 1,Hardware,Pantalla sin señal,Medio,Media,Media,Técnico,Cerrada,Cable ajustado,Conforme
+INC-002,2026-11-18,Docente B,Aula 2,Conectividad,Aula sin conexión,Alto,Alta,Alta,Técnico,En curso,,Pendiente
+INC-003,2026-11-18,Admin A,Administración,Software,Aplicación lenta,Medio,Baja,Media,Técnico,Asignada,,Pendiente
+INC-004,2026-11-18,Docente C,Aula 1,Acceso,Acceso a recurso de clase,Bajo,Media,Media,Coordinación,Cerrada,Permiso revisado,Conforme
+INC-005,2026-11-18,Docente D,Aula 2,Hardware,Tecla rota,Bajo,Baja,Baja,Técnico,Asignada,,Pendiente
+INC-006,2026-11-18,Admin B,Administración,Software,Documento no abre,Bajo,Media,Media,Técnico,Cerrada,Formato corregido,Conforme
+INC-007,2026-11-18,Docente E,Aula 1,Hardware,Proyector no enciende,Alto,Media,Alta,Técnico,En curso,,Pendiente
+INC-008,2026-11-18,Docente F,Aula 2,Software,Aviso de actualización,Bajo,Baja,Baja,Técnico,Asignada,,Pendiente
+INC-009,2026-11-18,Admin C,Administración,Acceso,Carpeta no visible,Medio,Media,Media,Coordinación,Cerrada,Ruta corregida,Conforme
+INC-010,2026-11-18,Docente G,Aula 1,Hardware,Sonido intermitente,Bajo,Media,Media,Técnico,Asignada,,Pendiente

@@ -1,0 +1,7 @@
+id,accion,esperado,resultado_16nov_SIMULADO,resultado_final_SIMULADO
+P01,Alta con ID único y rechazo/revisión de duplicado,Revisar ID y lista,Cumple,Cumple
+P02,Entrada sin prioridad y entrada válida,No aceptar vacío; admitir valor permitido,No cumple,Cumple tras corrección 17/11
+P03,Consultar pendientes,Cerradas no aparecen,Cumple,Cumple
+P04,Cerrar sin validación y reabrir si persiste,No cerrar sin Conforme; reabrir a En curso,Cumple,Cumple
+P05,Comprobar acceso y copia,Equipo autorizado y copia disponible en escena,Cumple,Cumple
+P06,Usuario registra y explica procedimiento,"Campos, responsable y flujo comprendidos",Cumple,Cumple

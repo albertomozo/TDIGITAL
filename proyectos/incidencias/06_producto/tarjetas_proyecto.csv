@@ -1,0 +1,10 @@
+id,tarea,responsable,inicio,fin,dependencia,entregable,horas_base,criterio,estado_inicial
+T01,Definir y validar inicio,Coordinación,09/11,09/11,—,E04,2,Acta revisada y D-01,Pendiente
+T02,"Validar alcance, calendario y riesgos",Coordinación,10/11,10/11,T01,E04,3,"05,07,10 revisados y D-02",Pendiente
+T03,"Diseñar campos, estados y prioridad",Técnico,11/11,11/11,T02,E01,3,Diccionario y listas definidos,Pendiente
+T04,Configurar registro y vistas,Técnico,12/11,13/11,T03,E01,6,Registro disponible para ensayo,Pendiente
+T05,Redactar procedimiento,Coordinación,12/11,13/11,T03,E02,3,Roles y transiciones revisados,Pendiente
+T06,Ensayar seis pruebas,Usuario representante,16/11,16/11,"T04,T05",E03,3,Resultados P01–P06 registrados,Pendiente
+T07,Corregir y volver a probar,Técnico,17/11,17/11,T06,E03,4,IP-01 resuelta en simulación y P02 repetida,Pendiente
+T08,Ejecutar piloto con diez avisos,Usuario representante,18/11,18/11,T07,E03,3,Lista de diez cotejada con registro,Pendiente
+T09,"Formar, transferir y cerrar",Coordinación,19/11,20/11,T08,E04,4,"Formación, pendientes, 22 y24 archivados",Pendiente

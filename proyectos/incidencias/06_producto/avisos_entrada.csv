@@ -1,0 +1,11 @@
+id_origen,aviso_recibido,naturaleza
+INC-001,Pantalla sin señal,SIMULADO
+INC-002,Aula sin conexión,SIMULADO
+INC-003,Aplicación lenta,SIMULADO
+INC-004,Acceso a recurso de clase,SIMULADO
+INC-005,Tecla rota,SIMULADO
+INC-006,Documento no abre,SIMULADO
+INC-007,Proyector no enciende,SIMULADO
+INC-008,Aviso de actualización,SIMULADO
+INC-009,Carpeta no visible,SIMULADO
+INC-010,Sonido intermitente,SIMULADO
